@@ -1,9 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
+    private void Awake()
+    {
+        
+    }
 
     public void LoadScene()
     {

@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BackToMenuButton : MonoBehaviour
+public class BackToHub : MonoBehaviour
 {
-    public void BackToMenu()
+    public void BacktoHub()
     {
         SceneManager.LoadScene(0);
-    }
+    }    
 }
