@@ -3,14 +3,18 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    private void Awake()
+    [SerializeField] GameObject startMenu;
+    [SerializeField] GameObject miniGamesHub;
+
+    private void Start()
     {
-        
+        startMenu?.SetActive(true);
+        miniGamesHub?.SetActive(false);
     }
 
-    public void LoadScene()
+    public void LoadMiniGame(int sceneId)
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(sceneId);
     }
 
 

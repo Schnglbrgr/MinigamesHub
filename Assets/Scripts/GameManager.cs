@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.timeScale = 1;
         isPaused = false;
         pauseMenu?.SetActive(false);
         gameOverText?.SetActive(false);        
