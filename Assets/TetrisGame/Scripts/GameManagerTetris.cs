@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,62 +7,77 @@ public class GameManagerTetris : MonoBehaviour
 {
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] prefabs;
-    [SerializeField] private TMP_Text loseText;
-    [SerializeField] private Button start;
+    [SerializeField] private TMP_Text lose_PausedText;
+    [SerializeField] private Button restart_Paused;
     [SerializeField] private Button exit;
-    [SerializeField] private GameObject HUD;
+    [SerializeField] private GameObject lose_PausedHUD;
     [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text timerText;
+    [SerializeField] private TMP_Text levelText;
+    [SerializeField] private GameObject[] hearts;
+    [SerializeField] private Transform nextPrefabSpawn;
 
     private int score;
-    public bool isLand;
+    public int level;
+    private int heartsCount;
+    private int prefabNum;
 
+    public GameObject nextPrefab;
+    private GameObject currentPrefab;
     private Transform[,] grid;
-    private Vector2Int gridDimension;
-
-    private void Awake()
-    {
-        gridDimension = new Vector2Int(10,20);
-    }
+    private Vector2Int gridDimension = new Vector2Int(10, 20);
 
     private void Start()
     {
-        score = 0;
+        score = 90;
+        level = 1;
         grid = new Transform[gridDimension.x, gridDimension.y];
-        SpawnNewBlock();
+        Instantiate(prefabs[0], spawnPoint.position, Quaternion.identity);
+        NextPrefab();
+        heartsCount = hearts.Length;
     }
 
     private void Update()
     {
         scoreText.text = $"Score: {score}";
+        levelText.text = $"Level: {level}";
+        PausedGame();
 
-        if (isLand)
+    }
+
+    public void SpawnNewBlock()
+    {
+        currentPrefab = Instantiate(nextPrefab, spawnPoint.position, Quaternion.identity);
+
+        currentPrefab.GetComponent<PlayerTetris>().enabled = true;
+
+        if (!IsValidMove(currentPrefab.transform))
         {
-            SpawnNewBlock();
-            CheckAndClearLines();           
+            LoseHearts();
         }
     }
 
-    void SpawnNewBlock()
+    public void NextPrefab()
     {
-        int currentPrefab = Random.Range(0, prefabs.Length);
 
-        Instantiate(prefabs[currentPrefab], spawnPoint.position, Quaternion.identity);
+        prefabNum = Random.Range(0, prefabs.Length);
 
-        isLand = false;
+        nextPrefab = Instantiate(prefabs[prefabNum], nextPrefabSpawn.position, Quaternion.identity);
+
+        nextPrefab.GetComponent<PlayerTetris>().enabled = false;
+       
     }
 
     void CheckAndClearLines()
     {
         for (int y = 0; y < gridDimension.y; y++)
         {
-            for (int x = 0; x < gridDimension.x; x++)
+            if (RowIsFull(y))
             {
-                if (RowIsFull(y))
-                {
-                    ClearRow(y);
-                    MoveRowDown(y);
-                    score += 10;
-                }
+                ClearRow(y);
+                MoveRowDown(y);
+                score += 10;
+                NextLevel();
             }
         }
     }
@@ -110,22 +126,24 @@ public class GameManagerTetris : MonoBehaviour
     {
         foreach (Transform block in player)
         {
-            Vector2Int position = Vector2Int.RoundToInt(player.position);
+            Vector2Int position = Vector2Int.RoundToInt(block.position);
 
             if (InsideMap(position))
             {
                 grid[position.x, position.y] = block;
             }
         }
+
+        CheckAndClearLines();
     }
 
     public bool IsValidMove(Transform player)
     {
         foreach (Transform block in player)
         {
-            Vector2Int position = Vector2Int.RoundToInt(player.position);
+            Vector2Int position = Vector2Int.RoundToInt(block.position);
 
-            if (!InsideMap(player.position) || grid[position.x,position.y] != null)
+            if (!InsideMap(position) || grid[position.x,position.y] != null)
             {
                 return false;
             }
@@ -143,13 +161,79 @@ public class GameManagerTetris : MonoBehaviour
         return false;
     }
 
+
+    void PausedGame()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Time.timeScale = 0f;
+
+            lose_PausedHUD.SetActive(true);
+
+            lose_PausedText.text = "Game Paused";
+
+            restart_Paused.GetComponentInChildren<TMP_Text>().text = "Resume";
+
+            restart_Paused.onClick.AddListener(ResumeGame);
+        }
+    }
+
+    void ResumeGame()
+    {
+        lose_PausedHUD.SetActive(false);
+
+        Time.timeScale = 1f;
+    }
+
+    void LoseHearts()
+    {
+        heartsCount--;
+
+        for (int y = 0; y < gridDimension.y; y++)
+        {
+            for (int x = 0; x < gridDimension.x; x++)
+            {
+                if (grid[x,y] != null)
+                {
+                    Destroy(grid[x,y].gameObject);
+                    grid[x, y] = null;
+                }
+            }
+        }
+
+        if (heartsCount <= 0)
+        {
+            EndGame();
+        }
+
+        Destroy(hearts[heartsCount]);
+        Destroy(currentPrefab);
+        score = Mathf.Max(score - 50, 0);
+        level = Mathf.Max(level--, 1);
+
+        SpawnNewBlock();
+    }
+
+    void NextLevel()
+    {
+        if (score % 100 == 0)
+        {
+            level += 1;
+        }
+       
+    }
+
     void EndGame()
     {
-        HUD.SetActive(true);
+        Time.timeScale = 0f;
 
-        loseText.text = $"You Lost: {score}";
+        lose_PausedHUD.SetActive(true);
 
-        start.onClick.AddListener(Start);
+        lose_PausedText.text = "You Lost";
+
+        restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
+
+        //restart_Paused.onClick.AddListener();
 
     }
 
