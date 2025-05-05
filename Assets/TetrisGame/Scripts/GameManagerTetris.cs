@@ -1,6 +1,9 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GameManagerTetris : MonoBehaviour
@@ -16,32 +19,56 @@ public class GameManagerTetris : MonoBehaviour
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private GameObject[] hearts;
     [SerializeField] private Transform nextPrefabSpawn;
+    [SerializeField] private Button[] powerUps;
+    [SerializeField] private GameObject bomb;
+    [SerializeField] private GameObject selectPrefab;
+    [SerializeField] private Button[] selectPlayer;
+    [SerializeField] private GameObject slowCam;
+    [SerializeField] private TMP_Text slowCamText;
 
-    private int score;
-    public int level;
+    public int score;
+    private int level;
+    private float fallTime;
     private int heartsCount;
     private int prefabNum;
+    private float invertoryChangePiece = 1f;
+    private float invertorySelectPiece = 1f;
+    public float invertoryBomb = 1f;
+    private float invertorySlowMotion = 1f;
+    public bool powerUpActive;
 
     public GameObject nextPrefab;
     private GameObject currentPrefab;
-    private Transform[,] grid;
-    private Vector2Int gridDimension = new Vector2Int(10, 20);
+    public Transform[,] grid;
+    public Vector2Int gridDimension = new Vector2Int(10, 20);
 
     private void Start()
     {
-        score = 90;
+        score = 0;
         level = 1;
         grid = new Transform[gridDimension.x, gridDimension.y];
-        Instantiate(prefabs[0], spawnPoint.position, Quaternion.identity);
+        currentPrefab = Instantiate(prefabs[0], spawnPoint.position, Quaternion.identity);
         NextPrefab();
         heartsCount = hearts.Length;
+        fallTime = 0.5f;
+
+        PowerUps();
     }
 
     private void Update()
     {
+
         scoreText.text = $"Score: {score}";
         levelText.text = $"Level: {level}";
         PausedGame();
+
+        if (powerUpActive)
+        {
+            for (int x = 0; x < powerUps.Length; x++)
+            {
+                ChangeColorButton(x, Color.red);
+            }
+        }
 
     }
 
@@ -50,6 +77,11 @@ public class GameManagerTetris : MonoBehaviour
         currentPrefab = Instantiate(nextPrefab, spawnPoint.position, Quaternion.identity);
 
         currentPrefab.GetComponent<PlayerTetris>().enabled = true;
+
+        currentPrefab.GetComponent<PlayerTetris>().fallTime = fallTime;
+
+        powerUpActive = false;
+       
 
         if (!IsValidMove(currentPrefab.transform))
         {
@@ -76,7 +108,7 @@ public class GameManagerTetris : MonoBehaviour
             {
                 ClearRow(y);
                 MoveRowDown(y);
-                score += 10;
+                score += 20;
                 NextLevel();
             }
         }
@@ -166,7 +198,7 @@ public class GameManagerTetris : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Time.timeScale = 0f;
+            currentPrefab.GetComponent<PlayerTetris>().enabled = false;
 
             lose_PausedHUD.SetActive(true);
 
@@ -174,15 +206,28 @@ public class GameManagerTetris : MonoBehaviour
 
             restart_Paused.GetComponentInChildren<TMP_Text>().text = "Resume";
 
-            restart_Paused.onClick.AddListener(ResumeGame);
+            restart_Paused.onClick.AddListener(() => StartCoroutine(ResumeGame()));
+
         }
     }
 
-    void ResumeGame()
+    IEnumerator ResumeGame()
     {
         lose_PausedHUD.SetActive(false);
 
-        Time.timeScale = 1f;
+        timerText.text = "3";
+
+        yield return new WaitForSeconds(1f);
+        timerText.text = "2";
+
+        yield return new WaitForSeconds(1f);
+        timerText.text = "1";
+
+        yield return new WaitForSeconds(1f);
+        timerText.text = "";
+        currentPrefab.GetComponent<PlayerTetris>().enabled = true;
+
+
     }
 
     void LoseHearts()
@@ -214,13 +259,138 @@ public class GameManagerTetris : MonoBehaviour
         SpawnNewBlock();
     }
 
-    void NextLevel()
+    void NextLevel( )
     {
         if (score % 100 == 0)
         {
             level += 1;
+            fallTime = Mathf.Max(fallTime -= 0.05f, 0);
+
+            invertoryBomb++;
+            invertoryChangePiece++;
+            invertorySelectPiece++;
+            invertorySlowMotion++;
+        }
+
+    }
+
+    void PowerUps()
+    {       
+        powerUps[0].onClick.AddListener(() => ChangePiece(5));
+        powerUps[1].onClick.AddListener(() => SelectPiece(10));
+        powerUps[2].onClick.AddListener(() => Bomb());
+        powerUps[3].onClick.AddListener(() => SlowCam(7));
+
+    }
+
+    void ChangePiece(int coolDown)
+    {
+
+        if (!powerUpActive && invertoryChangePiece >= 1)
+        {
+            ChangeColorButton(0, Color.red);
+            Destroy(currentPrefab);
+            Destroy(nextPrefab);
+            SpawnNewBlock();
+            NextPrefab();
+            powerUpActive = true;
+            invertoryChangePiece--;
+        }
+
+    }
+
+    void SlowCam(int coolDown)
+    {
+
+        if (!powerUpActive && invertorySlowMotion >= 1)
+        {
+            ChangeColorButton(3, Color.red);
+            slowCam.SetActive(true);
+            slowCamText.text = "SlowMotion Active";
+
+            currentPrefab.GetComponent<PlayerTetris>().fallTime = 1f;
+            powerUpActive = true;
+            invertorySlowMotion--;
+
+            StartCoroutine(ReturnSpeed(coolDown));
         }
        
+    }
+
+    void Bomb()
+    {
+        if (!powerUpActive && invertoryBomb >= 1)
+        {
+            ChangeColorButton(2, Color.red);
+            powerUpActive = true;
+            Destroy(currentPrefab);
+            invertoryBomb--;
+            Instantiate(bomb, spawnPoint.position, Quaternion.identity);
+        }                 
+    }
+
+    void SelectPiece(int coolDown)
+    {
+
+        if (invertorySelectPiece >= 1 && !powerUpActive)
+        {
+            ChangeColorButton(1, Color.red);
+
+            Destroy(currentPrefab);
+
+            selectPrefab.SetActive(true);
+
+            invertorySelectPiece--;
+
+            for (int x = 0; x < selectPlayer.Length; x++)
+            {
+                selectPlayer[x].gameObject.SetActive(true);
+
+            }
+
+            selectPlayer[0].onClick.AddListener(() => SelectPieceSpawn(0));
+            selectPlayer[1].onClick.AddListener(() => SelectPieceSpawn(1));
+            selectPlayer[2].onClick.AddListener(() => SelectPieceSpawn(2));
+            selectPlayer[3].onClick.AddListener(() => SelectPieceSpawn(3));
+            selectPlayer[4].onClick.AddListener(() => SelectPieceSpawn(4));
+            selectPlayer[5].onClick.AddListener(() => SelectPieceSpawn(5));
+            selectPlayer[6].onClick.AddListener(() => SelectPieceSpawn(6));
+            selectPlayer[7].onClick.AddListener(() => SelectPieceSpawn(7));
+
+            powerUpActive = true;
+
+        }
+    }
+
+    void SelectPieceSpawn(int prefabNum)
+    {
+        ChangeColorButton(1, Color.green);
+
+
+        Instantiate(prefabs[prefabNum], spawnPoint.position, Quaternion.identity);
+
+        selectPrefab.SetActive(false);
+
+        for (int x = 0; x < selectPlayer.Length; x++)
+        {
+            selectPlayer[x].gameObject.SetActive(false);
+        }
+
+        powerUpActive = false;
+    }
+
+    private void ChangeColorButton(int num, Color color)
+    {
+        powerUps[num].GetComponent<Image>().color = color;
+    }
+
+    IEnumerator ReturnSpeed(int coolDown)
+    {
+        yield return new WaitForSeconds(4f);
+        currentPrefab.GetComponent<PlayerTetris>().fallTime = fallTime;
+        slowCam.SetActive(false);
+        slowCamText.text = "";
+        powerUpActive = false;
     }
 
     void EndGame()

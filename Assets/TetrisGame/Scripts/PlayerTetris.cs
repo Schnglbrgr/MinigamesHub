@@ -5,7 +5,7 @@ public class PlayerTetris : MonoBehaviour
     private GameManagerTetris gameManagerTetris;
 
     private float previousTime;
-    public float fallTime = 0.5f;
+    public float fallTime;
     private float moveSpeed = 0.2f;
     private float timer = 0f;
 
@@ -83,7 +83,6 @@ public class PlayerTetris : MonoBehaviour
                 this.enabled = false;
                 Destroy(gameManagerTetris.nextPrefab);
                 gameManagerTetris.NextPrefab();
-
             }
             previousTime = 0f;
         }
