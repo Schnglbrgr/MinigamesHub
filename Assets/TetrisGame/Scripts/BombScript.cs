@@ -33,18 +33,18 @@ public class BombScript : MonoBehaviour
 
                 gameManagerTetris.AddToGrid(transform);
 
-                for (int y = 0; y < 4; y++)
+                for (int y = 0; y < gameManagerTetris.gridDimension.y; y++)
                 {
                     for (int x = 0; x < gameManagerTetris.gridDimension.x; x++)
                     {
                         if (gameManagerTetris.grid[x, y] != null)
                         {
                             Destroy(gameManagerTetris.grid[x, y].gameObject);
-                            gameManagerTetris.grid[x, y] = null;
+                            gameManagerTetris.grid[x, y] = null;                            
                         }
                     }
                 }
-
+             
                 Destroy(gameObject);
 
                 gameManagerTetris.SpawnNewBlock();

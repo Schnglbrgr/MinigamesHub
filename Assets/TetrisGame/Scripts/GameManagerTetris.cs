@@ -25,6 +25,8 @@ public class GameManagerTetris : MonoBehaviour
     [SerializeField] private Button[] selectPlayer;
     [SerializeField] private GameObject slowCam;
     [SerializeField] private TMP_Text slowCamText;
+    [SerializeField] private Transform holdPrefabSpawn;
+    [SerializeField] private TMP_Text holdPrefabText;
 
     public int score;
     private int level;
@@ -36,8 +38,10 @@ public class GameManagerTetris : MonoBehaviour
     public float invertoryBomb = 1f;
     private float invertorySlowMotion = 1f;
     public bool powerUpActive;
+    private bool isHolding;
 
     public GameObject nextPrefab;
+    private GameObject holdPrefab;
     private GameObject currentPrefab;
     public Transform[,] grid;
     public Vector2Int gridDimension = new Vector2Int(10, 20);
@@ -45,14 +49,26 @@ public class GameManagerTetris : MonoBehaviour
     private void Start()
     {
         score = 0;
+
         level = 1;
+
         grid = new Transform[gridDimension.x, gridDimension.y];
+
         currentPrefab = Instantiate(prefabs[0], spawnPoint.position, Quaternion.identity);
+
         NextPrefab();
+
         heartsCount = hearts.Length;
+
         fallTime = 0.5f;
 
+        lose_PausedHUD.SetActive(false);
+
         PowerUps();
+
+        isHolding = false;
+
+        Time.timeScale = 1f;
     }
 
     private void Update()
@@ -69,6 +85,8 @@ public class GameManagerTetris : MonoBehaviour
                 ChangeColorButton(x, Color.red);
             }
         }
+
+        HoldPrefab();
 
     }
 
@@ -100,7 +118,7 @@ public class GameManagerTetris : MonoBehaviour
        
     }
 
-    void CheckAndClearLines()
+    public void CheckAndClearLines()
     {
         for (int y = 0; y < gridDimension.y; y++)
         {
@@ -137,7 +155,7 @@ public class GameManagerTetris : MonoBehaviour
         }
     }
 
-    void MoveRowDown(int height)
+    public void MoveRowDown(int height)
     {
         for (int y = height + 1; y < gridDimension.y; y++)
         {
@@ -192,7 +210,6 @@ public class GameManagerTetris : MonoBehaviour
         }
         return false;
     }
-
 
     void PausedGame()
     {
@@ -259,17 +276,17 @@ public class GameManagerTetris : MonoBehaviour
         SpawnNewBlock();
     }
 
-    void NextLevel( )
+    void NextLevel()
     {
         if (score % 100 == 0)
         {
             level += 1;
             fallTime = Mathf.Max(fallTime -= 0.05f, 0);
 
-            invertoryBomb++;
-            invertoryChangePiece++;
-            invertorySelectPiece++;
-            invertorySlowMotion++;
+            invertoryBomb = Mathf.Max(invertoryBomb++, 3);
+            invertoryChangePiece = Mathf.Max(invertoryBomb++, 3);
+            invertorySelectPiece = Mathf.Max(invertoryBomb++, 3);
+            invertorySlowMotion = Mathf.Max(invertoryBomb++, 3);
         }
 
     }
@@ -393,6 +410,45 @@ public class GameManagerTetris : MonoBehaviour
         powerUpActive = false;
     }
 
+    void HoldPrefab()
+    {
+        if (!isHolding && Input.GetKey(KeyCode.Q))
+        {
+            isHolding = true;
+
+            holdPrefab = Instantiate(currentPrefab, holdPrefabSpawn.position, Quaternion.identity);
+
+            holdPrefab.GetComponent<PlayerTetris>().enabled = false;
+
+            Destroy(currentPrefab);
+
+            SpawnNewBlock();
+
+            Destroy(nextPrefab);
+
+            NextPrefab();
+
+            holdPrefabText.text = "Use Block: E";
+
+        }
+
+        if (isHolding && Input.GetKey(KeyCode.E))
+        {
+            isHolding = false;
+
+            Destroy(currentPrefab);
+
+            Destroy(holdPrefab);
+
+            currentPrefab = Instantiate(holdPrefab,spawnPoint.position,Quaternion.identity);
+
+            currentPrefab.GetComponent<PlayerTetris>().enabled = true;
+
+            holdPrefabText.text = "Hold Block: Q";
+
+        }
+    }
+
     void EndGame()
     {
         Time.timeScale = 0f;
@@ -403,7 +459,7 @@ public class GameManagerTetris : MonoBehaviour
 
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
 
-        //restart_Paused.onClick.AddListener();
+        restart_Paused.onClick.AddListener(Start);
 
     }
 
