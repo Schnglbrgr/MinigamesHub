@@ -97,9 +97,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
     }
 
-    //public void MainMenuButton()
-    //{
-    //    SceneManager.LoadScene("");
-    //}
-
+    public void ResumeButton()
+    {
+        Time.timeScale = 1;
+        pauseMenu?.SetActive(false);
+        isPaused = false;
+    }
 }

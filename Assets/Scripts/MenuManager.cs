@@ -1,22 +1,24 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Menu : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
+
     [SerializeField] GameObject startMenu;
-    [SerializeField] GameObject miniGamesHub;
+    [SerializeField] GameObject levelSelectMenu;
+
 
     private void Start()
     {
         startMenu?.SetActive(true);
-        miniGamesHub?.SetActive(false);
+        levelSelectMenu?.SetActive(false);    
     }
 
-    public void LoadMiniGame(int sceneId)
+
+    public void SelectLevel(int levelIndex)
     {
-        SceneManager.LoadScene(sceneId);
+        SceneManager.LoadScene(levelIndex);
     }
-
 
     public void QuitGame()
     {
