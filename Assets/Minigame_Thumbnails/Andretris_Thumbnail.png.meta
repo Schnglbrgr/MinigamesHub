@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Andretris_Thumbnail_0: 7412161314198664545
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
