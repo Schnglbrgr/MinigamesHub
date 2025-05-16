@@ -85,6 +85,15 @@ public class GameManagerTetris : MonoBehaviour
                 ChangeColorButton(x, Color.red);
             }
         }
+        else
+        {
+            for (int x = 0; x < powerUps.Length; x++)
+            {
+                ChangeColorButton(x, Color.green);
+            }
+        }
+
+
 
         HoldPrefab();
 
@@ -373,9 +382,6 @@ public class GameManagerTetris : MonoBehaviour
             selectPlayer[5].onClick.AddListener(() => SelectPieceSpawn(5));
             selectPlayer[6].onClick.AddListener(() => SelectPieceSpawn(6));
             selectPlayer[7].onClick.AddListener(() => SelectPieceSpawn(7));
-
-            powerUpActive = true;
-
         }
     }
 
