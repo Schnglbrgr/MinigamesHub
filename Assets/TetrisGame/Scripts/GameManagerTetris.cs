@@ -244,7 +244,6 @@ public class GameManagerTetris : MonoBehaviour
         timerText.text = "";
         currentPrefab.GetComponent<PlayerTetris>().enabled = true;
 
-
     }
 
     void LoseHearts()
