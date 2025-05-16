@@ -64,6 +64,8 @@ public class GameManagerTetris : MonoBehaviour
 
         lose_PausedHUD.SetActive(false);
 
+        PowerUps();
+
         isHolding = false;
 
         Time.timeScale = 1f;
@@ -83,17 +85,8 @@ public class GameManagerTetris : MonoBehaviour
                 ChangeColorButton(x, Color.red);
             }
         }
-        else
-        {
-            for (int x = 0; x < powerUps.Length; x++)
-            {
-                ChangeColorButton(x, Color.green);
-            }
-        }
 
         HoldPrefab();
-
-        PowerUps();
 
     }
 
@@ -107,6 +100,7 @@ public class GameManagerTetris : MonoBehaviour
 
         powerUpActive = false;
        
+
         if (!IsValidMove(currentPrefab.transform))
         {
             LoseHearts();
@@ -379,6 +373,8 @@ public class GameManagerTetris : MonoBehaviour
             selectPlayer[5].onClick.AddListener(() => SelectPieceSpawn(5));
             selectPlayer[6].onClick.AddListener(() => SelectPieceSpawn(6));
             selectPlayer[7].onClick.AddListener(() => SelectPieceSpawn(7));
+
+            powerUpActive = true;
 
         }
     }
