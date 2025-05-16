@@ -4,13 +4,24 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject ballPrefab;
+    [Header("Prefabs")]
+    public GameObject ballPrefab;    
+    [Space(5)]
+
+    [Header("UI")]
+    [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject gameOverText;
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text powerUpTimer;
+    [Space(5)]
+
     [SerializeField] Transform ballSpawner;
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject powerUp;
     private int score;
     private bool isPaused = false;
+    private float time;
+    private float timer = 8f;
+
 
     private void Awake()
     {
@@ -24,11 +35,63 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         score = 0;
+        time = timer;
         UpdateScoreText();
         SpawnBall();
+        UpdateTimerText();
     }
 
-    
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            Application.targetFrameRate = 60;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            Application.targetFrameRate = 144;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
+
+        PowerUpTimer();
+    }
+
+
+    void PowerUpTimer()
+    {               
+        if (time >= 0)
+        {
+            time -= Time.deltaTime;
+            UpdateTimerText();
+        }
+        else
+        {
+            SpawnPowerUp();
+            time = timer;
+        }
+        
+    }
+
+    void UpdateTimerText()
+    {
+        powerUpTimer.text = "PowerUp in: " + time.ToString("0.0");
+    }
+
+
+    void SpawnPowerUp()
+    {
+        float minX = -7.5f;
+        float maxX = 7.5f;
+        float spawnX = Random.Range(minX, maxX);
+        Instantiate(powerUp, new Vector2(spawnX, 6), Quaternion.identity);
+    }
+
+
     void SpawnBall()
     {
         Instantiate(ballPrefab, ballSpawner.position, Quaternion.identity);
@@ -57,25 +120,7 @@ public class GameManager : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            Application.targetFrameRate = 60;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            Application.targetFrameRate = 144;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            PauseGame();
-        }
-    }
-
-    void PauseGame()
+    public void PauseGame()
     {        
         if (!isPaused)
         {
@@ -91,15 +136,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
     public void RestartButton()
     {
-        SceneManager.LoadScene("BallBounce");
-        Time.timeScale = 1;
+        SceneManager.LoadScene("BallBounce");        
     }
-
-    //public void MainMenuButton()
-    //{
-    //    SceneManager.LoadScene("");
-    //}
-
 }
