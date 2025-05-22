@@ -5,30 +5,39 @@ using UnityEngine.UI;
 
 public class SpaceBattleManager : MonoBehaviour
 {
-    [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject player;
-    [SerializeField] private Transform[] enemiesSpawnPoint;
     [SerializeField] private GameObject[] enemies;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject lose_PausedHUD;
     [SerializeField] private TMP_Text lose_PausedText;
     [SerializeField] private Button restart_Paused;
     [SerializeField] private TMP_Text timerText;
+    [SerializeField] private GameObject[] powerUps;
 
     private Vector2Int map = new Vector2Int(10,20);
+    private Vector3 randomSpawnPosition;
+    private Vector3 randomSpawnPowerUp;
     private GameObject currentEnemy;
     private GameObject currentPrefab;
+    private GameObject currentPowerUp;
+
+    private float timerEnemy;
+    private float timerPowerUps;
+    private float coolDownPowerUps = 15f;
+    private float coolDownEnemySpawn = 5f;
     private int randomSpawn;
     private int randomEnemy;
+    private int randomSpawnPower;
+    private int randomPowerUp;
     public int score;
 
     private void Start()
     {
-        SpawnPlayer();
         SpawnEnemies();
         lose_PausedHUD.SetActive(false);
         score = 0;
         scoreText.text = $"Score: {score}";
+        timerPowerUps = coolDownPowerUps;
     }
 
     private void Update()
@@ -36,21 +45,54 @@ public class SpaceBattleManager : MonoBehaviour
         scoreText.text = $"Score: {score}";
 
         PausedGame();
+
+        if (timerEnemy > 0)
+        {
+            timerEnemy -= Time.deltaTime;
+        }
+
+        if (timerPowerUps > 0)
+        {
+            timerPowerUps -= Time.deltaTime;
+        }
+
+        if (timerEnemy <= 0)
+        {
+            SpawnEnemies();
+        }
+
+        SpawnPowerUps();
     }
 
-    void SpawnPlayer()
-    {
-        currentPrefab = Instantiate(player, spawnPoint.position, Quaternion.identity);
-    }
 
     public void SpawnEnemies()
     {
-        randomSpawn = Random.Range(0, enemiesSpawnPoint.Length);
+        randomSpawn = Random.Range(2, 8);
+
+        randomSpawnPosition = new Vector3(randomSpawn, 17, -1f);
+
         randomEnemy = Random.Range(0, enemies.Length);
 
-        currentEnemy = Instantiate(enemies[randomEnemy], enemiesSpawnPoint[randomSpawn].position ,Quaternion.identity);
+        Instantiate(enemies[randomEnemy], randomSpawnPosition, Quaternion.identity);    
+
+        timerEnemy = coolDownEnemySpawn;
     }
 
+    private void SpawnPowerUps()
+    {
+        if (timerPowerUps <= 0)
+        {
+            randomSpawnPower = Random.Range(2, 8);
+
+            randomSpawnPowerUp = new Vector3(randomSpawnPower, 17, -1f);
+
+            randomPowerUp = Random.Range(0, powerUps.Length);
+
+            currentPowerUp = Instantiate(powerUps[randomPowerUp], randomSpawnPowerUp, Quaternion.identity);
+
+            timerPowerUps = coolDownPowerUps;
+        }
+    }
 
     public bool InsideMap(Transform player)
     {
@@ -60,6 +102,16 @@ public class SpaceBattleManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void LevelUp(float speed)
+    {
+        if (score % 100 == 0)
+        {
+            coolDownEnemySpawn = Mathf.Max(coolDownEnemySpawn - 0.2f, 0.5f);
+
+            speed++;
+        }
     }
 
     void PausedGame()
