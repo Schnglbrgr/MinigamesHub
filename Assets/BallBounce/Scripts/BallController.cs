@@ -2,17 +2,22 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    GameManager gameManager;
+    GameManagerBallBounce gameManager;
     Rigidbody2D rb;
-    [SerializeField] float ballSpeed = 1f;
-    [SerializeField] float directionY = 11f;
-    float rRange = 2f;
+    [SerializeField] float speed = 0.5f;
+    [SerializeField] float maxSpeed = 8f;
+    private float rangeX = 3f;
+    private float directionY = 11.5f;
 
 
     void Awake()
     {
-        gameManager = FindAnyObjectByType<GameManager>();
+        gameManager = FindAnyObjectByType<GameManagerBallBounce>();
         rb = GetComponent<Rigidbody2D>();        
+    }
+    private void Start()
+    {
+        rb.linearVelocity = new Vector2(Random.Range(-1f, 1f), -1f).normalized;
     }
 
 
@@ -20,12 +25,11 @@ public class BallController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            gameManager.IncreaseScore();
-            BallBounce();
-            if (ballSpeed >= 10) {
-                ballSpeed = 10;
-                return; }
-            ballSpeed++;
+            BallBounce();            
+            gameManager.IncreaseScore();            
+            
+            speed += 0.5f;
+            speed = Mathf.Clamp(speed, 0f, maxSpeed);
         }
 
         if (collision.gameObject.CompareTag("Ground"))
@@ -38,7 +42,7 @@ public class BallController : MonoBehaviour
 
     void BallBounce()
     {
-        float bounceDirection = Random.Range(-rRange, rRange);
-        rb.linearVelocity = new Vector2(bounceDirection * ballSpeed, directionY);
+        float bounceDirection = Random.Range(-rangeX, rangeX);
+        rb.linearVelocity = new Vector2(bounceDirection * speed, directionY);
     }
 }
