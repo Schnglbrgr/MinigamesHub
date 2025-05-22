@@ -7,6 +7,8 @@ public class SpaceBattleBullet : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
+
+        Destroy(gameObject, 4);
     }
 
     void Movement()
