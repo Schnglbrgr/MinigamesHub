@@ -15,6 +15,10 @@ public class MovementSpacebattle : MonoBehaviour
         currentSpeed = speed;
     }
 
+    private void FixedUpdate()
+    {
+        Movement();
+    }
 
     public void Movement()
     {

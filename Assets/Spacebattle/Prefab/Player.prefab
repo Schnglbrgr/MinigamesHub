@@ -345,7 +345,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4789920842706442548}
   - component: {fileID: 4527165874225815424}
-  - component: {fileID: -3921998921282774015}
   - component: {fileID: 6959991058078246871}
   - component: {fileID: 5824215258855645079}
   - component: {fileID: 7944626357073191190}
@@ -430,20 +429,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &-3921998921282774015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6131101277939130378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc13c183d58564e479edff7a9430708c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementSpacebattle: {fileID: 7944626357073191190}
-  attackSpaceBattle: {fileID: 6959991058078246871}
 --- !u!114 &6959991058078246871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -458,7 +443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1989240653225493358, guid: fe087a6da9786d04caba2d13414026c7, type: 3}
   spawnPosition: {fileID: 1236567575345318418}
-  coolDown: 0.5
+  fireRate: 0.5
+  damage: 1
 --- !u!114 &5824215258855645079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -472,6 +458,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpBar: {fileID: 0}
+  currentHealth: 0
 --- !u!114 &7944626357073191190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,6 +472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  currentSpeed: 0
 --- !u!61 &7205616354281392235
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -627,6 +627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 394486602}
   - component: {fileID: 394486601}
+  - component: {fileID: 394486603}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -661,6 +662,10 @@ MonoBehaviour:
   - {fileID: 1037359712304547826, guid: 39d85fbe408aa2546b0ad3fb146558f8, type: 3}
   - {fileID: 1037359712304547826, guid: 47a90ee3f09e8a946bfe122f99452d3e, type: 3}
   - {fileID: 1037359712304547826, guid: c7ee559c84bd60a4da29d39fa53c184f, type: 3}
+  spawnRandomEnemy: {fileID: 11400000, guid: 8105571c480ff8345bf07a478f951aa7, type: 2}
+  poolQueue: {fileID: 394486603}
+  currentEnemy: {fileID: 0}
+  coolDownEnemySpawn: 5
   score: 0
 --- !u!4 &394486602
 Transform:
@@ -677,6 +682,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394486603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394486600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d43f73e5f525042abf95ac571b81f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &513085439
 GameObject:
   m_ObjectHideFlags: 0

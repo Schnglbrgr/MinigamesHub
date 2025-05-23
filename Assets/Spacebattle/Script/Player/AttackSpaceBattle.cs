@@ -5,8 +5,10 @@ public class AttackSpaceBattle : MonoBehaviour
     [SerializeField] private GameObject bullet;
     [SerializeField] private Transform spawnPosition;
 
-    public float coolDown = 0.5f;
+    public float fireRate = 0.5f;
     private float timer;
+
+    public int damage = 1;
 
     public void Attack()
     {
@@ -14,7 +16,7 @@ public class AttackSpaceBattle : MonoBehaviour
         {           
             Instantiate(bullet, spawnPosition.position, Quaternion.identity);
 
-            timer = coolDown;
+            timer = fireRate;
         }
     }
 
@@ -23,6 +25,11 @@ public class AttackSpaceBattle : MonoBehaviour
         if (timer > 0)
         {
             timer -= Time.deltaTime;
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            Attack();
         }
     }
 }
