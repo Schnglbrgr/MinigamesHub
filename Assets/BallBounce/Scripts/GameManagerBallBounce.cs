@@ -19,7 +19,7 @@ public class GameManagerBallBounce : MonoBehaviour
     [Space(5)]
 
     [Header("PowerUps")]
-    [SerializeField] GameObject[] powerUps;
+    [SerializeField] WeightedPuPickerSO_BallBounce powerUpPicker;
     private float spawnX = 7.5f;
 
     private PlatformController platform;
@@ -130,20 +130,21 @@ public class GameManagerBallBounce : MonoBehaviour
         statsSizeText.text = "Size: " + size;
     }
 
-
+    
     IEnumerator SpawnPowerUps()
     {
         while (true)
         {
             if (!isPaused)
-            {
-                int powerUpIndex = Random.Range(0, powerUps.Length);
+            {                
                 float randomX = Random.Range(-spawnX, spawnX);
                 float randomTime = Random.Range(6f, 12f);
 
                 yield return new WaitForSeconds(randomTime);
-                    
-                Instantiate(powerUps[powerUpIndex], new Vector2(randomX, 6), Quaternion.identity);
+
+                PowerUpEffect result = powerUpPicker.GetRandomPowerUp();
+                Instantiate(result.powerUpPrefab, new Vector2(randomX, 6), Quaternion.identity);
+
             }
             else
             {

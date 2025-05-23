@@ -780,12 +780,7 @@ MonoBehaviour:
   scoreText: {fileID: 791859299}
   statsSpeedText: {fileID: 761090551}
   statsSizeText: {fileID: 1922964016}
-  powerUps:
-  - {fileID: 3774727803587485593, guid: 6384910c051b8694191ff0c91bbf5c21, type: 3}
-  - {fileID: 1768540566308687542, guid: 6a845009200c8c94ca33fc516b22f3c9, type: 3}
-  - {fileID: 4938631801494028451, guid: 465bf7ad1ea2fb5448557b602d54e26a, type: 3}
-  - {fileID: 8231664549303407574, guid: f29295718c0531240ba8f1876c02bb85, type: 3}
-  - {fileID: 3001782543815513366, guid: 0b803371817b5df409738b4d2319e4e6, type: 3}
+  powerUpPicker: {fileID: 11400000, guid: 140a2e1b615e32342b7ee4cb858e9544, type: 2}
 --- !u!1 &715330856
 GameObject:
   m_ObjectHideFlags: 0
