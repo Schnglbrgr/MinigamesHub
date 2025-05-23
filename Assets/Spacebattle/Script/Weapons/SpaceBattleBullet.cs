@@ -4,6 +4,20 @@ public class SpaceBattleBullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
 
+    private SpaceBattleEnemy enemy;
+    private AttackSpaceBattle attackSpaceBattle;
+
+    private int damage;
+
+    private void Awake()
+    {
+        attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
+
+        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<SpaceBattleEnemy>();
+
+        damage = attackSpaceBattle.damage;
+    }
+
     private void FixedUpdate()
     {
         Movement();
@@ -18,6 +32,10 @@ public class SpaceBattleBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if (collision.gameObject.tag == "Enemy")
+        {
+            enemy.TakeDamage(damage);
+            Destroy(gameObject);
+        }
     }
 }

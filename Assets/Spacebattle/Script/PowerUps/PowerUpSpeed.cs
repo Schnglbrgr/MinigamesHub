@@ -15,7 +15,6 @@ public class PowerUpSpeed : MonoBehaviour
         currentSpeed = movementSpacebattle.currentSpeed;
 
         speedBoost = currentSpeed + 2;
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
