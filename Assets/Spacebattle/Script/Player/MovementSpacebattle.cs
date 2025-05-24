@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MovementSpacebattle : MonoBehaviour
@@ -13,6 +14,11 @@ public class MovementSpacebattle : MonoBehaviour
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
 
         currentSpeed = speed;
+    }
+
+    private void FixedUpdate()
+    {
+        Movement();
     }
 
 
@@ -47,5 +53,16 @@ public class MovementSpacebattle : MonoBehaviour
             transform.position -= direction;
         }
 
+    }
+
+    public void StopBoost(float timer)
+    {
+        StartCoroutine(StopBoostTimer(timer));
+    }
+
+    IEnumerator StopBoostTimer(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        currentSpeed = speed;
     }
 }
