@@ -33,8 +33,9 @@ public class SpaceBattleManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnEnemies();
+        Time.timeScale = 1f;
         lose_PausedHUD.SetActive(false);
+        SpawnEnemies();
         score = 0;
         scoreText.text = $"Score: {score}";
         timerPowerUps = coolDownPowerUps;
@@ -63,7 +64,6 @@ public class SpaceBattleManager : MonoBehaviour
 
         SpawnPowerUps();
     }
-
 
     public void SpawnEnemies()
     {
@@ -104,7 +104,7 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void LevelUp(float speed)
     {
-        if (score % 100 == 0)
+        if (score % 100 == 0 && score != 0)
         {
             coolDownEnemySpawn = Mathf.Max(coolDownEnemySpawn - 0.2f, 0.5f);
 
@@ -152,7 +152,9 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void EndGame()
     {
-        Destroy(currentPrefab);
+        Destroy(currentEnemy);
+
+        Destroy(currentPowerUp);
 
         lose_PausedHUD.SetActive(true);
 

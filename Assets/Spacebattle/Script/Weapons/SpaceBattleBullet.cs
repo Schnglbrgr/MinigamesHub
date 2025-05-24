@@ -15,7 +15,7 @@ public class SpaceBattleBullet : MonoBehaviour
 
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<SpaceBattleEnemy>();
 
-        damage = attackSpaceBattle.damage;
+        damage = attackSpaceBattle.currentDamage;
     }
 
     private void FixedUpdate()

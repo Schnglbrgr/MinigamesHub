@@ -662,6 +662,7 @@ MonoBehaviour:
   - {fileID: 1037359712304547826, guid: 39d85fbe408aa2546b0ad3fb146558f8, type: 3}
   - {fileID: 1037359712304547826, guid: 47a90ee3f09e8a946bfe122f99452d3e, type: 3}
   - {fileID: 1037359712304547826, guid: c7ee559c84bd60a4da29d39fa53c184f, type: 3}
+  - {fileID: 1037359712304547826, guid: 6b64c4bb9fff0fb4ca3759bab6d2c183, type: 3}
   pickRandomEnemy: {fileID: 394486603}
   score: 0
 --- !u!4 &394486602
@@ -1571,7 +1572,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -3921998921282774015, guid: 0057e9425ce552b40ac404e08b29cb5c, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

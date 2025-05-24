@@ -6,6 +6,7 @@ public class PowerUpSpeed : MonoBehaviour
     private MovementSpacebattle movementSpacebattle;
 
     private float speedBoost;
+    private float timer = 3f;
     private float currentSpeed;
 
     private void Awake()
@@ -22,6 +23,7 @@ public class PowerUpSpeed : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             movementSpacebattle.currentSpeed = speedBoost;
+            movementSpacebattle.StopBoost(timer);
             Destroy(gameObject);
         }
     }

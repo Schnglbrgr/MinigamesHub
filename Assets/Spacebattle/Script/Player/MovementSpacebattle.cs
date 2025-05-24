@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MovementSpacebattle : MonoBehaviour
@@ -52,5 +53,16 @@ public class MovementSpacebattle : MonoBehaviour
             transform.position -= direction;
         }
 
+    }
+
+    public void StopBoost(float timer)
+    {
+        StartCoroutine(StopBoostTimer(timer));
+    }
+
+    IEnumerator StopBoostTimer(float timer)
+    {
+        yield return new WaitForSeconds(timer);
+        currentSpeed = speed;
     }
 }
