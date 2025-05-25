@@ -9,6 +9,7 @@ public class Teleport : MonoBehaviour
     [SerializeField] private GameObject[] teleports;
     [SerializeField] private GameObject teleportText;
 
+    private CollectWeapon collectWeapon;
     private GameObject currentPlayer;
     private GameObject newPlayer;
 
@@ -20,6 +21,8 @@ public class Teleport : MonoBehaviour
     private void Awake()
     {
         currentPlayer = gameObject;
+
+        collectWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>();
     }
 
     private void Update()
@@ -41,6 +44,8 @@ public class Teleport : MonoBehaviour
         GetComponent<MovementSystem>().enabled = false;
 
         newPlayer = Instantiate(currentPlayer, teleports[selectTeleport].transform.position, Quaternion.identity);
+
+        collectWeapon.currentWeapon.transform.SetParent(newPlayer.transform);
 
         Destroy(currentPlayer);
 

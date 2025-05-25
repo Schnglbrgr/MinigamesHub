@@ -7,12 +7,10 @@ public class Bullet : MonoBehaviour
     public int damage;
 
     private Rigidbody2D rb;
-    private EnemyHealthSystem enemyHealthSystem;
+    private EnemyController enemyController;
 
     private void Awake()
     {
-        enemyHealthSystem = GameObject.FindGameObjectWithTag("Enemy").GetComponent<EnemyHealthSystem>();
-
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -27,7 +25,9 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            enemyHealthSystem.TakeDamageEnemy(damage);
+            enemyController = collision.gameObject.GetComponent<EnemyController>();
+
+            enemyController.TakeDamageEnemy(damage);
         }
 
         Destroy(gameObject);

@@ -1,18 +1,29 @@
+using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
     [SerializeField] private GameObject[] hearts;
+    [SerializeField] private GameObject[] shield;
 
     private GameManagerMazeRunner gameManagerMazeRunner;
-
-    private int heartsLeft;
+    private Color currentColor;
+    private Transform child;
+    public int heartsLeft;
+    public int shieldLeft;
 
     private void Awake()
     {
         gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>();
 
         heartsLeft = hearts.Length - 2;
+
+        shieldLeft = shield.Length;
+
+        child = transform.GetChild(1);
+
+        currentColor = child.GetChild(1).GetComponent<SpriteRenderer>().color;
     }
 
     private void Update()
@@ -20,11 +31,24 @@ public class HealthSystem : MonoBehaviour
         CheckHealth();
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        hearts[heartsLeft].SetActive(false);
+        child = transform.GetChild(1);
 
-        heartsLeft--;
+        child.GetChild(1).GetComponent<SpriteRenderer>().color = Color.red;
+
+        if (shieldLeft <= 0)
+        {
+            hearts[heartsLeft].SetActive(false);
+            heartsLeft -= damage;
+        }
+        else
+        {
+            shield[shieldLeft].SetActive(false);
+            shieldLeft -= damage;
+        }
+
+        StartCoroutine(ReturnColor());
     }
 
     private void CheckHealth()
@@ -34,6 +58,13 @@ public class HealthSystem : MonoBehaviour
             gameManagerMazeRunner.Lose();
             Destroy(gameObject);
         }
+    }
+
+    public void AddShield()
+    {
+        shieldLeft++;
+
+        shield[shieldLeft].SetActive(true);
     }
 
     public void AddHealth()
@@ -48,10 +79,16 @@ public class HealthSystem : MonoBehaviour
         {
             heartsLeft++;
 
-            hearts[heartsLeft].SetActive(true);
+            hearts[heartsLeft - 1].SetActive(true);
 
             Debug.Log("Chao");
         }
+    }
+
+    IEnumerator ReturnColor()
+    {
+        yield return new WaitForSeconds(0.2f);
+        child.GetChild(1).GetComponent<SpriteRenderer>().color = currentColor;
     }
    
 }

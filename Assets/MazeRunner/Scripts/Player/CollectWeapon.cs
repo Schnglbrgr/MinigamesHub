@@ -47,7 +47,7 @@ public class CollectWeapon : MonoBehaviour
     {
         for (int x = 0; x < weapons.Length; x++)
         {
-            if (weaponName == $"{weapons[x].name}(Clone)" )
+            if (weaponName == weapons[x].GetComponent<AttackSystem>().weapon.nameWeapon)
             {
                 grabWeapon = weapons[x];
             }     
@@ -59,7 +59,6 @@ public class CollectWeapon : MonoBehaviour
         currentWeapon.GetComponent<AttackSystem>().enabled = true;
 
         currentWeapon.GetComponent<AttackSystem>().ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
-
 
         currentWeaponInv = Instantiate(grabWeapon, currentWeaponInvPosition.position, Quaternion.identity, player);
 
@@ -94,7 +93,7 @@ public class CollectWeapon : MonoBehaviour
         {
             Destroy(collision.gameObject);
 
-            weaponName = collision.gameObject.name;
+            weaponName = collision.GetComponent<AttackSystem>().weapon.name;
 
             TakeWeapon();
         }

@@ -8,11 +8,12 @@ public class GameManagerMazeRunner : MonoBehaviour
     [SerializeField] private TMP_Text win_loseText;
     [SerializeField] private Button restart;
     [SerializeField] private Button exit;
-    [SerializeField] private Transform[] weaponsSpawn;
+    [SerializeField] private Transform[] chestSpawn;
     [SerializeField] private GameObject[] weapons;
+    [SerializeField] private GameObject[] chests;
     [SerializeField] private Transform[] enemySpawn;
     [SerializeField] private GameObject[] enemy;
-    [SerializeField] private Transform weaponSpawnParent;
+    [SerializeField] private Transform chestParent;
     [SerializeField] private Transform enemySpawnParent;
 
     public GameObject warningMessage;
@@ -27,11 +28,19 @@ public class GameManagerMazeRunner : MonoBehaviour
 
     private void Start()
     {
-        SpawnRandomWeapons();
-
         SpawnRandonEnemies();
+        SpawnChest();
     }
 
+    private void SpawnChest()
+    {
+        for (int x = 0; x < chests.Length; x++)
+        {
+            int randomPosition = Random.Range(0, chestSpawn.Length);
+
+            Instantiate(chests[x], chestSpawn[randomPosition].position, Quaternion.identity, chestParent);
+        }
+    }
 
     public void Win(int keyInventory)
     {
@@ -72,28 +81,9 @@ public class GameManagerMazeRunner : MonoBehaviour
 
     }
 
-    private void SpawnRandomWeapons()
-    {
-        for (int x = 0; x < weaponsSpawn.Length; x++)
-        {
-            int selectWeapon = Random.Range(0,weapons.Length);
-
-            Instantiate(weapons[selectWeapon], weaponsSpawn[x].position,Quaternion.identity, weaponSpawnParent);
-
-            weapons[selectWeapon].GetComponent<RotateWeapon>().enabled = false;
-        }
-    }
-
     private void SpawnRandonEnemies()
     {
-        for (int x = 0; x < enemySpawn.Length; x++)
-        {
-            int selectEnemy = Random.Range(0, enemy.Length);
-
-            Instantiate(enemy[selectEnemy], enemySpawn[x].position, Quaternion.identity, enemySpawnParent);
-
-            enemy[selectEnemy].GetComponent<EnemyHealthSystem>().enabled = false;
-        }
+        
     }
 
 }
