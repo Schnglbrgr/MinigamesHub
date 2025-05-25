@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class SpaceBattleBullet : MonoBehaviour
@@ -6,8 +7,10 @@ public class SpaceBattleBullet : MonoBehaviour
 
     private SpaceBattleEnemy enemy;
     private AttackSpaceBattle attackSpaceBattle;
+    public GameObject bulletPrefab;
 
     private int damage;
+
 
     private void Awake()
     {
@@ -21,8 +24,7 @@ public class SpaceBattleBullet : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-
-        Destroy(gameObject, 4);
+        StartCoroutine(DestroyBullet());
     }
 
     void Movement()
@@ -35,7 +37,13 @@ public class SpaceBattleBullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             enemy.TakeDamage(damage);
-            Destroy(gameObject);
+            attackSpaceBattle.bulletPool.Return(bulletPrefab, gameObject);
         }
+    }
+
+    IEnumerator DestroyBullet()
+    {
+        yield return new WaitForSeconds(4);
+        attackSpaceBattle.bulletPool.Return(bulletPrefab, gameObject);
     }
 }

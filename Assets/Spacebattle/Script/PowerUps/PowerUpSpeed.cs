@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class PowerUpSpeed : MonoBehaviour
 {
-
+    private AttackSpaceBattle attackSpaceBattle;
     private MovementSpacebattle movementSpacebattle;
+    private SpaceBattleManager spaceBattleManager;
 
     private float speedBoost;
     private float timer = 3f;
@@ -12,6 +13,10 @@ public class PowerUpSpeed : MonoBehaviour
     private void Awake()
     {
         movementSpacebattle = GameObject.FindGameObjectWithTag("Player").GetComponent<MovementSpacebattle>();
+
+        attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
+
+        spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
 
         currentSpeed = movementSpacebattle.currentSpeed;
 
@@ -24,7 +29,8 @@ public class PowerUpSpeed : MonoBehaviour
         {
             movementSpacebattle.currentSpeed = speedBoost;
             movementSpacebattle.StopBoost(timer);
-            Destroy(gameObject);
+            attackSpaceBattle.ReturnColor(timer);
+            spaceBattleManager.powerUpPool.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
         }
     }
 

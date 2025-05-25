@@ -6,20 +6,22 @@ using UnityEngine.UI;
 public class SpaceBattleManager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject[] enemies;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject lose_PausedHUD;
     [SerializeField] private TMP_Text lose_PausedText;
     [SerializeField] private Button restart_Paused;
     [SerializeField] private TMP_Text timerText;
-    [SerializeField] private GameObject[] powerUps;
     [SerializeField] private WeightedPicker pickRandomEnemy;
 
+    public PoolManagerSO enemyPool;
+    public PoolManagerSO powerUpPool;
+
     private Vector2Int map = new Vector2Int(10,20);
-    private Vector3 randomSpawnPosition;
-    private Vector3 randomSpawnPowerUp;
+    public Vector3 randomSpawnPosition;
+    public GameObject[] powerUps;
     private GameObject currentEnemy;
-    private GameObject currentPrefab;
+    public GameObject currentPrefabEnemy;
+    public GameObject currentPrefabPowerUp;
     private GameObject currentPowerUp;
 
     private float timerEnemy;
@@ -27,9 +29,9 @@ public class SpaceBattleManager : MonoBehaviour
     private float coolDownPowerUps = 15f;
     private float coolDownEnemySpawn = 5f;
     private int randomSpawn;
-    private int randomSpawnPower;
     private int randomPowerUp;
     public int score;
+
 
     private void Start()
     {
@@ -67,26 +69,41 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void SpawnEnemies()
     {
+        currentPrefabEnemy = pickRandomEnemy.SelectRandomEnemy();
+
+        currentEnemy = enemyPool.CreateObject(currentPrefabEnemy);
+
+        currentEnemy.GetComponent<SpaceBattleEnemy>().prefab = currentPrefabEnemy;
+
+        currentEnemy.transform.position = PickRandomSpawn();
+
+        currentEnemy.GetComponent<SpaceBattleEnemy>().ResetState();
+
+        timerEnemy = coolDownEnemySpawn;
+    }
+
+    public Vector3 PickRandomSpawn()
+    {
         randomSpawn = Random.Range(2, 8);
 
         randomSpawnPosition = new Vector3(randomSpawn, 17, -1f);
 
-        currentEnemy = Instantiate(pickRandomEnemy.SelectRandomEnemy(), randomSpawnPosition, Quaternion.identity);    
-
-        timerEnemy = coolDownEnemySpawn;
+        return randomSpawnPosition;
     }
 
     private void SpawnPowerUps()
     {
         if (timerPowerUps <= 0)
         {
-            randomSpawnPower = Random.Range(2, 8);
-
-            randomSpawnPowerUp = new Vector3(randomSpawnPower, 17, -1f);
-
             randomPowerUp = Random.Range(0, powerUps.Length);
 
-            currentPowerUp = Instantiate(powerUps[randomPowerUp], randomSpawnPowerUp, Quaternion.identity);
+            currentPrefabPowerUp = powerUps[randomPowerUp];
+
+            currentPowerUp = powerUpPool.CreateObject(currentPrefabPowerUp);
+
+            currentPowerUp.GetComponent<MovementPowerUps>().prefab = currentPrefabPowerUp;
+
+            currentPowerUp.transform.position = PickRandomSpawn();
 
             timerPowerUps = coolDownPowerUps;
         }

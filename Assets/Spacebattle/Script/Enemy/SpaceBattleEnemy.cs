@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class SpaceBattleEnemy : MonoBehaviour
 {
-    [SerializeField] private SpaceBattleEnemySO enemy;
-
+    public SpaceBattleEnemySO enemy;
     private SpaceBattleManager spaceBattleManager;
     private HealthSpaceBattle healthSpaceBattle;
     private Color currentColor;
+    public GameObject prefab;
 
     private int currentHealth;
 
@@ -23,11 +23,6 @@ public class SpaceBattleEnemy : MonoBehaviour
         {
             currentColor = gameObject.transform.GetChild(x).GetComponent<SpriteRenderer>().color;
         }
-    }
-
-    private void Update()
-    {
-        CheckHealth();
     }
 
     private void FixedUpdate()
@@ -50,6 +45,7 @@ public class SpaceBattleEnemy : MonoBehaviour
             gameObject.transform.GetChild(x).GetComponent<SpriteRenderer>().color = Color.red;
             StartCoroutine(ReturnColor(x));
         }
+        CheckHealth();
     }
 
     void CheckHealth()
@@ -59,7 +55,7 @@ public class SpaceBattleEnemy : MonoBehaviour
             spaceBattleManager.score += 10;
             spaceBattleManager.SpawnEnemies();
             spaceBattleManager.LevelUp(enemy.speed);
-            Destroy(gameObject);
+            spaceBattleManager.enemyPool.Return(prefab,gameObject);
         }
     }
 
@@ -67,9 +63,16 @@ public class SpaceBattleEnemy : MonoBehaviour
     {
         if (transform.position.y <= 0)
         {
-            Destroy(gameObject);
+            spaceBattleManager.enemyPool.Return(prefab, gameObject);
             spaceBattleManager.EndGame();           
         }
+    }
+
+    public void ResetState()
+    {
+        //currentHealth = enemy.health;
+        currentHealth = 100;
+        prefab = spaceBattleManager.currentPrefabEnemy;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -78,7 +81,7 @@ public class SpaceBattleEnemy : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             healthSpaceBattle.TakeDamage(enemy.damage);
-            Destroy(gameObject);
+            spaceBattleManager.enemyPool.Return(prefab, gameObject);
         }
     }
 
