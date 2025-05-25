@@ -184,6 +184,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5856272078798671037}
   - component: {fileID: 2866301790020017172}
+  - component: {fileID: -8565801459385552399}
+  - component: {fileID: -6433965566066245478}
   - component: {fileID: 5895017433949884735}
   - component: {fileID: 7006156166899050726}
   m_Layer: 0
@@ -218,13 +220,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6982966627328317168}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a72b2283b02c2724ab8084caea7922fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 150
-  manaReward: 40
+  enemy: {fileID: 11400000, guid: c324d1cdb916fec4ab6f31225c15ceea, type: 2}
+--- !u!114 &-8565801459385552399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982966627328317168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5514e05df7f7e7644ae88faefa366d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6433965566066245478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982966627328317168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d44cff33db9e44d9cbda807a5d57c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &5895017433949884735
 Rigidbody2D:
   serializedVersion: 5

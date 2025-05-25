@@ -72,19 +72,17 @@ public class PowerUps : MonoBehaviour
 
             currentLevelSpeed++;
 
-            movementSystem.speed ++;
+            movementSystem.speed += 0.5f;
 
             speed.transform.GetChild(2).GetComponent<TMP_Text>().text = $"Level {currentLevelSpeed}";
         }
         else if (currentLevelSpeed > 3)
         {
             warningMana.text = "Level Max";
-            StartCoroutine(DeactiveWarning());
         }
         else
         {
             warningMana.text = "Insufficient Mana";
-            StartCoroutine(DeactiveWarning());
         }
     }
 
@@ -96,41 +94,43 @@ public class PowerUps : MonoBehaviour
 
             currentLevelHealth++;
 
+            healthSystem.AddHealth();
+
             health.transform.GetChild(2).GetComponent<TMP_Text>().text = $"Level {currentLevelHealth}";
         }
         else if (currentLevelHealth > 2)
         {
             warningMana.text = "Level Max";
-            StartCoroutine(DeactiveWarning());
         }
         else
         {
             warningMana.text = "Insufficient Mana";
-            StartCoroutine(DeactiveWarning());
         }
     }
 
     private void ShieldPowerUp()
     {
-        if (currentMana >= shieldCost && currentLevelShield <= 3)
+        if (currentMana >= shieldCost && currentLevelShield <= 3 && healthSystem.shieldLeft < 3)
         {
             manaSystem.mana = Mathf.Max(manaSystem.mana - shieldCost, 0);
 
             currentLevelShield++;
 
-            healthSystem.AddHealth();
+            healthSystem.AddShield();
 
             shield.transform.GetChild(2).GetComponent<TMP_Text>().text = $"Level {currentLevelShield}";
         }
         else if (currentLevelShield > 3)
         {
             warningMana.text = "Level Max";
-            StartCoroutine(DeactiveWarning());
+        }
+        else if (healthSystem.shieldLeft >= 3)
+        {
+            warningMana.text = "Max Shield";
         }
         else
         {
             warningMana.text = "Insufficient Mana";
-            StartCoroutine(DeactiveWarning());
         }
     }
 
@@ -139,12 +139,6 @@ public class PowerUps : MonoBehaviour
         powerUpsHUD.SetActive(false);
 
         Time.timeScale = 1f;
-    }
-
-    IEnumerator DeactiveWarning()
-    {
-        yield return new WaitForSeconds(0.5f);
-        warningMana.text = "";
     }
 
 }

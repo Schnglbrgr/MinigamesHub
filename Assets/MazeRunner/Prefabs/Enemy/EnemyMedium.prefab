@@ -184,6 +184,8 @@ GameObject:
   m_Component:
   - component: {fileID: 769856602901233278}
   - component: {fileID: 8546688142955169370}
+  - component: {fileID: 5794428059277174778}
+  - component: {fileID: -2677459978989772810}
   - component: {fileID: 2061474428604678321}
   - component: {fileID: 4559369821865566998}
   m_Layer: 0
@@ -217,13 +219,36 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5245605685648393930}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a72b2283b02c2724ab8084caea7922fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  manaReward: 30
+  enemy: {fileID: 11400000, guid: 5a9d951fac3335743b4473f2bcd27812, type: 2}
+--- !u!114 &5794428059277174778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245605685648393930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949819d79a4b86444ac1d0e7a76619fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-2677459978989772810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5245605685648393930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8164c19d28f09419bf1b5cad2638ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!60 &2061474428604678321
 PolygonCollider2D:
   m_ObjectHideFlags: 0

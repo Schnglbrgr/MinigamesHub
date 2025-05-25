@@ -5,10 +5,8 @@ using UnityEngine.UI;
 public class AttackSystem : MonoBehaviour
 {
     [SerializeField] private GameObject bullet;
-    [SerializeField] private int damage;
-    [SerializeField] private float coolDown;
-    [SerializeField] private int maxAmmo;
 
+    public WeaponsSO weapon;
     private TMP_Text ammoText;
     private Transform spawnPoint;
     private GameObject warningAmmo;
@@ -20,13 +18,13 @@ public class AttackSystem : MonoBehaviour
 
     private void Awake()
     {
-        bullet.GetComponent<Bullet>().damage = damage;
+        bullet.GetComponent<Bullet>().damage = weapon.damage;
 
         spawnPoint = transform.GetChild(1).GetComponent<Transform>();
 
         player = GameObject.FindGameObjectWithTag("Player");
 
-        currentAmmo = maxAmmo;
+        currentAmmo = weapon.maxAmmo;
 
         ammoText = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
 
@@ -44,7 +42,7 @@ public class AttackSystem : MonoBehaviour
 
         Shoot();
 
-        ammoText.text = $"{currentAmmo} / {maxAmmo}";
+        ammoText.text = $"{currentAmmo} / {weapon.maxAmmo}";
 
         if (currentAmmo <= 0)
         {
@@ -62,7 +60,7 @@ public class AttackSystem : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && timer <= 0 && currentAmmo > 0)
         {
-            timer = coolDown;
+            timer = weapon.fireRate;
 
             currentAmmo--;
 
