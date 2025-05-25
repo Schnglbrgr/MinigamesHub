@@ -6,19 +6,22 @@ using UnityEngine.UI;
 public class SpaceBattleManager : MonoBehaviour
 {
     [SerializeField] private GameObject player;
-    [SerializeField] private GameObject[] enemies;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject lose_PausedHUD;
     [SerializeField] private TMP_Text lose_PausedText;
     [SerializeField] private Button restart_Paused;
     [SerializeField] private TMP_Text timerText;
-    [SerializeField] private GameObject[] powerUps;
+    [SerializeField] private WeightedPicker pickRandomEnemy;
+
+    public PoolManagerSO enemyPool;
+    public PoolManagerSO powerUpPool;
 
     private Vector2Int map = new Vector2Int(10,20);
-    private Vector3 randomSpawnPosition;
-    private Vector3 randomSpawnPowerUp;
+    public Vector3 randomSpawnPosition;
+    public GameObject[] powerUps;
     private GameObject currentEnemy;
-    private GameObject currentPrefab;
+    public GameObject currentPrefabEnemy;
+    public GameObject currentPrefabPowerUp;
     private GameObject currentPowerUp;
 
     private float timerEnemy;
@@ -26,15 +29,15 @@ public class SpaceBattleManager : MonoBehaviour
     private float coolDownPowerUps = 15f;
     private float coolDownEnemySpawn = 5f;
     private int randomSpawn;
-    private int randomEnemy;
-    private int randomSpawnPower;
     private int randomPowerUp;
     public int score;
 
+
     private void Start()
     {
-        SpawnEnemies();
+        Time.timeScale = 1f;
         lose_PausedHUD.SetActive(false);
+        SpawnEnemies();
         score = 0;
         scoreText.text = $"Score: {score}";
         timerPowerUps = coolDownPowerUps;
@@ -64,31 +67,43 @@ public class SpaceBattleManager : MonoBehaviour
         SpawnPowerUps();
     }
 
-
     public void SpawnEnemies()
+    {
+        currentPrefabEnemy = pickRandomEnemy.SelectRandomEnemy();
+
+        currentEnemy = enemyPool.CreateObject(currentPrefabEnemy);
+
+        currentEnemy.GetComponent<SpaceBattleEnemy>().prefab = currentPrefabEnemy;
+
+        currentEnemy.transform.position = PickRandomSpawn();
+
+        currentEnemy.GetComponent<SpaceBattleEnemy>().ResetState();
+
+        timerEnemy = coolDownEnemySpawn;
+    }
+
+    public Vector3 PickRandomSpawn()
     {
         randomSpawn = Random.Range(2, 8);
 
         randomSpawnPosition = new Vector3(randomSpawn, 17, -1f);
 
-        randomEnemy = Random.Range(0, enemies.Length);
-
-        Instantiate(enemies[randomEnemy], randomSpawnPosition, Quaternion.identity);    
-
-        timerEnemy = coolDownEnemySpawn;
+        return randomSpawnPosition;
     }
 
     private void SpawnPowerUps()
     {
         if (timerPowerUps <= 0)
         {
-            randomSpawnPower = Random.Range(2, 8);
-
-            randomSpawnPowerUp = new Vector3(randomSpawnPower, 17, -1f);
-
             randomPowerUp = Random.Range(0, powerUps.Length);
 
-            currentPowerUp = Instantiate(powerUps[randomPowerUp], randomSpawnPowerUp, Quaternion.identity);
+            currentPrefabPowerUp = powerUps[randomPowerUp];
+
+            currentPowerUp = powerUpPool.CreateObject(currentPrefabPowerUp);
+
+            currentPowerUp.GetComponent<MovementPowerUps>().prefab = currentPrefabPowerUp;
+
+            currentPowerUp.transform.position = PickRandomSpawn();
 
             timerPowerUps = coolDownPowerUps;
         }
@@ -106,7 +121,7 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void LevelUp(float speed)
     {
-        if (score % 100 == 0)
+        if (score % 100 == 0 && score != 0)
         {
             coolDownEnemySpawn = Mathf.Max(coolDownEnemySpawn - 0.2f, 0.5f);
 
@@ -118,15 +133,14 @@ public class SpaceBattleManager : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            currentPrefab.GetComponent<PlayerSpaceBattle>().enabled = false;
-
-            currentEnemy.GetComponent<SpaceBattleEnemy>().enabled = false;
 
             lose_PausedHUD.SetActive(true);
 
             lose_PausedText.text = "Game Paused";
 
             restart_Paused.GetComponentInChildren<TMP_Text>().text = "Resume";
+
+            Time.timeScale = 0f;
 
             restart_Paused.onClick.AddListener(() => StartCoroutine(ResumeGame()));
 
@@ -139,30 +153,33 @@ public class SpaceBattleManager : MonoBehaviour
 
         timerText.text = "3";
 
-        yield return new WaitForSeconds(1f);
+        Time.timeScale = 0.1f;
+
+        yield return new WaitForSeconds(0.1f);
         timerText.text = "2";
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         timerText.text = "1";
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.1f);
         timerText.text = "";
-        currentPrefab.GetComponent<PlayerSpaceBattle>().enabled = true;
-        currentEnemy.GetComponent<SpaceBattleEnemy>().enabled = true;
+
 
     }
 
     public void EndGame()
     {
-        Destroy(currentPrefab);
+        Destroy(currentEnemy);
+
+        Destroy(currentPowerUp);
 
         lose_PausedHUD.SetActive(true);
-
-        currentPrefab.GetComponent<PlayerSpaceBattle>().enabled = false;
 
         lose_PausedText.text = "You Lose";
 
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
+
+        Time.timeScale = 0f;
 
         restart_Paused.onClick.AddListener(Start);
     }

@@ -627,6 +627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 394486602}
   - component: {fileID: 394486601}
+  - component: {fileID: 394486603}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -647,20 +648,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 6131101277939130378, guid: 0057e9425ce552b40ac404e08b29cb5c, type: 3}
-  enemies:
-  - {fileID: 4494215068426473020, guid: 93861faf138fec445b9b7be8a12cf4f9, type: 3}
-  - {fileID: 3620537512607031645, guid: f55d7509017bad24dbe8ca12c5abce69, type: 3}
-  - {fileID: 265466818584269473, guid: 266b44c774a4e5747ab3ddc98dcc468f, type: 3}
-  - {fileID: 1526725132709275198, guid: 7a70145510fa1d049a993b881d6a3d73, type: 3}
   scoreText: {fileID: 1688624714}
   lose_PausedHUD: {fileID: 1653036788}
   lose_PausedText: {fileID: 738592779}
   restart_Paused: {fileID: 202880843}
   timerText: {fileID: 2085038463}
+  pickRandomEnemy: {fileID: 394486603}
+  enemyPool: {fileID: 11400000, guid: aff9c36739d1184439c8acc2bcdd8c20, type: 2}
+  powerUpPool: {fileID: 11400000, guid: e791d50ce3adbd34488957b5a5e92cfd, type: 2}
+  randomSpawnPosition: {x: 0, y: 0, z: 0}
   powerUps:
   - {fileID: 1037359712304547826, guid: 39d85fbe408aa2546b0ad3fb146558f8, type: 3}
   - {fileID: 1037359712304547826, guid: 47a90ee3f09e8a946bfe122f99452d3e, type: 3}
   - {fileID: 1037359712304547826, guid: c7ee559c84bd60a4da29d39fa53c184f, type: 3}
+  - {fileID: 1037359712304547826, guid: 6b64c4bb9fff0fb4ca3759bab6d2c183, type: 3}
+  currentPrefabEnemy: {fileID: 0}
+  currentPrefabPowerUp: {fileID: 0}
   score: 0
 --- !u!4 &394486602
 Transform:
@@ -677,6 +680,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394486603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394486600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72658e779942a3242926fc440bfc8c9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemies:
+  - {fileID: 11400000, guid: aa500f3591da2e24ea04a440b7b34d9c, type: 2}
+  - {fileID: 11400000, guid: f500129724be9f648b8b8a36569726c1, type: 2}
+  - {fileID: 11400000, guid: bce74b29aa337794786c7223396409ce, type: 2}
 --- !u!1 &513085439
 GameObject:
   m_ObjectHideFlags: 0
@@ -1552,8 +1571,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    - target: {fileID: 6959991058078246871, guid: 0057e9425ce552b40ac404e08b29cb5c, type: 3}
+      propertyPath: bulletPool
+      value: 
+      objectReference: {fileID: 11400000, guid: 74fcf95d5ed7cc4499488c19aea46e63, type: 2}
+    - target: {fileID: 6959991058078246871, guid: 0057e9425ce552b40ac404e08b29cb5c, type: 3}
+      propertyPath: poolManagerSO
+      value: 
+      objectReference: {fileID: 11400000, guid: 74fcf95d5ed7cc4499488c19aea46e63, type: 2}
+    m_RemovedComponents:
+    - {fileID: -3921998921282774015, guid: 0057e9425ce552b40ac404e08b29cb5c, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 116955456285078467, guid: 0057e9425ce552b40ac404e08b29cb5c, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0057e9425ce552b40ac404e08b29cb5c, type: 3}

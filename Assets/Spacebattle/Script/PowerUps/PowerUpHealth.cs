@@ -3,10 +3,15 @@ using UnityEngine;
 public class PowerUpHealth : MonoBehaviour
 {
     private HealthSpaceBattle healthSpaceBattle;
+    private AttackSpaceBattle attackSpaceBattle;
+    private SpaceBattleManager spaceBattleManager;
 
     private void Awake()
     {
         healthSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSpaceBattle>();
+        attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
+        spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -15,10 +20,10 @@ public class PowerUpHealth : MonoBehaviour
         {
             if (healthSpaceBattle.currentHealth < 100)
             {
-                healthSpaceBattle.currentHealth += 30;
+                healthSpaceBattle.currentHealth += 30;                
             }
-
-            Destroy(gameObject);
-        }     
+            attackSpaceBattle.ReturnColor(0.1f);
+            spaceBattleManager.powerUpPool.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+        }
     }
 }
