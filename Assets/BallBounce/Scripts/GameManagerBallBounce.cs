@@ -20,7 +20,9 @@ public class GameManagerBallBounce : MonoBehaviour
 
     [Header("PowerUps")]
     [SerializeField] WeightedPuPickerSO_BallBounce powerUpPicker;
-    private float spawnX = 7.5f;
+    [SerializeField] BallBouncePoolManager poolManager;
+    [SerializeField] float minSpawnTime = 6f;
+    [SerializeField] float maxSpawnTime = 12f;
 
     private PlatformController platform;
     private int score;
@@ -32,6 +34,7 @@ public class GameManagerBallBounce : MonoBehaviour
     private void Awake()
     {
         Time.timeScale = 1;
+        platform = FindAnyObjectByType<PlatformController>();
         isPaused = false;
         pauseMenu?.SetActive(false);
         gameOverText?.SetActive(false);        
@@ -45,6 +48,7 @@ public class GameManagerBallBounce : MonoBehaviour
         UpdateScoreText();
         SpawnBall();        
     }
+
 
     void Update()
     {
@@ -78,6 +82,7 @@ public class GameManagerBallBounce : MonoBehaviour
     {
         Time.timeScale = 0f;
         isPauseable = false;
+        platform.isMoveable = false;
         
         gameOverText?.SetActive(true);
         scoreText.rectTransform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
@@ -90,7 +95,7 @@ public class GameManagerBallBounce : MonoBehaviour
         if (!isPaused && isPauseable)
         {
             previousTimeScale = Time.timeScale;
-
+            platform.isMoveable = false;
             Time.timeScale = 0;
             pauseMenu?.SetActive(true);
             isPaused = true;
@@ -101,6 +106,7 @@ public class GameManagerBallBounce : MonoBehaviour
             Time.timeScale = previousTimeScale;
             pauseMenu?.SetActive(false);
             isPaused = false;
+            platform.isMoveable = true;
         }
     }
 
@@ -121,8 +127,7 @@ public class GameManagerBallBounce : MonoBehaviour
 
 
     private void UpdateStatsText()
-    {
-        platform = FindAnyObjectByType<PlatformController>();
+    {        
         float speed = platform.speed;
         float size = platform.scaleStat;
 
@@ -136,15 +141,13 @@ public class GameManagerBallBounce : MonoBehaviour
         while (true)
         {
             if (!isPaused)
-            {                
-                float randomX = Random.Range(-spawnX, spawnX);
-                float randomTime = Random.Range(6f, 12f);
+            {                                
+                float randomTime = Random.Range(minSpawnTime, maxSpawnTime);
 
                 yield return new WaitForSeconds(randomTime);
 
                 PowerUpEffect result = powerUpPicker.GetRandomPowerUp();
-                Instantiate(result.powerUpPrefab, new Vector2(randomX, 6), Quaternion.identity);
-
+                poolManager.Get(result.powerUpPrefab);
             }
             else
             {

@@ -15,7 +15,8 @@ public class PlatformController : MonoBehaviour
 
     [HideInInspector]
     public float scaleStat = 0;
-    
+
+    public bool isMoveable = true;
      
     void Update()
     {
@@ -24,13 +25,16 @@ public class PlatformController : MonoBehaviour
 
     void Movement()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        transform.Translate(speed * Time.deltaTime * new Vector2(moveX, 0));
+        if (isMoveable)
+        {
+            float moveX = Input.GetAxisRaw("Horizontal");
+            transform.Translate(speed * Time.unscaledDeltaTime * new Vector2(moveX, 0));
 
-        float halfwidth = transform.localScale.x / 2f;
+            float halfwidth = transform.localScale.x / 2f;
 
-        float clampedX = Mathf.Clamp(transform.position.x, -clampRange + halfwidth, clampRange - halfwidth);
-        transform.position = new Vector2(clampedX, transform.position.y);      
+            float clampedX = Mathf.Clamp(transform.position.x, -clampRange + halfwidth, clampRange - halfwidth);
+            transform.position = new Vector2(clampedX, transform.position.y);
+        }
     }
 
     public void SetSpeed(float newSpeed)

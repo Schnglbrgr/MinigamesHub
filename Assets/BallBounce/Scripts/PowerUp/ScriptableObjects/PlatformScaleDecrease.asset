@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69071776602046e409a5c84766464aae, type: 3}
   m_Name: PlatformScaleDecrease
   m_EditorClassIdentifier: 
-  weight: 5
+  weight: 3
   powerUpPrefab: {fileID: 1768540566308687542, guid: 6a845009200c8c94ca33fc516b22f3c9, type: 3}
   xScale: -1

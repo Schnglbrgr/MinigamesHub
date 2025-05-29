@@ -4,8 +4,9 @@ public class BallController : MonoBehaviour
 {
     GameManagerBallBounce gameManager;
     Rigidbody2D rb;
-    [SerializeField] float speed = 0.5f;
-    [SerializeField] float maxSpeed = 8f;
+    [SerializeField] private float startSpeed = 0.25f;
+    private float speedIncrement = 0.25f;
+    [SerializeField] private float maxSpeed = 8f;
     private float rangeX = 3f;
     private float directionY = 11.5f;
 
@@ -28,8 +29,8 @@ public class BallController : MonoBehaviour
             BallBounce();            
             gameManager.IncreaseScore();            
             
-            speed += 0.5f;
-            speed = Mathf.Clamp(speed, 0f, maxSpeed);
+            startSpeed += speedIncrement;
+            startSpeed = Mathf.Clamp(startSpeed, 0f, maxSpeed);
         }
 
         if (collision.gameObject.CompareTag("Ground"))
@@ -43,6 +44,6 @@ public class BallController : MonoBehaviour
     void BallBounce()
     {
         float bounceDirection = Random.Range(-rangeX, rangeX);
-        rb.linearVelocity = new Vector2(bounceDirection * speed, directionY);
+        rb.linearVelocity = new Vector2(bounceDirection * startSpeed, directionY);
     }
 }

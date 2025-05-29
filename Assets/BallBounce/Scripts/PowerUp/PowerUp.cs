@@ -4,6 +4,14 @@ public class PowerUp : MonoBehaviour
 {
     public PowerUpEffect powerUpEffect;
     [SerializeField] private float fallingSpeed = 1.2f;
+    BallBouncePoolManager poolManager;
+
+
+    private void Start()
+    {
+          poolManager = FindAnyObjectByType<BallBouncePoolManager>();
+    }
+
 
     private void Update()
     {
@@ -16,10 +24,10 @@ public class PowerUp : MonoBehaviour
         if (collision.gameObject.CompareTag("Platform"))
         {
             powerUpEffect.Apply(collision.gameObject);
-            Destroy(gameObject);
+            poolManager.Return(powerUpEffect.powerUpPrefab, gameObject);
         }
 
         if (collision.gameObject.CompareTag("Ground"))
-            Destroy(gameObject);
+            poolManager.Return(powerUpEffect.powerUpPrefab, gameObject);
     }
 }
