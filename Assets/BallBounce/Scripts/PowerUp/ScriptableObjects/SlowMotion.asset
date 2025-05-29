@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c740334a7582c84418e7988e6490eb92, type: 3}
   m_Name: SlowMotion
   m_EditorClassIdentifier: 
-  weight: 1
+  weight: 2
   powerUpPrefab: {fileID: 4938631801494028451, guid: 465bf7ad1ea2fb5448557b602d54e26a, type: 3}
   powerUpDuration: 5

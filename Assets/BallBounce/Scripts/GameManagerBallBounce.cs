@@ -14,6 +14,7 @@ public class GameManagerBallBounce : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject gameOverText;
     [SerializeField] TMP_Text scoreText;
+    [SerializeField] TMP_Text livesText;
     [SerializeField] TMP_Text statsSpeedText;
     [SerializeField] TMP_Text statsSizeText;
     [Space(5)]
@@ -23,6 +24,8 @@ public class GameManagerBallBounce : MonoBehaviour
     [SerializeField] BallBouncePoolManager poolManager;
     [SerializeField] float minSpawnTime = 6f;
     [SerializeField] float maxSpawnTime = 12f;
+    public int lives;    
+
 
     private PlatformController platform;
     private int score;
@@ -43,8 +46,9 @@ public class GameManagerBallBounce : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnPowerUps());
+        lives = 0;
         score = 0;
+        StartCoroutine(SpawnPowerUps());
         UpdateScoreText();
         SpawnBall();        
     }
@@ -65,9 +69,10 @@ public class GameManagerBallBounce : MonoBehaviour
     }
 
 
-    void UpdateScoreText()
+    public void UpdateScoreText()
     {
-        scoreText.SetText("Score: " + score);
+        scoreText.text = "Score: " + score;
+        livesText.text = "Lives: " + lives;
     }
 
 
@@ -87,6 +92,8 @@ public class GameManagerBallBounce : MonoBehaviour
         gameOverText?.SetActive(true);
         scoreText.rectTransform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
         scoreText.transform.localPosition = new Vector2(0, 50);
+
+
     }
 
 
@@ -123,6 +130,7 @@ public class GameManagerBallBounce : MonoBehaviour
         Time.timeScale = previousTimeScale;
         pauseMenu?.SetActive(false);
         isPaused = false;
+        platform.isMoveable = true;
     }
 
 
@@ -132,7 +140,7 @@ public class GameManagerBallBounce : MonoBehaviour
         float size = platform.scaleStat;
 
         statsSpeedText.text = "Speed: " + speed;
-        statsSizeText.text = "Size: " + size;
+        statsSizeText.text = "Platform Size: " + size;
     }
 
     
