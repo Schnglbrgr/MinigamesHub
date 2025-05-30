@@ -5,16 +5,17 @@ public class EnemyBullet : MonoBehaviour
     private HealthSystem playerHealthSystem;
 
     private float speed = 2f;
-    private int damage;
+    public int damage;
 
     private void Awake()
     {
         playerHealthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
+
     }
 
     private void FixedUpdate()
     {
-        transform.position += Vector3.down * speed * Time.deltaTime;
+        transform.position += transform.up * speed * Time.deltaTime;
 
         Destroy(gameObject, 4);
     }
@@ -27,5 +28,7 @@ public class EnemyBullet : MonoBehaviour
 
             Destroy(gameObject);
         }
+
+        Destroy(gameObject);
     }
 }

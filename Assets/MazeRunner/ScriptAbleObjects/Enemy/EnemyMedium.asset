@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: EnemyMedium
   m_EditorClassIdentifier: 
   nameEnemy: Medium
-  weight: 7
   health: 100
   damage: 2
   mana: 20
-  prefab: {fileID: 5245605685648393930, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
+  speed: 2

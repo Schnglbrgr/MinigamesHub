@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4336618988622087901}
   - component: {fileID: 6686556692808759445}
   - component: {fileID: 7972616829847460575}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Teleport
   m_TagString: Teleport
   m_Icon: {fileID: 0}

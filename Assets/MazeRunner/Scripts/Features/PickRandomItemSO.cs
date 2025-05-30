@@ -5,13 +5,13 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "PickRandomItemSO", menuName = "Scriptable Objects/PickRandomItemSO")]
 public class PickRandomItemSO : ScriptableObject
 {
-    public List<WeaponsSO> items;
+    public List<WeightedEntrySO> items;
 
     private int totalWeight;
     private int randomNum;
     private int cumulativeWeight;
 
-    public GameObject SelectRandomWeapon()
+    public GameObject SelectRandomObject()
     {
         totalWeight = 0;
 
@@ -29,7 +29,7 @@ public class PickRandomItemSO : ScriptableObject
 
             if (randomNum < cumulativeWeight)
             {
-                return items[x].weaponPrefab;
+                return items[x].prefab;
             }
         }
 

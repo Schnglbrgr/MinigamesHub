@@ -15,8 +15,10 @@ public class GameManagerMazeRunner : MonoBehaviour
     [SerializeField] private GameObject[] enemy;
     [SerializeField] private Transform chestParent;
     [SerializeField] private Transform enemySpawnParent;
+    [SerializeField] private PickRandomItemSO pickRandomItemSO;
 
     public GameObject warningMessage;
+    public TMP_Text maxHealthShield;
 
     private void Awake()
     {
@@ -83,7 +85,10 @@ public class GameManagerMazeRunner : MonoBehaviour
 
     private void SpawnRandonEnemies()
     {
-        
+        for (int x = 0; x < enemySpawn.Length; x++)
+        {
+            Instantiate(pickRandomItemSO.SelectRandomObject(), enemySpawn[x].position, Quaternion.identity, enemySpawnParent);
+        }
     }
 
 }

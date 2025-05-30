@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class AttackSystem : MonoBehaviour
 {
-    [SerializeField] private GameObject bullet;
+    public GameObject bullet;
 
     public WeaponsSO weapon;
     private TMP_Text ammoText;
@@ -12,6 +12,8 @@ public class AttackSystem : MonoBehaviour
     private GameObject warningAmmo;
     private GameObject player;
     public GameObject ammoHUD;
+    private PoolManager poolManager;
+    private GameObject currentBullet;
 
     private int currentAmmo;
     private float timer;
@@ -29,6 +31,8 @@ public class AttackSystem : MonoBehaviour
         ammoText = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
 
         warningAmmo = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
+
+        poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
 
     }
 
@@ -64,7 +68,9 @@ public class AttackSystem : MonoBehaviour
 
             currentAmmo--;
 
-            Instantiate(bullet, spawnPoint.position, player.transform.rotation);
+            currentBullet = poolManager.PoolInstance(bullet);
+
+            currentBullet.transform.position = spawnPoint.position;
         }
     }
 }

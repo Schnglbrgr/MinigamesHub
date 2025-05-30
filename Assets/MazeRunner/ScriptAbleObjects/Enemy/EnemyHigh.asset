@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: EnemyHigh
   m_EditorClassIdentifier: 
   nameEnemy: High
-  weight: 2
   health: 150
   damage: 3
   mana: 30
-  prefab: {fileID: 6982966627328317168, guid: c100888badeaae549bab420aa3da477b, type: 3}
+  speed: 1.5
