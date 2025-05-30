@@ -18,6 +18,6 @@ public class PowerUpDamage : MonoBehaviour
         attackSpaceBattle.currentDamage++;
         attackSpaceBattle.StopDamage(timer);
         attackSpaceBattle.ReturnColor(timer);
-        spaceBattleManager.powerUpPool.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+        spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
     }
 }

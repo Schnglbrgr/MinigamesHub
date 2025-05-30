@@ -11,16 +11,16 @@ public class SpaceBattleManager : MonoBehaviour
     [SerializeField] private TMP_Text lose_PausedText;
     [SerializeField] private Button restart_Paused;
     [SerializeField] private TMP_Text timerText;
-    [SerializeField] private WeightedPicker pickRandomEnemy;
+    [SerializeField] private WeightedPickerSO pickRandomEnemy;
+    [SerializeField] private WeightedPickerSO pickRandomPowerUp;
 
-    public PoolManagerSO enemyPool;
-    public PoolManagerSO powerUpPool;
+    public PoolManagerSO poolManager;
 
     private Vector2Int map = new Vector2Int(10,20);
     public Vector3 randomSpawnPosition;
     public GameObject[] powerUps;
     private GameObject currentEnemy;
-    public GameObject currentPrefabEnemy;
+    private GameObject currentPrefabEnemy;
     public GameObject currentPrefabPowerUp;
     private GameObject currentPowerUp;
 
@@ -69,41 +69,20 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        currentPrefabEnemy = pickRandomEnemy.SelectRandomEnemy();
+        currentPrefabEnemy = pickRandomEnemy.SelectRandomObject();
 
-        currentEnemy = enemyPool.CreateObject(currentPrefabEnemy);
-
-        currentEnemy.GetComponent<SpaceBattleEnemy>().prefab = currentPrefabEnemy;
-
-        currentEnemy.transform.position = PickRandomSpawn();
-
-        currentEnemy.GetComponent<SpaceBattleEnemy>().ResetState();
+        currentEnemy = poolManager.CreateObject(currentPrefabEnemy);
 
         timerEnemy = coolDownEnemySpawn;
-    }
-
-    public Vector3 PickRandomSpawn()
-    {
-        randomSpawn = Random.Range(2, 8);
-
-        randomSpawnPosition = new Vector3(randomSpawn, 17, -1f);
-
-        return randomSpawnPosition;
     }
 
     private void SpawnPowerUps()
     {
         if (timerPowerUps <= 0)
         {
-            randomPowerUp = Random.Range(0, powerUps.Length);
+            currentPrefabPowerUp = pickRandomPowerUp.SelectRandomObject();
 
-            currentPrefabPowerUp = powerUps[randomPowerUp];
-
-            currentPowerUp = powerUpPool.CreateObject(currentPrefabPowerUp);
-
-            currentPowerUp.GetComponent<MovementPowerUps>().prefab = currentPrefabPowerUp;
-
-            currentPowerUp.transform.position = PickRandomSpawn();
+            currentPowerUp = poolManager.CreateObject(currentPrefabPowerUp);
 
             timerPowerUps = coolDownPowerUps;
         }

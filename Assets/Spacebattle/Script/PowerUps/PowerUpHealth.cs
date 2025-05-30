@@ -23,7 +23,7 @@ public class PowerUpHealth : MonoBehaviour
                 healthSpaceBattle.currentHealth += 30;                
             }
             attackSpaceBattle.ReturnColor(0.1f);
-            spaceBattleManager.powerUpPool.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+            spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
         }
     }
 }

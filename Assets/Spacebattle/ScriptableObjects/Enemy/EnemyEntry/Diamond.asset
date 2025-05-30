@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ac4a7a961e3dea4992bc8723e6896df, type: 3}
-  m_Name: Triangle
+  m_Script: {fileID: 11500000, guid: bc661f6f4eb5009409b0ff8eab90ec83, type: 3}
+  m_Name: Diamond
   m_EditorClassIdentifier: 
-  nameEnemy: Triangle
-  speed: 3
-  health: 1
-  damage: 10
-  childNum: 1
+  weight: 7
+  prefab: {fileID: 3620537512607031645, guid: f55d7509017bad24dbe8ca12c5abce69, type: 3}

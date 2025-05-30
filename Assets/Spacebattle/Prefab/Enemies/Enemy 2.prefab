@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3870206694170569939}
   - component: {fileID: 7693301636559678687}
   - component: {fileID: -8209971285166015004}
+  - component: {fileID: -6587782411586738223}
   m_Layer: 0
   m_Name: Enemy 2
   m_TagString: Enemy
@@ -101,6 +102,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: aa500f3591da2e24ea04a440b7b34d9c, type: 2}
+  enemyEntry: {fileID: 11400000, guid: 5a0b59c871c77ed419f0a1230f0b98f2, type: 2}
+--- !u!111 &-6587782411586738223
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3620537512607031645}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: a88dc5a82e331fc42a7ca5e58a5ebf2a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a88dc5a82e331fc42a7ca5e58a5ebf2a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &3776228978384169535
 GameObject:
   m_ObjectHideFlags: 0

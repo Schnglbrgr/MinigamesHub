@@ -4,10 +4,11 @@ using UnityEngine;
 public class SpaceBattleEnemy : MonoBehaviour
 {
     public SpaceBattleEnemySO enemy;
+    public WeightedEntrySO enemyEntry;
     private SpaceBattleManager spaceBattleManager;
     private HealthSpaceBattle healthSpaceBattle;
-    private Color currentColor;
-    public GameObject prefab;
+    private GameObject prefab;
+    private Animation animationEnemy;
 
     private int currentHealth;
 
@@ -19,10 +20,18 @@ public class SpaceBattleEnemy : MonoBehaviour
 
         currentHealth = enemy.health;
 
-        for (int x = 0; x < enemy.childNum; x++)
-        {
-            currentColor = gameObject.transform.GetChild(x).GetComponent<SpriteRenderer>().color;
-        }
+        prefab = enemyEntry.prefab;
+
+        spaceBattleManager.poolManager.PickRandomSpawn();
+
+        animationEnemy = GetComponent<Animation>();
+
+    }
+
+
+    private void OnDisable()
+    {
+        spaceBattleManager.poolManager.PickRandomSpawn();
     }
 
     private void FixedUpdate()
@@ -43,8 +52,9 @@ public class SpaceBattleEnemy : MonoBehaviour
         for (int x = 0; x < enemy.childNum; x++)
         {
             gameObject.transform.GetChild(x).GetComponent<SpriteRenderer>().color = Color.red;
-            StartCoroutine(ReturnColor(x));
+            animationEnemy.Play();
         }
+
         CheckHealth();
     }
 
@@ -55,7 +65,7 @@ public class SpaceBattleEnemy : MonoBehaviour
             spaceBattleManager.score += 10;
             spaceBattleManager.SpawnEnemies();
             spaceBattleManager.LevelUp(enemy.speed);
-            spaceBattleManager.enemyPool.Return(prefab,gameObject);
+            spaceBattleManager.poolManager.Return(prefab,gameObject);
         }
     }
 
@@ -63,33 +73,20 @@ public class SpaceBattleEnemy : MonoBehaviour
     {
         if (transform.position.y <= 0)
         {
-            spaceBattleManager.enemyPool.Return(prefab, gameObject);
+            spaceBattleManager.poolManager.Return(prefab, gameObject);
             spaceBattleManager.EndGame();           
         }
     }
 
-    public void ResetState()
-    {
-        //currentHealth = enemy.health;
-        currentHealth = 100;
-        prefab = spaceBattleManager.currentPrefabEnemy;
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {        
-
         if (collision.gameObject.tag == "Player")
         {
             healthSpaceBattle.TakeDamage(enemy.damage);
-            spaceBattleManager.enemyPool.Return(prefab, gameObject);
+            spaceBattleManager.poolManager.Return(prefab, gameObject);
         }
     }
 
-    IEnumerator ReturnColor(int x)
-    {
-        yield return new WaitForSeconds(0.1f);
-        gameObject.transform.GetChild(x).GetComponent<SpriteRenderer>().color = currentColor;
-    }
 }
 
 
