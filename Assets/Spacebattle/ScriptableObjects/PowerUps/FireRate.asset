@@ -9,6 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58abfd386389fa46b1f4fa42b1979bc, type: 3}
-  m_Name: BulletsPool
+  m_Script: {fileID: 11500000, guid: bc661f6f4eb5009409b0ff8eab90ec83, type: 3}
+  m_Name: FireRate
   m_EditorClassIdentifier: 
+  weight: 5
+  prefab: {fileID: 1037359712304547826, guid: 6b64c4bb9fff0fb4ca3759bab6d2c183, type: 3}

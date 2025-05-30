@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9009555379677476728}
   - component: {fileID: 6663410659836822832}
   - component: {fileID: 975190955114943668}
+  - component: {fileID: 5648959184394063499}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -47,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: bce74b29aa337794786c7223396409ce, type: 2}
+  enemyEntry: {fileID: 11400000, guid: 7f931b25fa8f737409b037fa5b22122e, type: 2}
 --- !u!60 &975190955114943668
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -97,6 +99,23 @@ PolygonCollider2D:
       - {x: -1.4296284, y: -0.38261884}
       - {x: -0.40984917, y: -0.38261884}
   m_UseDelaunayMesh: 0
+--- !u!111 &5648959184394063499
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4494215068426473020}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: 45e92a55083a4384299aca980c33cf3e, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 45e92a55083a4384299aca980c33cf3e, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &5008010215242807294
 GameObject:
   m_ObjectHideFlags: 0

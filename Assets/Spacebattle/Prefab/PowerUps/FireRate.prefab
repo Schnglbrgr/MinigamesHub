@@ -140,7 +140,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619dc9b46a387ed41a9af73a51124e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpEntry: {fileID: 11400000, guid: ec2110e99f5d0e54187b7026484e773f, type: 2}
   speed: 3
+  prefab: {fileID: 0}
 --- !u!114 &9217800803465541271
 MonoBehaviour:
   m_ObjectHideFlags: 0

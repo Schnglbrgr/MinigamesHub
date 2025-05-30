@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+  bombEntry: {fileID: 11400000, guid: 7d418168e851fdd4093a84bbfe57cabf, type: 2}
 --- !u!58 &3430699433661432796
 CircleCollider2D:
   m_ObjectHideFlags: 0

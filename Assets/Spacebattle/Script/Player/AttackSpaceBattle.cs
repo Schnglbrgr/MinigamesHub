@@ -10,14 +10,13 @@ public class AttackSpaceBattle : MonoBehaviour
 
     public float fireRate = 0.5f;
     private float currentFireRate;
-    private int damage;
+    private int damage = 1;
     public int currentDamage;
     private float timer;
     private Color currentColor;
 
     private void Awake()
     {
-        damage = 1;
 
         currentDamage = damage;
 
@@ -31,11 +30,6 @@ public class AttackSpaceBattle : MonoBehaviour
         if (timer <= 0)
         {
             currentBullet = bulletPool.CreateObject(bullet);
-
-            currentBullet.GetComponent<SpaceBattleBullet>().bulletPrefab = bullet;
-
-            currentBullet.transform.position = spawnPosition.position;
-
             timer = currentFireRate;
         }
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8861534323580150958}
   - component: {fileID: 3151943910288879813}
   - component: {fileID: -397453688242046185}
+  - component: {fileID: -5469870879255443888}
   m_Layer: 0
   m_Name: Enemy 3
   m_TagString: Enemy
@@ -101,6 +102,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: f500129724be9f648b8b8a36569726c1, type: 2}
+  enemyEntry: {fileID: 11400000, guid: a67c9a92ad90b0a4799c6354ade387d4, type: 2}
+--- !u!111 &-5469870879255443888
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265466818584269473}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: e6a975cc60f02b348884ab71380b2844, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: e6a975cc60f02b348884ab71380b2844, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &4272698006785151517
 GameObject:
   m_ObjectHideFlags: 0
