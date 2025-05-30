@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -8,17 +9,19 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D rb;
     private EnemyController enemyController;
+    private PoolManager poolManager;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
     }
 
     void Update()
     {
-        rb.linearVelocity = Vector2.right * speed;
+        rb.linearVelocity = transform.right * speed;
 
-        Destroy(gameObject, 3);
+        StartCoroutine(ReturnBullet());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -28,8 +31,17 @@ public class Bullet : MonoBehaviour
             enemyController = collision.gameObject.GetComponent<EnemyController>();
 
             enemyController.TakeDamageEnemy(damage);
+
+            StopCoroutine(ReturnBullet());
         }
 
-        Destroy(gameObject);
+        poolManager.Return(GetComponent<AttackSystem>().bullet,gameObject);
+    }
+
+    IEnumerator ReturnBullet()
+    {
+        yield return new WaitForSeconds(3);
+        poolManager.Return(GetComponent<AttackSystem>().bullet, gameObject);
+
     }
 }
