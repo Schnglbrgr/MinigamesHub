@@ -1,15 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class WeightedPicker : MonoBehaviour
+[CreateAssetMenu(fileName = "WeightedPickerSO", menuName = "Scriptable Objects/WeightedPickerSO")]
+
+public class WeightedPickerSO : ScriptableObject
 {
-    public List<SpaceBattleEnemySO> enemies;
+    public List<WeightedEntrySO> enemies;
 
     private int totalWeight;
     private int randomNum;
     private int cumulativeWeight;
 
-    public GameObject SelectRandomEnemy()
+    public GameObject SelectRandomObject()
     {
         totalWeight = 0;
 

@@ -17,7 +17,7 @@ public class PowerUpFireRate : MonoBehaviour
         attackSpaceBattle.fireRate -= 0.2f;
         attackSpaceBattle.StopFireRate(timer);
         attackSpaceBattle.ReturnColor(timer);
-        spaceBattleManager.powerUpPool.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+        spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
     }
 }
 

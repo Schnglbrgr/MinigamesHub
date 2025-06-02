@@ -7,10 +7,8 @@ public class SpaceBattleBullet : MonoBehaviour
 
     private SpaceBattleEnemy enemy;
     private AttackSpaceBattle attackSpaceBattle;
-    public GameObject bulletPrefab;
 
     private int damage;
-
 
     private void Awake()
     {
@@ -19,12 +17,23 @@ public class SpaceBattleBullet : MonoBehaviour
         enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<SpaceBattleEnemy>();
 
         damage = attackSpaceBattle.currentDamage;
+
+        transform.position = attackSpaceBattle.spawnPosition.position;
+    }
+
+    private void OnEnable()
+    {
+        transform.position = attackSpaceBattle.spawnPosition.position;
+    }
+
+    private void Start()
+    {
+        StartCoroutine(DestroyBullet());
     }
 
     private void FixedUpdate()
     {
         Movement();
-        StartCoroutine(DestroyBullet());
     }
 
     void Movement()
@@ -37,13 +46,13 @@ public class SpaceBattleBullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
             enemy.TakeDamage(damage);
-            attackSpaceBattle.bulletPool.Return(bulletPrefab, gameObject);
+            attackSpaceBattle.bulletPool.Return(attackSpaceBattle.bullet, gameObject);
         }
     }
 
     IEnumerator DestroyBullet()
     {
         yield return new WaitForSeconds(4);
-        attackSpaceBattle.bulletPool.Return(bulletPrefab, gameObject);
+        attackSpaceBattle.bulletPool.Return(attackSpaceBattle.bullet, gameObject);
     }
 }

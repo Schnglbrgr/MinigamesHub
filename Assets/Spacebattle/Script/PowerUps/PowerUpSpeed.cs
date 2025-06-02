@@ -30,7 +30,7 @@ public class PowerUpSpeed : MonoBehaviour
             movementSpacebattle.currentSpeed = speedBoost;
             movementSpacebattle.StopBoost(timer);
             attackSpaceBattle.ReturnColor(timer);
-            spaceBattleManager.powerUpPool.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+            spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
         }
     }
 

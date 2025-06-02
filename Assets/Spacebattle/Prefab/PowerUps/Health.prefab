@@ -152,7 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619dc9b46a387ed41a9af73a51124e57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUpEntry: {fileID: 11400000, guid: 4f15de432bc80b14db08691a6f5b3f77, type: 2}
   speed: 3
+  prefab: {fileID: 0}
 --- !u!1 &5253279442912428690
 GameObject:
   m_ObjectHideFlags: 0

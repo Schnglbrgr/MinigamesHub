@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: Double Diamond
   m_EditorClassIdentifier: 
   nameEnemy: Double Diamond
-  weight: 2
   speed: 2
   health: 3
   damage: 20
   childNum: 2
-  prefab: {fileID: 265466818584269473, guid: 266b44c774a4e5747ab3ddc98dcc468f, type: 3}

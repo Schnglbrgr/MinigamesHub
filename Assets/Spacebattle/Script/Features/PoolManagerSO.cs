@@ -7,6 +7,9 @@ public class PoolManagerSO : ScriptableObject
 {
     private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
 
+    private int randomSpawn;
+    private Vector3 randomSpawnPosition;
+
     public GameObject CreateObject(GameObject prefab)
     {
         if (!pools.ContainsKey(prefab))
@@ -38,5 +41,13 @@ public class PoolManagerSO : ScriptableObject
             pools[prefab] = new Queue<GameObject>();
         }
         pools[prefab].Enqueue(currentObject);
+    }
+    public Vector3 PickRandomSpawn()
+    {
+        randomSpawn = Random.Range(2, 8);
+
+        randomSpawnPosition = new Vector3(randomSpawn, 17f, -1f);
+
+        return randomSpawnPosition;
     }
 }

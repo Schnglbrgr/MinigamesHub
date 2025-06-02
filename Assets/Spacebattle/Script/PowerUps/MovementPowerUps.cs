@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class MovementPowerUps : MonoBehaviour
 {
-    public float speed = 3f;
+    public WeightedEntrySO powerUpEntry;
 
+    public float speed = 3f;
     private GameObject player;
     public GameObject prefab;
 
@@ -12,6 +13,14 @@ public class MovementPowerUps : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
+        prefab = powerUpEntry.prefab;
+
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.PickRandomSpawn();
+    }
+
+    private void OnDisable()
+    {
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.PickRandomSpawn();
     }
 
     private void FixedUpdate()
