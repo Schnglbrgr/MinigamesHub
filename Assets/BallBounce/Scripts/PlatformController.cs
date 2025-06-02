@@ -7,8 +7,8 @@ public class PlatformController : MonoBehaviour
     public float speed { get; private set; } = 8f;
     private float clampRange = 8.5f;
 
-    private float minSpeed = 4f;
-    private float maxSpeed = 14f;
+    [SerializeField] private float minSpeed = 4f;
+    [SerializeField] private float maxSpeed = 16f;
 
     private float minScaleX = 1.5f;
     private float maxScaleX = 5.5f;

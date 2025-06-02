@@ -1,12 +1,18 @@
+using System.Collections;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    GameManagerBallBounce gameManager;
-    Rigidbody2D rb;
+    private GameManagerBallBounce gameManager;
+    private Rigidbody2D rb;
+
+    [Header("Ball Settings")]
     [SerializeField] private float startSpeed = 0.25f;
-    private float speedIncrement = 0.25f;
     [SerializeField] private float maxSpeed = 8f;
+    [Space(5)]
+
+    [SerializeField] private ParticleSystem gameOverParticle;
+    private float speedIncrement = 0.25f;
     private float rangeX = 3f;
     private float directionY = 11.5f;    
 
@@ -35,7 +41,8 @@ public class BallController : MonoBehaviour
         }
 
         if (collision.gameObject.CompareTag("Ground") && gameManager.lives <= 0)
-        {            
+        {
+            Instantiate(gameOverParticle, transform.position, Quaternion.identity);
             Destroy(gameObject);
             gameManager.EndGame();
         }
@@ -58,4 +65,6 @@ public class BallController : MonoBehaviour
         float bounceDirection = Random.Range(-rangeX, rangeX);
         rb.linearVelocity = new Vector2(bounceDirection * startSpeed, directionY);
     }
+
+            
 }

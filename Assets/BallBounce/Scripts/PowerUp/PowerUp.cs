@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class PowerUp : MonoBehaviour
 {
-    public PowerUpEffect powerUpEffect;
     [SerializeField] private float fallingSpeed = 1.2f;
+    [SerializeField] private ParticleSystem particleForPlatform;
+    [SerializeField] private ParticleSystem particleForGround;
+    public PowerUpEffect powerUpEffect;
     BallBouncePoolManager poolManager;
 
 
@@ -23,11 +25,15 @@ public class PowerUp : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            powerUpEffect.Apply(collision.gameObject);
-            poolManager.Return(powerUpEffect.powerUpPrefab, gameObject);
+            Instantiate(particleForPlatform, transform.position, Quaternion.identity);
+            powerUpEffect.Apply(collision.gameObject);            
+            poolManager.Return(powerUpEffect.powerUpPrefab, gameObject);            
         }
 
         if (collision.gameObject.CompareTag("Ground"))
-            poolManager.Return(powerUpEffect.powerUpPrefab, gameObject);
+        {
+            Instantiate(particleForGround, transform.position, Quaternion.identity);
+            poolManager.Return(powerUpEffect.powerUpPrefab, gameObject);            
+        }
     }
 }

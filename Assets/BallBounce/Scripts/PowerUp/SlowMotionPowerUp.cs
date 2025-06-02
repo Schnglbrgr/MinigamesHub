@@ -49,7 +49,10 @@ public class SlowMotionPowerUp : PowerUpEffect
             float adjustedElapsed = currentTime - startTime - totalPausedTime;
 
             float remaining = powerUpDuration - adjustedElapsed;
-            slowMoIcon.fillAmount = remaining / powerUpDuration;
+            if(slowMoIcon != null)
+            {
+                slowMoIcon.fillAmount = remaining / powerUpDuration;
+            }
 
             if (adjustedElapsed >= powerUpDuration)
             {

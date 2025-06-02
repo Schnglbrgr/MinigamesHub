@@ -16,6 +16,7 @@ public class ExtraLifePowerUp : PowerUpEffect
         ground.GetComponent<SpriteRenderer>().color = Color.green;
         ground.GetComponent<BoxCollider2D>().sharedMaterial = bouncyWallMaterial;
         gameManager.lives++;
-        gameManager.lives = Mathf.Clamp(gameManager.lives, 0, maxLives);                
+        gameManager.lives = Mathf.Clamp(gameManager.lives, 0, maxLives);  
+        gameManager.UpdateScoreText();
     }
 }

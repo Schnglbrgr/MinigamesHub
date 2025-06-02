@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204341003371c07478bef0ff4ce00130, type: 3}
   m_Name: SpeedIncrease
   m_EditorClassIdentifier: 
-  weight: 3
+  weight: 5
   powerUpPrefab: {fileID: 8231664549303407574, guid: f29295718c0531240ba8f1876c02bb85, type: 3}
   speed: 2

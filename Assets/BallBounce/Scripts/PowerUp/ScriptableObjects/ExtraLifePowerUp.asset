@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1487660bd422c00419b565a66556cdcb, type: 3}
   m_Name: ExtraLifePowerUp
   m_EditorClassIdentifier: 
-  weight: 1
+  weight: 2
   powerUpPrefab: {fileID: 5594627165990474993, guid: 96414df9cb8a98348b1ababaaba72ff1, type: 3}
-  maxLifes: 3
+  maxLives: 3
   bouncyWallMaterial: {fileID: 6200000, guid: 65deaf0f989b57d4d988aba3c47b19e4, type: 2}

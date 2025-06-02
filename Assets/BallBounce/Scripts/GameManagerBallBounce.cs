@@ -12,11 +12,13 @@ public class GameManagerBallBounce : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] GameObject pauseMenu;
-    [SerializeField] GameObject gameOverText;
+    [SerializeField] GameObject gameOverUI;
     [SerializeField] TMP_Text scoreText;
     [SerializeField] TMP_Text livesText;
     [SerializeField] TMP_Text statsSpeedText;
     [SerializeField] TMP_Text statsSizeText;
+    [SerializeField] CanvasGroup gameOverCanvasGroup;
+    [SerializeField] private float gameOverFadeDuration = 1.0f;
     [Space(5)]
 
     [Header("PowerUps")]
@@ -40,7 +42,7 @@ public class GameManagerBallBounce : MonoBehaviour
         platform = FindAnyObjectByType<PlatformController>();
         isPaused = false;
         pauseMenu?.SetActive(false);
-        gameOverText?.SetActive(false);        
+        gameOverUI?.SetActive(false);        
     }
 
 
@@ -85,17 +87,9 @@ public class GameManagerBallBounce : MonoBehaviour
 
     public void EndGame()
     {
-        Time.timeScale = 0f;
-        isPauseable = false;
-        platform.isMoveable = false;
-        
-        gameOverText?.SetActive(true);
-        scoreText.rectTransform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
-        scoreText.transform.localPosition = new Vector2(0, 50);
-
-
+        StartCoroutine(GameOverFadeIn());        
     }
-
+    
 
     void PauseGame()
     {        
@@ -162,5 +156,26 @@ public class GameManagerBallBounce : MonoBehaviour
                 yield return null;
             }
         }            
-    }        
+    }  
+    
+
+    IEnumerator GameOverFadeIn()
+    {
+        Time.timeScale = 0f;
+        gameOverUI?.SetActive(true);
+        isPauseable = false;
+        platform.isMoveable = false;
+        isPaused = true;
+
+        scoreText.rectTransform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
+        scoreText.transform.localPosition = new Vector2(0, 50);
+
+        float elapsed = 0;
+        while (elapsed < gameOverFadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            gameOverCanvasGroup.alpha = Mathf.Clamp01(elapsed/gameOverFadeDuration);
+            yield return null;
+        }
+    }
 }
