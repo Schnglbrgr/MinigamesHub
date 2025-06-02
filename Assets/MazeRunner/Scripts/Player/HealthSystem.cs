@@ -39,13 +39,13 @@ public class HealthSystem : MonoBehaviour
 
         if (shieldLeft <= 0)
         {
-            hearts[heartsLeft].SetActive(false);
             heartsLeft -= damage;
+            hearts[heartsLeft].SetActive(false);
         }
         else
         {
-            shield[shieldLeft].SetActive(false);
             shieldLeft -= damage;
+            shield[shieldLeft].SetActive(false);
         }
 
         StartCoroutine(ReturnColor());
@@ -73,7 +73,6 @@ public class HealthSystem : MonoBehaviour
         {
             hearts[heartsLeft + 1].SetActive(true);
 
-            Debug.Log("Hola");
         }
         else
         {
@@ -81,7 +80,6 @@ public class HealthSystem : MonoBehaviour
 
             hearts[heartsLeft - 1].SetActive(true);
 
-            Debug.Log("Chao");
         }
     }
 

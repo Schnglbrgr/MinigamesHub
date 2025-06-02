@@ -10,11 +10,14 @@ public class AttackEnemyLight : MonoBehaviour
     private float angle;
     private float initialAngle = 90f;
     private float timer;
+    private int damage;
     private float fireRate = 2f;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        damage = GetComponent<EnemyController>().damage;
     }
 
     private void Update()
@@ -55,6 +58,8 @@ public class AttackEnemyLight : MonoBehaviour
         if (timer <= 0)
         {
             Instantiate(enemyBullet, shootPoint.position, transform.rotation);
+
+            enemyBullet.GetComponent<EnemyBullet>().damage = damage;
 
             timer = fireRate;
         }

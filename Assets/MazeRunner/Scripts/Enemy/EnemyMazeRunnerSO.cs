@@ -4,11 +4,9 @@ using UnityEngine;
 public class EnemyMazeRunnerSO : ScriptableObject
 {
     public string nameEnemy;
-    public int weight;
     public int health;
     public int damage;
     public int mana;
-    public GameObject prefab;
-
+    public float speed;
     
 }

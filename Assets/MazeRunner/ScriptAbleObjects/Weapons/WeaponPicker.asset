@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponPicker
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 11400000, guid: 1041e0e20ac0ba440bda7fbab018a6b9, type: 2}
-  - {fileID: 11400000, guid: 1cf9f2ce92ee3fe4ead3461b2a8fe8be, type: 2}
-  - {fileID: 11400000, guid: 12f442b83d7a43d49ace20c6ec671f2c, type: 2}
-  - {fileID: 11400000, guid: e6fad4e7bacd1064e886623147f77f04, type: 2}
+  - {fileID: 11400000, guid: 24cede39b8965864f92f31eaabcb203d, type: 2}
+  - {fileID: 11400000, guid: 8b1d295f2264d6e4c9f05bf6bb0d7199, type: 2}
+  - {fileID: 11400000, guid: 81009ec31bb9f004198fb95848040ba2, type: 2}
+  - {fileID: 11400000, guid: eb2bf515beeda0b45b08961a793fa9fe, type: 2}

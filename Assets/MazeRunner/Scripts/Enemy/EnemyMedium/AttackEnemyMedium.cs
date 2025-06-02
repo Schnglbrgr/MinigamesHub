@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttackEnemyMedium : MonoBehaviour
 {
-    private EnemyController enemyController;
     private HealthSystem playerHealthSystem;
     private GameObject player;
     private GameObject weaponPlayer;
@@ -16,10 +15,9 @@ public class AttackEnemyMedium : MonoBehaviour
 
     private void Awake()
     {
-        enemyController = GetComponent<EnemyController>();
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealthSystem = player.GetComponent<HealthSystem>();
-        damage = enemyController.damage;
+        damage = damage = GetComponent<EnemyController>().damage;
         rbPlayer = player.GetComponent<Rigidbody2D>();
     }
 

@@ -5,9 +5,11 @@ using UnityEngine.UI;
 
 public class Chest : MonoBehaviour
 {
+    public PickRandomItemSO pickRandomWeapon;
     public PickRandomItemSO pickRandomItem;
 
     [SerializeField] private Transform weaponsSpawn;
+    [SerializeField] private Transform itemSpawn;
     [SerializeField] private GameObject holdText;
 
     private GameObject player;
@@ -27,7 +29,8 @@ public class Chest : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                Instantiate(pickRandomItem.SelectRandomWeapon(), weaponsSpawn.position, Quaternion.identity);
+                Instantiate(pickRandomWeapon.SelectRandomObject(), weaponsSpawn.position, Quaternion.identity);
+                Instantiate(pickRandomItem.SelectRandomObject(),itemSpawn.position,Quaternion.identity);
                 chestIsUsed = true;
             }
         }
