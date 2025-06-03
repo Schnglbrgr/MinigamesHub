@@ -4,14 +4,19 @@ public class MovementEnemyLight : MonoBehaviour
 {
     [SerializeField] private Transform[] patrolsPoints;
 
+    private Transform wayParent;
     private float speed = 1f;
     private int randomNum;
+    private void Awake()
+    {
+        wayParent = GameObject.FindGameObjectWithTag("Ways").GetComponent<Transform>();
+    }
 
     private void Start()
     {
         for (int x = 0; x < patrolsPoints.Length; x++)
         {
-            patrolsPoints[x].SetParent(null);
+            patrolsPoints[x].SetParent(wayParent);
         }
 
         randomNum = Random.Range(0, patrolsPoints.Length);

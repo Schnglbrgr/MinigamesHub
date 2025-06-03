@@ -87,7 +87,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     {
         for (int x = 0; x < enemySpawn.Length; x++)
         {
-            Instantiate(pickRandomItemSO.SelectRandomObject(), enemySpawn[x].position, Quaternion.identity, enemySpawnParent);
+           Instantiate(pickRandomItemSO.SelectRandomObject(), enemySpawn[x].position, Quaternion.identity, enemySpawnParent);
         }
     }
 

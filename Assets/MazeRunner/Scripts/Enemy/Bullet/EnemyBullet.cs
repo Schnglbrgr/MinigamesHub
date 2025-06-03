@@ -10,7 +10,6 @@ public class EnemyBullet : MonoBehaviour
     private void Awake()
     {
         playerHealthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
-
     }
 
     private void FixedUpdate()

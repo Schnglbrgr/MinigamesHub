@@ -5,6 +5,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyMazeRunnerSO enemy;
 
     private ManaSystem manaSystem;
+    private HealthSystem playerHealthSystem;
 
     public int currentHealth;
     public int damage;
@@ -14,11 +15,14 @@ public class EnemyController : MonoBehaviour
     {
         manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
 
+        playerHealthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
+
         currentHealth = enemy.health;
 
         damage = enemy.damage;
 
         manaReward = enemy.mana;
+
     }
 
 
@@ -38,6 +42,14 @@ public class EnemyController : MonoBehaviour
             }
 
             gameObject.SetActive(false);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            playerHealthSystem.TakeDamage(damage);
         }
     }
 
