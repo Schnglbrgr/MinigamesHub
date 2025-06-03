@@ -22,7 +22,7 @@ public class SpaceBattleEnemy : MonoBehaviour
 
         prefab = enemyEntry.prefab;
 
-        spaceBattleManager.poolManager.PickRandomSpawn();
+        transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
 
         animationEnemy = GetComponent<Animation>();
 
@@ -31,7 +31,8 @@ public class SpaceBattleEnemy : MonoBehaviour
 
     private void OnDisable()
     {
-        spaceBattleManager.poolManager.PickRandomSpawn();
+        transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
+        animationEnemy.Play();
     }
 
     private void FixedUpdate()
@@ -86,6 +87,8 @@ public class SpaceBattleEnemy : MonoBehaviour
             spaceBattleManager.poolManager.Return(prefab, gameObject);
         }
     }
+
+
 
 }
 

@@ -145,7 +145,6 @@ public class SpaceBattleManager : MonoBehaviour
 
 
     }
-
     public void EndGame()
     {
         Destroy(currentEnemy);

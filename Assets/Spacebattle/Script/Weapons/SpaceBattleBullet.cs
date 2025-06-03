@@ -24,6 +24,8 @@ public class SpaceBattleBullet : MonoBehaviour
     private void OnEnable()
     {
         transform.position = attackSpaceBattle.spawnPosition.position;
+
+        damage = attackSpaceBattle.currentDamage;
     }
 
     private void Start()
