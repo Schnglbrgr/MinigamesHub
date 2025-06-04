@@ -15,6 +15,7 @@ public class PlayerTetris : MonoBehaviour
         gameManagerTetris = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerTetris>();
     }
 
+
     private void Update()
     {
         if (timer < 0.3f)

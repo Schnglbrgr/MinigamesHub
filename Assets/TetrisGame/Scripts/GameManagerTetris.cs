@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameManagerTetris : MonoBehaviour
 {
-    [SerializeField] private Transform spawnPoint;
+    [SerializeField] public Transform spawnPoint;
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private TMP_Text lose_PausedText;
     [SerializeField] private Button restart_Paused;
@@ -93,9 +93,8 @@ public class GameManagerTetris : MonoBehaviour
             }
         }
 
-
-
         HoldPrefab();
+        CheckAndClearLines();
 
     }
 
@@ -193,7 +192,6 @@ public class GameManagerTetris : MonoBehaviour
             }
         }
 
-        CheckAndClearLines();
     }
 
     public bool IsValidMove(Transform player)
