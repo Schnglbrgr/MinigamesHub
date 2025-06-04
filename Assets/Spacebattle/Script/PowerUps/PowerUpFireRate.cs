@@ -14,7 +14,7 @@ public class PowerUpFireRate : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        attackSpaceBattle.fireRate -= 0.2f;
+        attackSpaceBattle.currentFireRate -= 0.2f;
         attackSpaceBattle.StopFireRate(timer);
         attackSpaceBattle.ReturnColor(timer);
         spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);

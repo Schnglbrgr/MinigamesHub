@@ -8,13 +8,11 @@ public class SpaceBattleBullet : MonoBehaviour
     private SpaceBattleEnemy enemy;
     private AttackSpaceBattle attackSpaceBattle;
 
-    private int damage;
+    public int damage;
 
     private void Awake()
     {
         attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
-
-        enemy = GameObject.FindGameObjectWithTag("Enemy").GetComponent<SpaceBattleEnemy>();
 
         damage = attackSpaceBattle.currentDamage;
 
@@ -47,9 +45,15 @@ public class SpaceBattleBullet : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            enemy.TakeDamage(damage);
+            collision.gameObject.GetComponent<SpaceBattleEnemy>().TakeDamage(damage);
             attackSpaceBattle.bulletPool.Return(attackSpaceBattle.bullet, gameObject);
         }
+        else if (collision.gameObject.tag == "Boss")
+        {
+            collision.gameObject.GetComponent<SpaceBattleBoss>().TakeDamage(damage);
+            attackSpaceBattle.bulletPool.Return(attackSpaceBattle.bullet, gameObject);
+        }
+
     }
 
     IEnumerator DestroyBullet()

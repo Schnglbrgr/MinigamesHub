@@ -8,16 +8,15 @@ public class AttackSpaceBattle : MonoBehaviour
     public PoolManagerSO bulletPool;
     private GameObject currentBullet;
 
-    public float fireRate = 0.5f;
-    private float currentFireRate;
+    private float fireRate = 0.5f;
+    public float currentFireRate;
     private int damage = 1;
     public int currentDamage;
-    private float timer;
+    private float timer = 0f;
     private Color currentColor;
 
     private void Awake()
     {
-
         currentDamage = damage;
 
         currentFireRate = fireRate;
@@ -27,7 +26,7 @@ public class AttackSpaceBattle : MonoBehaviour
 
     public void Attack()
     {
-        if (timer <= 0)
+        if (timer <= 0 && Input.GetMouseButton(0))
         {
             currentBullet = bulletPool.CreateObject(bullet);
             timer = currentFireRate;
@@ -41,10 +40,8 @@ public class AttackSpaceBattle : MonoBehaviour
             timer -= Time.deltaTime;
         }
 
-        if (Input.GetMouseButton(0))
-        {
-            Attack();
-        }
+        Attack();
+
     }
 
     public void StopDamage(float timer)

@@ -23,20 +23,21 @@ public class SpaceBattleManager : MonoBehaviour
     private GameObject currentPrefabEnemy;
     public GameObject currentPrefabPowerUp;
     private GameObject currentPowerUp;
+    public GameObject bossEnemy;
 
     private float timerEnemy;
     private float timerPowerUps;
     private float coolDownPowerUps = 15f;
     private float coolDownEnemySpawn = 5f;
-    private int randomSpawn;
-    private int randomPowerUp;
     public int score;
+    public bool bossActive;
 
 
     private void Start()
     {
         Time.timeScale = 1f;
         lose_PausedHUD.SetActive(false);
+        bossActive = false;
         SpawnEnemies();
         score = 0;
         scoreText.text = $"Score: {score}";
@@ -69,16 +70,19 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void SpawnEnemies()
     {
-        currentPrefabEnemy = pickRandomEnemy.SelectRandomObject();
+        if (!bossActive)
+        {
+            currentPrefabEnemy = pickRandomEnemy.SelectRandomObject();
 
-        currentEnemy = poolManager.CreateObject(currentPrefabEnemy);
+            currentEnemy = poolManager.CreateObject(currentPrefabEnemy);
 
-        timerEnemy = coolDownEnemySpawn;
+            timerEnemy = coolDownEnemySpawn;
+        }
     }
 
     private void SpawnPowerUps()
     {
-        if (timerPowerUps <= 0)
+        if (timerPowerUps <= 0 && !bossActive)
         {
             currentPrefabPowerUp = pickRandomPowerUp.SelectRandomObject();
 
@@ -103,6 +107,12 @@ public class SpaceBattleManager : MonoBehaviour
         if (score % 100 == 0 && score != 0)
         {
             coolDownEnemySpawn = Mathf.Max(coolDownEnemySpawn - 0.2f, 0.5f);
+
+            bossEnemy.SetActive(true);
+
+            poolManager.Return(currentPrefabEnemy, currentEnemy);
+
+            bossActive = true;
 
             speed++;
         }
@@ -150,6 +160,8 @@ public class SpaceBattleManager : MonoBehaviour
         Destroy(currentEnemy);
 
         Destroy(currentPowerUp);
+
+        bossEnemy.SetActive(false);
 
         lose_PausedHUD.SetActive(true);
 

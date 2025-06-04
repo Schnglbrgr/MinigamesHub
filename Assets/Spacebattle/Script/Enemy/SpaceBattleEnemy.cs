@@ -33,6 +33,7 @@ public class SpaceBattleEnemy : MonoBehaviour
     {
         transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
         animationEnemy.Play();
+        currentHealth = enemy.health;
     }
 
     private void FixedUpdate()
@@ -50,11 +51,7 @@ public class SpaceBattleEnemy : MonoBehaviour
     {
         currentHealth -= damage;
 
-        for (int x = 0; x < enemy.childNum; x++)
-        {
-            gameObject.transform.GetChild(x).GetComponent<SpriteRenderer>().color = Color.red;
-            animationEnemy.Play();
-        }
+        animationEnemy.Play();
 
         CheckHealth();
     }
@@ -87,8 +84,6 @@ public class SpaceBattleEnemy : MonoBehaviour
             spaceBattleManager.poolManager.Return(prefab, gameObject);
         }
     }
-
-
 
 }
 
