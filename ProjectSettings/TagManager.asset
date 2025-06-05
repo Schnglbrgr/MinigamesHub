@@ -12,6 +12,7 @@ TagManager:
   - Gun
   - Ammo
   - Teleport
+  - Ways
   layers:
   - Default
   - TransparentFX

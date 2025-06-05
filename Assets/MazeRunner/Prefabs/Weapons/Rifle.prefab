@@ -522,4 +522,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
   weapon: {fileID: 11400000, guid: 1cf9f2ce92ee3fe4ead3461b2a8fe8be, type: 2}
+  spawnPoint: {fileID: 0}
   ammoHUD: {fileID: 0}

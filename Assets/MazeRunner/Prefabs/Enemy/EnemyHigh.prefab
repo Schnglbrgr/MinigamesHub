@@ -241,8 +241,8 @@ Transform:
   m_GameObject: {fileID: 929914332046671051}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -99.67717, y: 157.52379, z: 1}
-  m_LocalScale: {x: 0.31057, y: 0.31057, z: 0.31057}
+  m_LocalPosition: {x: 0.51, y: 0, z: 0}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5856272078798671037}
@@ -291,7 +291,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 0.13054657, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -527,6 +527,7 @@ GameObject:
   - component: {fileID: -6433965566066245478}
   - component: {fileID: 5895017433949884735}
   - component: {fileID: 7006156166899050726}
+  - component: {fileID: 3136480409845751809}
   m_Layer: 0
   m_Name: EnemyHigh
   m_TagString: Enemy
@@ -687,6 +688,23 @@ PolygonCollider2D:
       - {x: 0.68570864, y: -0.5070913}
       - {x: 1.5506582, y: -0.0048409104}
   m_UseDelaunayMesh: 0
+--- !u!111 &3136480409845751809
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6982966627328317168}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: a604bdd2b625409448102a4a234eaff4, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a604bdd2b625409448102a4a234eaff4, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &7134308589803261725
 GameObject:
   m_ObjectHideFlags: 0

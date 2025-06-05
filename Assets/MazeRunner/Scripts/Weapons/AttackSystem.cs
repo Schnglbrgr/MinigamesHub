@@ -8,7 +8,7 @@ public class AttackSystem : MonoBehaviour
 
     public WeaponsSO weapon;
     private TMP_Text ammoText;
-    private Transform spawnPoint;
+    public Transform spawnPoint;
     private GameObject warningAmmo;
     private GameObject player;
     public GameObject ammoHUD;
@@ -70,7 +70,6 @@ public class AttackSystem : MonoBehaviour
 
             currentBullet = poolManager.PoolInstance(bullet);
 
-            currentBullet.transform.position = spawnPoint.position;
         }
     }
 }
