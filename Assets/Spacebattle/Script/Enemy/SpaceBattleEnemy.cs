@@ -22,7 +22,7 @@ public class SpaceBattleEnemy : MonoBehaviour
 
         prefab = enemyEntry.prefab;
 
-        spaceBattleManager.poolManager.PickRandomSpawn();
+        transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
 
         animationEnemy = GetComponent<Animation>();
 
@@ -31,7 +31,9 @@ public class SpaceBattleEnemy : MonoBehaviour
 
     private void OnDisable()
     {
-        spaceBattleManager.poolManager.PickRandomSpawn();
+        transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
+        animationEnemy.Play();
+        currentHealth = enemy.health;
     }
 
     private void FixedUpdate()
@@ -49,11 +51,7 @@ public class SpaceBattleEnemy : MonoBehaviour
     {
         currentHealth -= damage;
 
-        for (int x = 0; x < enemy.childNum; x++)
-        {
-            gameObject.transform.GetChild(x).GetComponent<SpriteRenderer>().color = Color.red;
-            animationEnemy.Play();
-        }
+        animationEnemy.Play();
 
         CheckHealth();
     }

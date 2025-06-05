@@ -15,12 +15,12 @@ public class MovementPowerUps : MonoBehaviour
 
         prefab = powerUpEntry.prefab;
 
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.PickRandomSpawn();
+        transform.position = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.PickRandomSpawn();
     }
 
     private void OnDisable()
     {
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.PickRandomSpawn();
+        transform.position = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.PickRandomSpawn();
     }
 
     private void FixedUpdate()

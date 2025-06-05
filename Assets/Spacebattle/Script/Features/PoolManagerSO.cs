@@ -42,6 +42,7 @@ public class PoolManagerSO : ScriptableObject
         }
         pools[prefab].Enqueue(currentObject);
     }
+
     public Vector3 PickRandomSpawn()
     {
         randomSpawn = Random.Range(2, 8);

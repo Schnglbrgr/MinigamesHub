@@ -17,6 +17,11 @@ public class HealthSpaceBattle : MonoBehaviour
         hpText = hpBar.GetComponentInChildren<TMP_Text>();
     }
 
+    private void OnDisable()
+    {
+        currentHealth = health;
+    }
+
     private void Update()
     {
         hpBar.value = currentHealth / health;
@@ -24,8 +29,20 @@ public class HealthSpaceBattle : MonoBehaviour
         hpText.text = $"{currentHealth} / {health}";    
     }
 
+    private void CheckHealth()
+    {
+        if (currentHealth <= 0)
+        {
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().EndGame();
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        CheckHealth();
+
+        GetComponent<Animation>().Play();
     }
 }
