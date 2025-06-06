@@ -102,15 +102,19 @@ public class PowerUps : MonoBehaviour
         {
             warningMana.text = "Level Max";
         }
-        else
+        else if (currentMana < healthCost)
         {
             warningMana.text = "Insufficient Mana";
+        }
+        else
+        {
+            warningMana.text = "Max Health";
         }
     }
 
     private void ShieldPowerUp()
     {
-        if (currentMana >= shieldCost && currentLevelShield <= 3 && healthSystem.shieldLeft < 3)
+        if (currentMana >= shieldCost && currentLevelShield <= 3 && healthSystem.currrentShield < healthSystem.maxShield)
         {
             manaSystem.mana = Mathf.Max(manaSystem.mana - shieldCost, 0);
 
@@ -124,13 +128,13 @@ public class PowerUps : MonoBehaviour
         {
             warningMana.text = "Level Max";
         }
-        else if (healthSystem.shieldLeft >= 3)
+        else if (currentMana < shieldCost)
         {
-            warningMana.text = "Max Shield";
+            warningMana.text = "Insufficient Mana";
         }
         else
         {
-            warningMana.text = "Insufficient Mana";
+            warningMana.text = "Max Shield";
         }
     }
 
