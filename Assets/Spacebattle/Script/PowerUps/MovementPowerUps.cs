@@ -4,7 +4,6 @@ using UnityEngine;
 public class MovementPowerUps : MonoBehaviour
 {
     public WeightedEntrySO powerUpEntry;
-
     public float speed = 3f;
     private GameObject player;
     public GameObject prefab;
@@ -16,6 +15,7 @@ public class MovementPowerUps : MonoBehaviour
         prefab = powerUpEntry.prefab;
 
         transform.position = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.PickRandomSpawn();
+
     }
 
     private void OnDisable()
@@ -29,7 +29,7 @@ public class MovementPowerUps : MonoBehaviour
 
         if (transform.position.y <= 0)
         {
-            Destroy(gameObject);
+            //GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().poolManager.Return(GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>().currentPrefabPowerUp, gameObject);
         }
     }
 
