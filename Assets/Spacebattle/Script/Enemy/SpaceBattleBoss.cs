@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpaceBattleBoss : MonoBehaviour
+public class SpaceBattleBoss : MonoBehaviour, IDamageable
 {
     [SerializeField] private Transform[] ways;
     [SerializeField] private Slider hpBar;

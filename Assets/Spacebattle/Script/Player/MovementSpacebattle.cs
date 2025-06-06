@@ -21,7 +21,6 @@ public class MovementSpacebattle : MonoBehaviour
         Movement();
     }
 
-
     public void Movement()
     {
         if (Input.GetKey(KeyCode.W))

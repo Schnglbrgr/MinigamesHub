@@ -5,7 +5,6 @@ public class SpaceBattleBullet : MonoBehaviour
 {
     [SerializeField] private float speed = 5f;
 
-    private SpaceBattleEnemy enemy;
     private AttackSpaceBattle attackSpaceBattle;
 
     public int damage;
@@ -43,17 +42,13 @@ public class SpaceBattleBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<SpaceBattleEnemy>().TakeDamage(damage);
-            attackSpaceBattle.bulletPool.Return(attackSpaceBattle.bullet, gameObject);
-        }
-        else if (collision.gameObject.tag == "Boss")
-        {
-            collision.gameObject.GetComponent<SpaceBattleBoss>().TakeDamage(damage);
-            attackSpaceBattle.bulletPool.Return(attackSpaceBattle.bullet, gameObject);
-        }
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
+        if (isDamageable != null)
+        {
+            isDamageable.TakeDamage(damage);
+            attackSpaceBattle.bulletPool.Return(attackSpaceBattle.bullet, gameObject);
+        }
     }
 
     IEnumerator DestroyBullet()
