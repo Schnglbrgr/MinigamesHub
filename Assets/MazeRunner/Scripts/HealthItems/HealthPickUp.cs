@@ -16,9 +16,9 @@ public class HealthPickUp : MonoBehaviour
 
     void GiveHealth()
     {
-        if (healthSystem.heartsLeft < 3)
+        if (healthSystem.currentHealth < healthSystem.maxHealth)
         {
-            healthSystem.heartsLeft++;
+            healthSystem.AddHealth();
             Destroy(gameObject);
         }
         else

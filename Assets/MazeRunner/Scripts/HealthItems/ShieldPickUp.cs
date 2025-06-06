@@ -16,9 +16,9 @@ public class ShieldPickUp : MonoBehaviour
 
     void GiveShield()
     {
-        if (healthSystem.shieldLeft < 3)
+        if (healthSystem.currrentShield < healthSystem.maxShield)
         {
-            healthSystem.shieldLeft++;
+            healthSystem.AddShield();
             Destroy(gameObject);
         }
         else
