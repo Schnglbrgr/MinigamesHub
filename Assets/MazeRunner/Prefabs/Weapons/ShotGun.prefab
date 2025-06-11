@@ -112,8 +112,8 @@ Transform:
   m_GameObject: {fileID: 653256986859036890}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.06201429, y: -0.14280424, z: -5.9280877}
-  m_LocalScale: {x: 1.6130853, y: 1.6130853, z: 1.6130853}
+  m_LocalPosition: {x: 0.061914, y: -0.14327, z: -3.2916}
+  m_LocalScale: {x: 0.8957084, y: 0.8957084, z: 0.8957084}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8228105911326041395}
@@ -423,8 +423,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8497497524495816536}
   - component: {fileID: 4856591971273560302}
-  - component: {fileID: -7156872099429234514}
-  - component: {fileID: 6774662095253340626}
+  - component: {fileID: -7130432850678675377}
   m_Layer: 6
   m_Name: ShotGun
   m_TagString: Gun
@@ -442,7 +441,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 32.557, y: -6.7944, z: -1}
-  m_LocalScale: {x: 0.61993, y: 0.61993, z: 0.61993}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8351514206936460138}
@@ -496,31 +495,15 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.5223007, y: 0.20722103}
   m_EdgeRadius: 0
---- !u!114 &-7156872099429234514
+--- !u!114 &-7130432850678675377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8463586386554664373}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 063b23356db07dd4eb2f4c18f4b68104, type: 3}
+  m_Script: {fileID: 11500000, guid: 2e23a6357e9c9e94b8c6413bb602c6f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6774662095253340626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8463586386554664373}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215a2feb56903754a85d6562938bb406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
-  weapon: {fileID: 11400000, guid: 12f442b83d7a43d49ace20c6ec671f2c, type: 2}
-  spawnPoint: {fileID: 0}
-  ammoHUD: {fileID: 0}

@@ -1,20 +1,16 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class HealthPickUp : MonoBehaviour
+public class HealthPickUp : MonoBehaviour, IPickable
 {
     private HealthSystem healthSystem;
-    private TMP_Text warningText;
 
     private void Awake()
     {
         healthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
-        warningText = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>().maxHealthShield;
-
     }
 
-    void GiveHealth()
+    public void TakeItem()
     {
         if (healthSystem.currentHealth < healthSystem.maxHealth)
         {
@@ -23,22 +19,7 @@ public class HealthPickUp : MonoBehaviour
         }
         else
         {
-            warningText.text = "Max Health";
-            StartCoroutine(ReturnText());
+            Debug.Log("Full");
         }
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            GiveHealth();
-        }
-    }
-    IEnumerator ReturnText()
-    {
-        yield return new WaitForSeconds(0.2f);
-        warningText.text = "";
-    }
-
 }

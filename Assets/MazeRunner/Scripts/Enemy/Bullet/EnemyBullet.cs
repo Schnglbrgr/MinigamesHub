@@ -2,15 +2,8 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    private HealthSystem playerHealthSystem;
-
     private float speed = 2f;
     public int damage;
-
-    private void Awake()
-    {
-        playerHealthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
-    }
 
     private void FixedUpdate()
     {
@@ -21,10 +14,11 @@ public class EnemyBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            playerHealthSystem.TakeDamage(damage);
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
+        if (isDamageable != null)
+        {
+            isDamageable.TakeDamage(damage);
             Destroy(gameObject);
         }
 

@@ -10,20 +10,16 @@ public class AttackEnemyLight : MonoBehaviour
     private float angle;
     private float initialAngle = 90f;
     private float timer;
-    private int damage;
     private float fireRate = 2f;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
-        damage = GetComponent<EnemyController>().damage;
     }
 
     private void Update()
     {
-        RotateToPlayer();
-
         if (timer > 0)
         {
             timer -= Time.deltaTime;
@@ -39,7 +35,7 @@ public class AttackEnemyLight : MonoBehaviour
         return false;
     }
 
-    private void RotateToPlayer()
+    public void RotateToPlayer(int damage)
     {
         if (CheckPositionPlayer())
         {
@@ -49,11 +45,11 @@ public class AttackEnemyLight : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle - initialAngle));
 
-            AttackPlayer();
+            AttackPlayer(damage);
         }
     }
 
-    private void AttackPlayer()
+    private void AttackPlayer(int damage)
     {
         if (timer <= 0)
         {

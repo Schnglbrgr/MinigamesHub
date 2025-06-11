@@ -8,7 +8,6 @@ public class Bullet : MonoBehaviour
     public int damage;
 
     private Rigidbody2D rb;
-    private EnemyController enemyController;
     private PoolManager poolManager;
     private AttackSystem currentWeapon;
 
@@ -18,19 +17,16 @@ public class Bullet : MonoBehaviour
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
         StartCoroutine(ReturnBullet());
         currentWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>().currentWeapon.GetComponent<AttackSystem>();
-        transform.position = currentWeapon.spawnPoint.position;
         transform.rotation = currentWeapon.transform.rotation;
     }
 
     private void OnDisable()
     {
-        transform.position = currentWeapon.spawnPoint.position;
         StopCoroutine(ReturnBullet());
     }
 
     private void OnEnable()
     {
-        transform.position = currentWeapon.spawnPoint.position;
     }
 
     void FixedUpdate()
@@ -40,23 +36,17 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Enemy")
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (isDamageable != null)
         {
-            enemyController = collision.gameObject.GetComponent<EnemyController>();
-
-            enemyController.TakeDamageEnemy(damage);
-
-            enemyController.GetComponent<Animation>().Play();
-
+            isDamageable.TakeDamage(damage);
         }
 
-        poolManager.Return(currentWeapon.bullet,gameObject);
     }
 
     IEnumerator ReturnBullet()
     {
         yield return new WaitForSeconds(3);
-        poolManager.Return(currentWeapon.GetComponent<AttackSystem>().bullet, gameObject);
-
     }
 }

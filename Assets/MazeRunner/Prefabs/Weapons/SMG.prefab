@@ -392,8 +392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2144066005826770880}
   - component: {fileID: 399841987126601610}
-  - component: {fileID: 4696920131562075514}
-  - component: {fileID: 6806425334403056428}
+  - component: {fileID: -8226568181152297976}
   m_Layer: 6
   m_Name: SMG
   m_TagString: Gun
@@ -465,34 +464,18 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.62301636, y: 0.15176392}
   m_EdgeRadius: 0
---- !u!114 &4696920131562075514
+--- !u!114 &-8226568181152297976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6682983511247933415}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 063b23356db07dd4eb2f4c18f4b68104, type: 3}
+  m_Script: {fileID: 11500000, guid: a28b5336eacc66b41bf140e11f7e8798, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6806425334403056428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6682983511247933415}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215a2feb56903754a85d6562938bb406, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullet: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
-  weapon: {fileID: 11400000, guid: e6fad4e7bacd1064e886623147f77f04, type: 2}
-  spawnPoint: {fileID: 0}
-  ammoHUD: {fileID: 0}
 --- !u!1 &8003357734308712390
 GameObject:
   m_ObjectHideFlags: 0

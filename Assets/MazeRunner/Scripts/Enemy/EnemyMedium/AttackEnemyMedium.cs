@@ -17,8 +17,8 @@ public class AttackEnemyMedium : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerHealthSystem = player.GetComponent<HealthSystem>();
-        damage = damage = GetComponent<EnemyController>().damage;
         rbPlayer = player.GetComponent<Rigidbody2D>();
+        damage = GetComponent<EnemyMedium>().damage;
     }
 
     private void StunPlayer()
@@ -41,14 +41,17 @@ public class AttackEnemyMedium : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (isDamageable != null)
         {
-            playerHealthSystem.TakeDamage(damage);
+            isDamageable.TakeDamage(damage);
 
             pushDirection = collision.transform.position - transform.position;
 
             StunPlayer();
         }
+
     }
 
     IEnumerator StopStun()
