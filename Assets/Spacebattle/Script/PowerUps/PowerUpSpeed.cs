@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerUpSpeed : MonoBehaviour
+public class PowerUpSpeed : PowerUpController, IPickable
 {
     private AttackSpaceBattle attackSpaceBattle;
     private MovementSpacebattle movementSpacebattle;
@@ -23,16 +23,16 @@ public class PowerUpSpeed : MonoBehaviour
         speedBoost = currentSpeed + 2;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void GivePowerUp()
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            movementSpacebattle.currentSpeed = speedBoost;
-            movementSpacebattle.StopBoost(timer);
-            attackSpaceBattle.ReturnColor(timer);
-            spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
-        }
+        movementSpacebattle.currentSpeed = speedBoost;
+        movementSpacebattle.StopBoost(timer);
+        attackSpaceBattle.ReturnColor(timer);
+        spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
     }
 
-
+    public void PickItem()
+    {
+        GivePowerUp();
+    }
 }

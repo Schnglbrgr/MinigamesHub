@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerUpHealth : MonoBehaviour
+public class PowerUpHealth : PowerUpController, IPickable
 {
     private HealthSpaceBattle healthSpaceBattle;
     private AttackSpaceBattle attackSpaceBattle;
@@ -14,16 +14,18 @@ public class PowerUpHealth : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void GivePowerUp()
     {
-        if (collision.gameObject.tag == "Player")
+        if (healthSpaceBattle.currentHealth < 100)
         {
-            if (healthSpaceBattle.currentHealth < 100)
-            {
-                healthSpaceBattle.currentHealth += 30;                
-            }
-            attackSpaceBattle.ReturnColor(0.1f);
-            spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+            healthSpaceBattle.currentHealth += 30;
         }
+        attackSpaceBattle.ReturnColor(0.1f);
+        spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+    }
+
+    public void PickItem()
+    {
+        GivePowerUp();
     }
 }

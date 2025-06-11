@@ -13,7 +13,6 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     public GameObject bulletEnemy;
     public Transform spawnPointBullet;
     private SpaceBattleManager spaceBattleManager;
-    private HealthSpaceBattle healthSpaceBattle;
 
     private int currentHealth;
     private float speed = 2f;
@@ -26,7 +25,6 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     private void Awake()
     {
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
-        healthSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSpaceBattle>();
 
         currentHealth = 15;
 

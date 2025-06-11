@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerUpFireRate : MonoBehaviour
+public class PowerUpFireRate : PowerUpController, IPickable
 {
     private AttackSpaceBattle attackSpaceBattle;
     private SpaceBattleManager spaceBattleManager;
@@ -12,12 +12,19 @@ public class PowerUpFireRate : MonoBehaviour
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    public override void GivePowerUp()
     {
         attackSpaceBattle.currentFireRate -= 0.2f;
         attackSpaceBattle.StopFireRate(timer);
         attackSpaceBattle.ReturnColor(timer);
         spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
     }
+
+    public void PickItem()
+    {
+        GivePowerUp();
+    }
+
 }
 

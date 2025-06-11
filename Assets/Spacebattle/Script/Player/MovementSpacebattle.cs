@@ -64,4 +64,14 @@ public class MovementSpacebattle : MonoBehaviour
         yield return new WaitForSeconds(timer);
         currentSpeed = speed;
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        IPickable isPickAble = collision.gameObject.GetComponent<IPickable>();
+
+        if (isPickAble != null)
+        {
+            isPickAble.PickItem();
+        }
+    }
 }
