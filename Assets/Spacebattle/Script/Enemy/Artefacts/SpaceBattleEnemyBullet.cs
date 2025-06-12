@@ -28,13 +28,14 @@ public class SpaceBattleEnemyBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<HealthSpaceBattle>().TakeDamage(damage);
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
+        if (isDamageable != null)
+        {
+            isDamageable.TakeDamage(damage);
             spaceBattleManager.poolManager.Return(boss.GetComponent<SpaceBattleBoss>().bulletEnemy, gameObject);
         }
-        else if(collision.gameObject.tag == "Floor")
+        else if (collision.gameObject.tag == "Floor")
         {
             spaceBattleManager.poolManager.Return(boss.GetComponent<SpaceBattleBoss>().bulletEnemy, gameObject);
         }

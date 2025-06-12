@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PowerUpDamage : MonoBehaviour
+public class PowerUpDamage : PowerUpController, IPickable
 {
     private AttackSpaceBattle attackSpaceBattle;
     private SpaceBattleManager spaceBattleManager;
@@ -10,14 +10,18 @@ public class PowerUpDamage : MonoBehaviour
     {
         attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
-
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override void GivePowerUp()
     {
         attackSpaceBattle.currentDamage++;
         attackSpaceBattle.StopDamage(timer);
         attackSpaceBattle.ReturnColor(timer);
         spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
+    }
+
+    public void PickItem()
+    {
+        GivePowerUp();
     }
 }

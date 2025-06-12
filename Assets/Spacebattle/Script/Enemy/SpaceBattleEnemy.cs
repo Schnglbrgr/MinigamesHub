@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
 
-public class SpaceBattleEnemy : MonoBehaviour
+public class SpaceBattleEnemy : MonoBehaviour, IDamageable
 {
     public SpaceBattleEnemySO enemy;
     public WeightedEntrySO enemyEntry;
     private SpaceBattleManager spaceBattleManager;
-    private HealthSpaceBattle healthSpaceBattle;
     private GameObject prefab;
     private Animation animationEnemy;
 
@@ -15,8 +14,6 @@ public class SpaceBattleEnemy : MonoBehaviour
     private void Awake()
     {
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
-
-        healthSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSpaceBattle>();
 
         currentHealth = enemy.health;
 
@@ -77,10 +74,13 @@ public class SpaceBattleEnemy : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
-    {        
-        if (collision.gameObject.tag == "Player")
+    {
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (isDamageable != null)
         {
-            healthSpaceBattle.TakeDamage(enemy.damage);
+            isDamageable.TakeDamage(enemy.damage);
+            spaceBattleManager.SpawnEnemies();
             spaceBattleManager.poolManager.Return(prefab, gameObject);
         }
     }

@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpaceBattleBoss : MonoBehaviour
+public class SpaceBattleBoss : MonoBehaviour, IDamageable
 {
     [SerializeField] private Transform[] ways;
     [SerializeField] private Slider hpBar;
@@ -13,7 +13,6 @@ public class SpaceBattleBoss : MonoBehaviour
     public GameObject bulletEnemy;
     public Transform spawnPointBullet;
     private SpaceBattleManager spaceBattleManager;
-    private HealthSpaceBattle healthSpaceBattle;
 
     private int currentHealth;
     private float speed = 2f;
@@ -26,7 +25,6 @@ public class SpaceBattleBoss : MonoBehaviour
     private void Awake()
     {
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
-        healthSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSpaceBattle>();
 
         currentHealth = 15;
 
