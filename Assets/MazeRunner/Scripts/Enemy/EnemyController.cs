@@ -1,56 +1,15 @@
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public abstract class EnemyController : MonoBehaviour, IDamageable
 {
-    [SerializeField] private EnemyMazeRunnerSO enemy;
+    public abstract void Movement();
 
-    private ManaSystem manaSystem;
-    private HealthSystem playerHealthSystem;
+    public abstract void Attack();
 
-    public int currentHealth;
-    public int damage;
-    private int manaReward;
-
-    private void Awake()
+    public virtual void TakeDamage(int damage)
     {
-        manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
-
-        playerHealthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
-
-        currentHealth = enemy.health;
-
-        damage = enemy.damage;
-
-        manaReward = enemy.mana;
-
     }
 
-
-    public void TakeDamageEnemy(int damage)
-    {
-        currentHealth -= damage;
-        CheckHealth();
-    }
-
-    private void CheckHealth()
-    {
-        if (currentHealth <= 0)
-        {
-            if (manaSystem.mana < 100)
-            {
-                manaSystem.mana += manaReward;
-            }
-
-            gameObject.SetActive(false);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            playerHealthSystem.TakeDamage(damage);
-        }
-    }
+    public abstract void CheckHealth();
 
 }

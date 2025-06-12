@@ -12,7 +12,6 @@ public class AttackEnemyHigh : MonoBehaviour
     private Color currentColor;
     private Quaternion startRotation;
     private float timer;
-    private int damage;
     private float timerShoot;
     private float fireRate = 1f;
     private float rotationSpeed = 100f;
@@ -22,8 +21,7 @@ public class AttackEnemyHigh : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
         startRotation = transform.rotation;
-        damage = GetComponent<EnemyController>().damage;
-
+    
         for (int x = 0; x < 3; x++)
         {
             currentColor = transform.GetChild(x).GetComponent<SpriteRenderer>().color;
@@ -43,15 +41,13 @@ public class AttackEnemyHigh : MonoBehaviour
             timerShoot -= Time.deltaTime;
         }
 
-        AttackPlayer();
-
         if (!CheckPositionPlayer())
         {
             ChangeColor(currentColor);
         }
     }
 
-    private void AttackPlayer()
+    public void AttackPlayer(int damage)
     {
         if (CheckPositionPlayer() && timer <= 0)
         {

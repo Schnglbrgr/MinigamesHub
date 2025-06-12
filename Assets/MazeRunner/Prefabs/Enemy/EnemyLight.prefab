@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 8588436306704596065}
   - component: {fileID: 7838164478432389342}
   - component: {fileID: 7008667302381745018}
-  - component: {fileID: 8200906764471821695}
-  - component: {fileID: 4139628577728857967}
+  - component: {fileID: 1167662319212328866}
   - component: {fileID: 7300221845116497352}
   - component: {fileID: -4483078995511379577}
   m_Layer: 0
@@ -120,7 +119,7 @@ PolygonCollider2D:
       - {x: 0.49480593, y: -0.2975881}
       - {x: 0.20717525, y: 0.20208353}
   m_UseDelaunayMesh: 0
---- !u!114 &8200906764471821695
+--- !u!114 &1167662319212328866
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,29 +128,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1262990576291600000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a72b2283b02c2724ab8084caea7922fa, type: 3}
+  m_Script: {fileID: 11500000, guid: ad5bd46c9827cea47965489120af529d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 11400000, guid: 36dbaf5a7e487d74e921c931fbc4bfa0, type: 2}
-  currentHealth: 0
-  damage: 0
---- !u!114 &4139628577728857967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1262990576291600000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2eae265418a86f459f2ad6741329a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   patrolsPoints:
   - {fileID: 367467687925082042}
   - {fileID: 1948500177587723411}
   - {fileID: 1479729984150391415}
   - {fileID: 7160724412639658724}
+  attack: {fileID: 7300221845116497352}
 --- !u!114 &7300221845116497352
 MonoBehaviour:
   m_ObjectHideFlags: 0

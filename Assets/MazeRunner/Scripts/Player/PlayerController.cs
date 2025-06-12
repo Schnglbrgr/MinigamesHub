@@ -57,6 +57,13 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        IPickable isPickable = collision.gameObject.GetComponent<IPickable>();
+
+        if (isPickable != null)
+        {
+            isPickable.TakeItem();
+        }
+
         if (collision.gameObject.tag == "Door")
         {
             gameManagerMazeRunner.Win(keyInventory);

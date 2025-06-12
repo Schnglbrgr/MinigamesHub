@@ -24,7 +24,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     {
         for (int x = 0; x < weapons.Length; x++)
         {
-            weapons[x].GetComponent<AttackSystem>().ammoHUD = GameObject.FindGameObjectWithTag("Ammo");
+            //weapons[x].GetComponent<AttackSystem>().ammoHUD = GameObject.FindGameObjectWithTag("Ammo");
         }
     }
 

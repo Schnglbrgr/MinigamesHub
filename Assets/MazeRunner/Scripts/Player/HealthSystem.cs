@@ -1,29 +1,28 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class HealthSystem : MonoBehaviour
+public class HealthSystem : MonoBehaviour, IDamageable
 {
-    [SerializeField] private GameObject[] hearts;
-    [SerializeField] private GameObject[] shield;
+    [SerializeField] private Slider shieldBar;
+    [SerializeField] private Slider healthBar;
+    [SerializeField] private TMP_Text healthText;
+    [SerializeField] private TMP_Text shieldText;
 
     private GameManagerMazeRunner gameManagerMazeRunner;
-    private Color currentColor;
-    private Transform child;
-    public int heartsLeft;
-    public int shieldLeft;
+    public int currentHealth;
+    public int currrentShield;
+    public int maxShield = 50;
+    public int maxHealth = 100;
 
     private void Awake()
     {
         gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>();
 
-        heartsLeft = hearts.Length - 2;
+        currentHealth = maxHealth;
 
-        shieldLeft = shield.Length;
-
-        child = transform.GetChild(1);
-
-        currentColor = child.GetChild(1).GetComponent<SpriteRenderer>().color;
+        currrentShield = maxShield;
     }
 
     private void Update()
@@ -33,27 +32,29 @@ public class HealthSystem : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        child = transform.GetChild(1);
+        GetComponent<Animation>().Play();
 
-        child.GetChild(1).GetComponent<SpriteRenderer>().color = Color.red;
-
-        if (shieldLeft <= 0)
+        if (currrentShield <= 0)
         {
-            heartsLeft -= damage;
-            hearts[heartsLeft].SetActive(false);
+            currentHealth = Mathf.Max(currentHealth - damage, 0);
         }
         else
         {
-            shieldLeft -= damage;
-            shield[shieldLeft].SetActive(false);
+            currrentShield = Mathf.Max(currrentShield - damage, 0);
         }
-
-        StartCoroutine(ReturnColor());
     }
 
     private void CheckHealth()
     {
-        if (heartsLeft <= 0)
+        healthBar.value = currentHealth / maxHealth;
+
+        shieldBar.value = currrentShield / maxShield;
+
+        healthText.text = $"{currentHealth} / {maxHealth}";
+
+        shieldText.text = $"{currrentShield} / {maxShield}";
+
+        if (currentHealth <= 0)
         {
             gameManagerMazeRunner.Lose();
             Destroy(gameObject);
@@ -62,31 +63,12 @@ public class HealthSystem : MonoBehaviour
 
     public void AddShield()
     {
-        shieldLeft++;
-
-        shield[shieldLeft].SetActive(true);
+        currrentShield += 10;
     }
 
     public void AddHealth()
     {
-        if (heartsLeft <= 2)
-        {
-            hearts[heartsLeft + 1].SetActive(true);
-
-        }
-        else
-        {
-            heartsLeft++;
-
-            hearts[heartsLeft - 1].SetActive(true);
-
-        }
-    }
-
-    IEnumerator ReturnColor()
-    {
-        yield return new WaitForSeconds(0.2f);
-        child.GetChild(1).GetComponent<SpriteRenderer>().color = currentColor;
+        currentHealth += 10;
     }
    
 }
