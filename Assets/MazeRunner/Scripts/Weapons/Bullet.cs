@@ -14,10 +14,16 @@ public class Bullet : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
+
         StartCoroutine(ReturnBullet());
+
         currentWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>().currentWeapon.GetComponent<AttackSystem>();
+
         transform.rotation = currentWeapon.transform.rotation;
+
+        transform.position = currentWeapon.spawnPoint.position;
     }
 
     private void OnDisable()
@@ -27,6 +33,7 @@ public class Bullet : MonoBehaviour
 
     private void OnEnable()
     {
+        transform.position = currentWeapon.spawnPoint.position;
     }
 
     void FixedUpdate()
@@ -41,6 +48,12 @@ public class Bullet : MonoBehaviour
         if (isDamageable != null)
         {
             isDamageable.TakeDamage(damage);
+            poolManager.Return(currentWeapon.bullet,gameObject);
+        }
+
+        if (collision.gameObject.layer == 7)
+        {
+            poolManager.Return(currentWeapon.bullet, gameObject);
         }
 
     }
@@ -48,5 +61,6 @@ public class Bullet : MonoBehaviour
     IEnumerator ReturnBullet()
     {
         yield return new WaitForSeconds(3);
+        poolManager.Return(currentWeapon.bullet, gameObject);
     }
 }

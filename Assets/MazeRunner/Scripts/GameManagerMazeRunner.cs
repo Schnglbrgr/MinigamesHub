@@ -15,17 +15,29 @@ public class GameManagerMazeRunner : MonoBehaviour
     [SerializeField] private GameObject[] enemy;
     [SerializeField] private Transform chestParent;
     [SerializeField] private Transform enemySpawnParent;
-    [SerializeField] private PickRandomItemSO pickRandomItemSO;
+    [SerializeField] private PickRandomItemSO pickRandomEnemy;
+    [SerializeField] private PickRandomItemSO pickRandomBoss;
+    [SerializeField] private GameObject arrow;
 
+    public Transform bossSpawn;
     public GameObject warningMessage;
     public TMP_Text maxHealthShield;
+    public GameObject currentBoss;
+    public PlayerController player;
+    private Animation openDoor;
+
+    public int deathBoss;
 
     private void Awake()
     {
         for (int x = 0; x < weapons.Length; x++)
         {
-            //weapons[x].GetComponent<AttackSystem>().ammoHUD = GameObject.FindGameObjectWithTag("Ammo");
+            weapons[x].GetComponent<AttackSystem>().ammoHUD = GameObject.FindGameObjectWithTag("Ammo");
         }
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+
+        openDoor = GameObject.FindGameObjectWithTag("Wall").GetComponent<Animation>();
     }
 
     private void Start()
@@ -44,9 +56,31 @@ public class GameManagerMazeRunner : MonoBehaviour
         }
     }
 
-    public void Win(int keyInventory)
+    public void StartBoss()
     {
-        if (keyInventory == 10)
+        if (player.keyInventory == 10)
+        {
+            openDoor.Play();
+
+            arrow.SetActive(true);
+
+            currentBoss = pickRandomBoss.SelectRandomObject();
+
+            GetComponent<PoolManager>().PoolInstance(currentBoss);
+
+            player.keyInventory = 0;
+
+        }
+        else if (player.keyInventory < 10)
+        {
+            warningMessage.SetActive(true);
+        }
+
+    }
+
+    public void Win()
+    {
+        if (deathBoss >= 2)
         {
             win_loseHUD.SetActive(true);
 
@@ -58,11 +92,6 @@ public class GameManagerMazeRunner : MonoBehaviour
 
             Time.timeScale = 0f;
         }
-        else if (keyInventory < 10)
-        {
-            warningMessage.SetActive(true);
-        }
-
     }
 
     private void Restart()
@@ -87,7 +116,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     {
         for (int x = 0; x < enemySpawn.Length; x++)
         {
-           Instantiate(pickRandomItemSO.SelectRandomObject(), enemySpawn[x].position, Quaternion.identity, enemySpawnParent);
+           Instantiate(pickRandomEnemy.SelectRandomObject(), enemySpawn[x].position, Quaternion.identity, enemySpawnParent);
         }
     }
 

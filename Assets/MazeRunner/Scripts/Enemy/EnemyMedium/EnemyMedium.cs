@@ -63,7 +63,7 @@ public class EnemyMedium : EnemyController
     {
         IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if (isDamageable != null)
+        if (isDamageable != null && collision.gameObject.tag != "Enemy")
         {
             isDamageable.TakeDamage(damage);
         }

@@ -393,6 +393,7 @@ GameObject:
   - component: {fileID: 2144066005826770880}
   - component: {fileID: 399841987126601610}
   - component: {fileID: -8226568181152297976}
+  - component: {fileID: 8232377581380424626}
   m_Layer: 6
   m_Name: SMG
   m_TagString: Gun
@@ -452,7 +453,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.07304382, y: -0.004714966}
+  m_Offset: {x: 0.05632782, y: -0.004714966}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -462,7 +463,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.62301636, y: 0.15176392}
+  m_Size: {x: 0.58958435, y: 0.12136841}
   m_EdgeRadius: 0
 --- !u!114 &-8226568181152297976
 MonoBehaviour:
@@ -471,9 +472,33 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6682983511247933415}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a28b5336eacc66b41bf140e11f7e8798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateWeapon: {fileID: 8232377581380424626}
+  collectWeapon: {fileID: 0}
+  bullet: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
+  ammoHUD: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  poolManager: {fileID: 0}
+  ammoText: {fileID: 0}
+  warningAmmo: {fileID: 0}
+  myWeapon: {fileID: 11400000, guid: e6fad4e7bacd1064e886623147f77f04, type: 2}
+  currentBullet: {fileID: 0}
+  currentAmmo: 0
+  timer: 0
+--- !u!114 &8232377581380424626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682983511247933415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063b23356db07dd4eb2f4c18f4b68104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8003357734308712390

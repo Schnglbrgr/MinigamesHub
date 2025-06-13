@@ -76,4 +76,14 @@ public class EnemyHigh : EnemyController
             gameObject.SetActive(false);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (isDamageable != null && collision.gameObject.tag != "Enemy")
+        {
+            isDamageable.TakeDamage(damage);
+        }
+    }
 }
