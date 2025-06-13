@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ba348efde9083b4cac4f04906eea2e3, type: 3}
+  m_Name: BossSecond
+  m_EditorClassIdentifier: 
+  health: 250
+  damage: 50
+  speed: 4
+  manaReward: 60
+  fireRate: 1
+  spawnRate: 16
+  pickRandomEnemy: {fileID: 11400000, guid: d5a86dd6718d72f40a08750ce0977bdd, type: 2}
+  pickRandomItem: {fileID: 11400000, guid: 61926cc95407b07439e2ad3b86348082, type: 2}
+  pickRandomWeapon: {fileID: 11400000, guid: 1bd5ec1897bb7d048b31aa49718627a0, type: 2}

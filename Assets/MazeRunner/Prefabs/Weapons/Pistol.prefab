@@ -337,6 +337,7 @@ GameObject:
   - component: {fileID: 700187555259268350}
   - component: {fileID: 4891926809162977118}
   - component: {fileID: 3354002644869243356}
+  - component: {fileID: -7857626243950247619}
   m_Layer: 6
   m_Name: Pistol
   m_TagString: Gun
@@ -415,9 +416,30 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7318195960791343090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23bd0c0472ce5cf41b8107671f0b6127, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateWeapon: {fileID: -7857626243950247619}
+  collectWeapon: {fileID: 0}
+  bullet: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
+  ammoHUD: {fileID: 0}
+  spawnPoint: {fileID: 0}
+  poolManager: {fileID: 0}
+  ammoText: {fileID: 0}
+  warningAmmo: {fileID: 0}
+  myWeapon: {fileID: 11400000, guid: 1041e0e20ac0ba440bda7fbab018a6b9, type: 2}
+--- !u!114 &-7857626243950247619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7318195960791343090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 063b23356db07dd4eb2f4c18f4b68104, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &8299318213927125115

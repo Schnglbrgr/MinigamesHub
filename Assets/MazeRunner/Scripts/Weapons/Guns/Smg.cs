@@ -3,18 +3,6 @@ using UnityEngine;
 
 public class Smg : AttackSystem, IPickable
 {
-    public WeaponsSO myWeapon;
-    public GameObject bullet;
-    public GameObject ammoHUD;
-    public Transform spawnPoint;
-    private PoolManager poolManager;
-    private GameObject currentBullet;
-    private TMP_Text ammoText;
-    private GameObject warningAmmo;
-
-    private int currentAmmo;
-    private float timer;
-
     private void Awake()
     {
         bullet.GetComponent<Bullet>().damage = myWeapon.damage;
@@ -29,6 +17,19 @@ public class Smg : AttackSystem, IPickable
 
         spawnPoint = transform.GetChild(1).GetComponent<Transform>();
 
+        collectWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>();
+
+        timer = 0f;
+
+    }
+    private void OnEnable()
+    {
+        ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    private void OnDisable()
+    {
+        ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
     }
 
     private void Update()
@@ -50,6 +51,8 @@ public class Smg : AttackSystem, IPickable
         }
 
         Rotation();
+
+        Shoot();
     }
 
     public override void Shoot()
@@ -66,5 +69,10 @@ public class Smg : AttackSystem, IPickable
     public void TakeItem()
     {
         collectWeapon.TakeWeapon(gameObject);
+    }
+
+    public  override void ControlEnable(bool turnOff_On)
+    {
+        this.enabled = turnOff_On;
     }
 }

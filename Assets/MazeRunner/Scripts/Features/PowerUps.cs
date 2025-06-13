@@ -94,7 +94,7 @@ public class PowerUps : MonoBehaviour
 
             currentLevelHealth++;
 
-            healthSystem.AddHealth();
+            healthSystem.AddHealth(50);
 
             health.transform.GetChild(2).GetComponent<TMP_Text>().text = $"Level {currentLevelHealth}";
         }

@@ -11,12 +11,15 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Teleport teleport;
 
     private GameManagerMazeRunner gameManagerMazeRunner;
+    private Camera mainCamera;
 
     public int keyInventory;
 
     private void Awake()
     {
         gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>();
+
+        mainCamera = transform.GetChild(2).gameObject.GetComponent<Camera>();
     }
 
     private void Start()
@@ -66,7 +69,8 @@ public class PlayerController : MonoBehaviour
 
         if (collision.gameObject.tag == "Door")
         {
-            gameManagerMazeRunner.Win(keyInventory);
+            gameManagerMazeRunner.StartBoss();
+
         }
     }
 

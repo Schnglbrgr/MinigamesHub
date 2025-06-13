@@ -66,9 +66,9 @@ public class HealthSystem : MonoBehaviour, IDamageable
         currrentShield += 10;
     }
 
-    public void AddHealth()
+    public void AddHealth(int healthBonus)
     {
-        currentHealth += 10;
+        currentHealth += healthBonus;
     }
    
 }
