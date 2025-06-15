@@ -2,24 +2,27 @@ using UnityEngine;
 
 public class EnemyMedium : EnemyController
 {
-    [SerializeField] private EnemyMazeRunnerSO enemy;
-
-    private int currentHealth;
-    public int damage;
-    private int manaReward;
-
-    private ManaSystem manaSystem;
     private GameObject player;
-    private float speed = 1.5f;
 
     private void Awake()
     {
         currentHealth = enemy.health;
+
         damage = enemy.damage;
+
         manaReward = enemy.mana;
 
+        speed = enemy.speed;
+
         player = GameObject.FindGameObjectWithTag("Player");
+
         manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
+
+        poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
+
+        hpBar.value = currentHealth / enemy.health;
+
+        hpText.text = $"{currentHealth} / {enemy.health}";
     }
 
     private void FixedUpdate()
@@ -42,7 +45,13 @@ public class EnemyMedium : EnemyController
     public override void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        hpBar.value = currentHealth / enemy.health;
+
+        hpText.text = $"{currentHealth} / {enemy.health}";
+
         CheckHealth();
+
         GetComponent<Animation>().Play();
     }
 
@@ -55,17 +64,19 @@ public class EnemyMedium : EnemyController
                 manaSystem.mana += manaReward;
             }
 
+            dropItem = Instantiate(dropRandomItem.SelectRandomObject(), spawnItem.position, Quaternion.identity);
+
+            dropAmmo = poolManager.PoolInstance(ammoPrefab);
+
+            dropAmmo.transform.position = spawnItem.position;
+
+            dropAmmo.GetComponent<AmmoPickUp>().ammoReward = enemy.ammoReward;
+
+            enemy.PushItems(dropItem.GetComponent<Rigidbody2D>(), Vector2.down, 0.5f);
+
+            enemy.PushItems(dropAmmo.GetComponent<Rigidbody2D>(), Vector2.up, 0.5f);
+
             gameObject.SetActive(false);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
-
-        if (isDamageable != null)
-        {
-            isDamageable.TakeDamage(damage);
         }
     }
 

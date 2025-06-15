@@ -9,23 +9,22 @@ public class AttackEnemyHigh : MonoBehaviour
     [SerializeField] private float coolDownAttack;
 
     private GameObject player;
-    private Color currentColor;
+    private GameObject currentBullet;
+    private GameObject gameManagerMazeRunner;
     private Quaternion startRotation;
     private float timer;
     private float timerShoot;
     private float fireRate = 1f;
-    private float rotationSpeed = 100f;
     private float rotationBullet;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
         startRotation = transform.rotation;
-    
-        for (int x = 0; x < 3; x++)
-        {
-            currentColor = transform.GetChild(x).GetComponent<SpriteRenderer>().color;
-        }
+
+        gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController");
+
     }
 
     private void Update()
@@ -33,7 +32,6 @@ public class AttackEnemyHigh : MonoBehaviour
         if (timer > 0)
         {
             timer -= Time.deltaTime;
-            ChangeColor(Color.white);
         }
 
         if (timerShoot > 0)
@@ -43,7 +41,6 @@ public class AttackEnemyHigh : MonoBehaviour
 
         if (!CheckPositionPlayer())
         {
-            ChangeColor(currentColor);
         }
     }
 
@@ -51,7 +48,6 @@ public class AttackEnemyHigh : MonoBehaviour
     {
         if (CheckPositionPlayer() && timer <= 0)
         {
-            //RotateEnemy();
 
             if (timerShoot <= 0)
             {
@@ -59,24 +55,22 @@ public class AttackEnemyHigh : MonoBehaviour
 
                 for (int x = 0; x < shootPoints.Length; x++)
                 {
-                    Instantiate(bulletEnemy, shootPoints[x].position, Quaternion.Euler(0f,0f,rotationBullet));
-                    bulletEnemy.GetComponent<EnemyBullet>().damage = damage;
+                    currentBullet = gameManagerMazeRunner.GetComponent<PoolManager>().PoolInstance(bulletEnemy);
+
+                    currentBullet.transform.position = shootPoints[x].position;
+
+                    currentBullet.GetComponent<EnemyBullet>().damage = damage;
+
                     rotationBullet += 90f;
                 }
 
                 timerShoot = fireRate;
             }
 
-            ChangeColor(Color.red);
-
             StartCoroutine(StopAttack());
         }
     }
 
-    private void RotateEnemy()
-    {
-        transform.Rotate(0f,0f,rotationSpeed * Time.deltaTime);
-    }
 
     private bool CheckPositionPlayer()
     {
@@ -85,14 +79,6 @@ public class AttackEnemyHigh : MonoBehaviour
             return true;
         }
         return false;
-    }
-
-    private void ChangeColor(Color color)
-    {
-        for (int x = 0; x < 3; x++)
-        {
-            transform.GetChild(x).GetComponent<SpriteRenderer>().color = color;
-        }
     }
 
     IEnumerator StopAttack()

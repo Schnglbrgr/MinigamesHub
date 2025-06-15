@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class AttackEnemyMedium : MonoBehaviour
 {
-    private HealthSystem playerHealthSystem;
     private GameObject player;
     private GameObject weaponPlayer;
     private Rigidbody2D rbPlayer;
@@ -16,8 +15,9 @@ public class AttackEnemyMedium : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerHealthSystem = player.GetComponent<HealthSystem>();
+
         rbPlayer = player.GetComponent<Rigidbody2D>();
+
         damage = GetComponent<EnemyMedium>().damage;
     }
 
@@ -43,7 +43,7 @@ public class AttackEnemyMedium : MonoBehaviour
     {
         IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if (isDamageable != null)
+        if (isDamageable != null && collision.gameObject.tag != "Enemy")
         {
             isDamageable.TakeDamage(damage);
 
@@ -57,6 +57,7 @@ public class AttackEnemyMedium : MonoBehaviour
     IEnumerator StopStun()
     {
         yield return new WaitForSeconds(2);
+
         player.GetComponent<PlayerController>().enabled = true;
 
         if (player.GetComponent<CollectWeapon>().currentWeapon)

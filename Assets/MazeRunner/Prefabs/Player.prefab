@@ -1092,7 +1092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.34509802, g: 0.6352117, b: 1, a: 1}
+  m_Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2113,13 +2113,12 @@ GameObject:
   - component: {fileID: 6606333869234934035}
   - component: {fileID: 8603658726021219839}
   - component: {fileID: 7305804782494342995}
-  - component: {fileID: 7769176392288684615}
   - component: {fileID: 1949662826113436886}
   - component: {fileID: 7476028181195625484}
   - component: {fileID: 7007622895281669736}
   - component: {fileID: 6509839172561494807}
   - component: {fileID: 2644479484148685921}
-  - component: {fileID: 1853451262022331226}
+  - component: {fileID: 3048367002261006474}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2165,7 +2164,6 @@ MonoBehaviour:
   collectWeapon: {fileID: 1949662826113436886}
   keysText: {fileID: 1410666924945186160}
   powerUps: {fileID: 7007622895281669736}
-  teleport: {fileID: 1853451262022331226}
   keyInventory: 0
 --- !u!114 &8603658726021219839
 MonoBehaviour:
@@ -2200,18 +2198,6 @@ MonoBehaviour:
   currrentShield: 0
   maxShield: 50
   maxHealth: 100
---- !u!114 &7769176392288684615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2411342026925916160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4fef806409d7e342846509cda44cad8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1949662826113436886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2224,17 +2210,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107406d145d76a14f95fb0734fb9f5d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 7318195960791343090, guid: 811362c74cca3a048b1537de26d14c2f, type: 3}
-  - {fileID: 9114239864295712232, guid: e8d43e1cd3d7d0f4bb8a0adca9d579b6, type: 3}
-  - {fileID: 8463586386554664373, guid: d5ae07ee3ed891348ac4074b30db2536, type: 3}
-  - {fileID: 6682983511247933415, guid: 32df7502b85144a4a922ad0ff3faf0e5, type: 3}
   gunPosition: {fileID: 5755341365725852032}
   currentWeaponInvPosition: {fileID: 6210586144768863069}
   dropWeaponText: {fileID: 2478925084306295475}
   weaponsInMap: {fileID: 0}
   inventoryFull: {fileID: 5472192713601278260}
   currentWeapon: {fileID: 0}
+  bulletPrefab: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
+  ammoPrefab: {fileID: 7211403548733091775, guid: c40a08e0fd1ae944fb9394ce0ab74d90, type: 3}
 --- !u!114 &7476028181195625484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2341,32 +2324,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1853451262022331226
-MonoBehaviour:
+--- !u!111 &3048367002261006474
+Animation:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2411342026925916160}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c0b066007ef04145af418059699cfb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleports:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  teleportText: {fileID: 7886372532739836715}
-  standingTime: 0
+  serializedVersion: 4
+  m_Animation: {fileID: 7400000, guid: a36463bc84f09b3439a7c0d088c2f719, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: a36463bc84f09b3439a7c0d088c2f719, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_UpdateMode: 0
+  m_CullingType: 0
 --- !u!1 &2478925084306295475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,7 +2818,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.86
+  orthographic size: 8.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3401,7 +3375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 1}
+  m_Color: {r: 0.5707547, g: 0.7894734, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4398,7 +4372,7 @@ Transform:
   m_GameObject: {fileID: 6018553339936771735}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.39, y: 2.34, z: -0.7371}
+  m_LocalPosition: {x: 8.86, y: 4.78, z: -0.7371}
   m_LocalScale: {x: 0.50502, y: 0.50502, z: 0.50502}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -8,5 +8,11 @@ public class EnemyMazeRunnerSO : ScriptableObject
     public int damage;
     public int mana;
     public float speed;
+    public int ammoReward;
     
+    public void PushItems(Rigidbody2D rbItem, Vector2 direction, float pushForce)
+    {
+        rbItem.AddForce(direction * pushForce, ForceMode2D.Impulse);
+    }
+
 }

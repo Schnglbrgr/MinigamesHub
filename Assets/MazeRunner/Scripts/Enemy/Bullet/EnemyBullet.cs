@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    private float speed = 2f;
+    public float speed = 2f;
     public int damage;
 
     private void FixedUpdate()
@@ -16,7 +16,7 @@ public class EnemyBullet : MonoBehaviour
     {
         IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if (isDamageable != null)
+        if (isDamageable != null && collision.gameObject.tag != "Enemy")
         {
             isDamageable.TakeDamage(damage);
             Destroy(gameObject);

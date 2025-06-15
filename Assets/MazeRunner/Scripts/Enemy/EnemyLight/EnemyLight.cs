@@ -2,24 +2,19 @@ using UnityEngine;
 
 public class EnemyLight : EnemyController
 {
-    [SerializeField] private EnemyMazeRunnerSO enemy;
     [SerializeField] private Transform[] patrolsPoints;
     [SerializeField] private AttackEnemyLight attack;
 
-    private ManaSystem manaSystem;
     private Transform wayParent;
-    private float speed = 1f;
     private int randomNum;
-
-    private int currentHealth;
-    private int damage;
-    private int manaReward;
-
 
     private void Awake()
     {
         wayParent = GameObject.FindGameObjectWithTag("Ways").GetComponent<Transform>();
+
         manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
+
+        poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
 
         for (int x = 0; x < patrolsPoints.Length; x++)
         {
@@ -29,9 +24,19 @@ public class EnemyLight : EnemyController
         randomNum = Random.Range(0, patrolsPoints.Length);
 
         currentHealth = enemy.health;
+
         damage = enemy.damage;
+
         manaReward = enemy.mana;
+
+        speed = enemy.speed;
+
+        hpBar.value = currentHealth / enemy.health;
+
+        hpText.text = $"{currentHealth} / {enemy.health}";
     }
+
+
     private void Update()
     {
         Attack();
@@ -60,8 +65,15 @@ public class EnemyLight : EnemyController
     public override void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        hpBar.value = currentHealth / enemy.health;
+
+        hpText.text = $"{currentHealth} / {enemy.health}";
+
         CheckHealth();
+
         GetComponent<Animation>().Play();
+
     }
 
     public override void CheckHealth()
@@ -70,8 +82,20 @@ public class EnemyLight : EnemyController
         {
             if (manaSystem.mana < 100)
             {
-                manaSystem.mana += manaReward;
+                manaSystem.mana += manaReward;               
             }
+
+            dropItem = Instantiate(dropRandomItem.SelectRandomObject(), spawnItem.position, Quaternion.identity);
+
+            dropAmmo = poolManager.PoolInstance(ammoPrefab);
+
+            dropAmmo.transform.position = spawnItem.position;
+
+            dropAmmo.GetComponent<AmmoPickUp>().ammoReward = enemy.ammoReward;
+
+            enemy.PushItems(dropItem.GetComponent<Rigidbody2D>(), Vector2.down, 0.5f);
+
+            enemy.PushItems(dropAmmo.GetComponent<Rigidbody2D>(), Vector2.up, 0.5f);
 
             gameObject.SetActive(false);
         }
@@ -81,7 +105,7 @@ public class EnemyLight : EnemyController
     {
         IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if (isDamageable != null)
+        if (isDamageable != null && collision.gameObject.tag != "Enemy")
         {
             isDamageable.TakeDamage(damage);
         }
