@@ -15,6 +15,8 @@ public class CollectWeapon : MonoBehaviour
     private Transform player;
     public GameObject currentWeapon;
     private GameObject currentWeaponInv;
+    public GameObject bulletPrefab;
+    public GameObject ammoPrefab;
 
     private void Awake()
     {

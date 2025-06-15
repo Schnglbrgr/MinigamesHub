@@ -10,6 +10,10 @@ public abstract class EnemyController : MonoBehaviour, IDamageable
     public TMP_Text hpText;
     public Transform spawnItem;
     public ManaSystem manaSystem;
+    public GameObject dropAmmo;
+    public GameObject ammoPrefab;
+    public GameObject dropItem;
+    public PoolManager poolManager;
 
     public float currentHealth;
     public int damage;

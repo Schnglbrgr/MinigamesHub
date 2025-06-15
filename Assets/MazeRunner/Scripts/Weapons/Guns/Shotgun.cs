@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class Shotgun : AttackSystem, IPickable
 {
+    private Rigidbody2D rbPlayer;
+
+    private float pushForce;
 
     private void Awake()
     {
         bullet.GetComponent<Bullet>().damage = myWeapon.damage;
 
-        currentAmmo = myWeapon.maxAmmo;
+        maxAmmo = myWeapon.maxAmmo;
+
+        currentAmmo = maxAmmo;
 
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
 
@@ -16,11 +21,13 @@ public class Shotgun : AttackSystem, IPickable
 
         warningAmmo = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
 
-        spawnPoint = transform.GetChild(1).GetComponent<Transform>();
-
         collectWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>();
 
+        rbPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>();
+
         timer = 0f;
+
+        pushForce = 4f;
 
     }
     private void OnEnable()
@@ -35,7 +42,7 @@ public class Shotgun : AttackSystem, IPickable
 
     private void Update()
     {
-        ammoText.text = $"{currentAmmo} / {myWeapon.maxAmmo}";
+        ammoText.text = $"{currentAmmo} / {maxAmmo}";
 
         if (timer > 0)
         {
@@ -64,8 +71,20 @@ public class Shotgun : AttackSystem, IPickable
             currentAmmo--;
 
             currentBullet = poolManager.PoolInstance(bullet);
+
+            currentBullet.transform.position = shootPoint.position;
+
+            currentBullet.transform.rotation = gameObject.transform.rotation;
+
+            Recoil();
         }
     }
+
+    void Recoil()
+    {
+        rbPlayer.AddForce(Vector2.left * pushForce, ForceMode2D.Impulse);
+    }
+
     public void TakeItem()
     {
         collectWeapon.TakeWeapon(gameObject);

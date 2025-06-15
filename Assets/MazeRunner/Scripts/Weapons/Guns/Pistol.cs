@@ -8,15 +8,15 @@ public class Pistol : AttackSystem, IPickable
     {
         bullet.GetComponent<Bullet>().damage = myWeapon.damage;
 
-        currentAmmo = myWeapon.maxAmmo;
+        maxAmmo = myWeapon.maxAmmo;
+
+        currentAmmo = maxAmmo;
 
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
 
         ammoText = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
 
         warningAmmo = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
-
-        spawnPoint = transform.GetChild(1).GetComponent<Transform>();
 
         collectWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>();
 
@@ -36,7 +36,7 @@ public class Pistol : AttackSystem, IPickable
 
     private void Update()
     {
-        ammoText.text = $"{currentAmmo} / {myWeapon.maxAmmo}";
+        ammoText.text = $"{currentAmmo} / {maxAmmo}";
 
         if (timer > 0)
         {
@@ -67,6 +67,9 @@ public class Pistol : AttackSystem, IPickable
 
             currentBullet = poolManager.PoolInstance(bullet);
 
+            currentBullet.transform.position = shootPoint.position;
+
+            currentBullet.transform.rotation = gameObject.transform.rotation;
         }
     }
 

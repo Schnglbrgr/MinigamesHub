@@ -23,6 +23,10 @@ public class HealthSystem : MonoBehaviour, IDamageable
         currentHealth = maxHealth;
 
         currrentShield = maxShield;
+
+        healthText.text = $"{currentHealth} / {maxHealth}";
+
+        shieldText.text = $"{currrentShield} / {maxShield}";
     }
 
     private void Update()
@@ -42,6 +46,10 @@ public class HealthSystem : MonoBehaviour, IDamageable
         {
             currrentShield = Mathf.Max(currrentShield - damage, 0);
         }
+
+        healthText.text = $"{currentHealth} / {maxHealth}";
+
+        shieldText.text = $"{currrentShield} / {maxShield}";
     }
 
     private void CheckHealth()
@@ -49,10 +57,6 @@ public class HealthSystem : MonoBehaviour, IDamageable
         healthBar.value = currentHealth / maxHealth;
 
         shieldBar.value = currrentShield / maxShield;
-
-        healthText.text = $"{currentHealth} / {maxHealth}";
-
-        shieldText.text = $"{currrentShield} / {maxShield}";
 
         if (currentHealth <= 0)
         {

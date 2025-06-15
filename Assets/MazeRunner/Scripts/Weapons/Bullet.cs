@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     private Rigidbody2D rb;
     private PoolManager poolManager;
-    private AttackSystem currentWeapon;
+    private CollectWeapon collectWeapon;
 
     private void Awake()
     {
@@ -17,13 +17,10 @@ public class Bullet : MonoBehaviour
 
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
 
+        collectWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>();
+
         StartCoroutine(ReturnBullet());
 
-        currentWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>().currentWeapon.GetComponent<AttackSystem>();
-
-        transform.rotation = currentWeapon.transform.rotation;
-
-        transform.position = currentWeapon.spawnPoint.position;
     }
 
     private void OnDisable()
@@ -31,10 +28,6 @@ public class Bullet : MonoBehaviour
         StopCoroutine(ReturnBullet());
     }
 
-    private void OnEnable()
-    {
-        transform.position = currentWeapon.spawnPoint.position;
-    }
 
     void FixedUpdate()
     {
@@ -45,15 +38,16 @@ public class Bullet : MonoBehaviour
     {
         IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if (isDamageable != null)
+        if (isDamageable != null && collision.gameObject.tag != "Player")
         {
             isDamageable.TakeDamage(damage);
-            poolManager.Return(currentWeapon.bullet,gameObject);
+
+            poolManager.Return(collectWeapon.bulletPrefab,gameObject);
         }
 
         if (collision.gameObject.layer == 7)
         {
-            poolManager.Return(currentWeapon.bullet, gameObject);
+            poolManager.Return(collectWeapon.bulletPrefab, gameObject);
         }
 
     }
@@ -61,6 +55,6 @@ public class Bullet : MonoBehaviour
     IEnumerator ReturnBullet()
     {
         yield return new WaitForSeconds(3);
-        poolManager.Return(currentWeapon.bullet, gameObject);
+        poolManager.Return(collectWeapon.bulletPrefab, gameObject);
     }
 }

@@ -2164,7 +2164,6 @@ MonoBehaviour:
   collectWeapon: {fileID: 1949662826113436886}
   keysText: {fileID: 1410666924945186160}
   powerUps: {fileID: 7007622895281669736}
-  teleport: {fileID: 0}
   keyInventory: 0
 --- !u!114 &8603658726021219839
 MonoBehaviour:
@@ -2217,6 +2216,8 @@ MonoBehaviour:
   weaponsInMap: {fileID: 0}
   inventoryFull: {fileID: 5472192713601278260}
   currentWeapon: {fileID: 0}
+  bulletPrefab: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
+  ammoPrefab: {fileID: 7211403548733091775, guid: c40a08e0fd1ae944fb9394ce0ab74d90, type: 3}
 --- !u!114 &7476028181195625484
 MonoBehaviour:
   m_ObjectHideFlags: 0

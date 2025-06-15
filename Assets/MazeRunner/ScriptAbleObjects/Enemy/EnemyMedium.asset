@@ -17,3 +17,4 @@ MonoBehaviour:
   damage: 20
   mana: 20
   speed: 2
+  ammoReward: 8

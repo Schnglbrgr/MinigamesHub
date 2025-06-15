@@ -7,7 +7,7 @@ public abstract class AttackSystem : MonoBehaviour
     public CollectWeapon collectWeapon; 
     public GameObject bullet;
     public GameObject ammoHUD;
-    public Transform spawnPoint;
+    public Transform shootPoint;
     public PoolManager poolManager;
     public TMP_Text ammoText;
     public GameObject warningAmmo;
@@ -16,6 +16,7 @@ public abstract class AttackSystem : MonoBehaviour
 
     public int currentAmmo;
     public float timer;
+    public int maxAmmo;
 
 
     public abstract void Shoot();
