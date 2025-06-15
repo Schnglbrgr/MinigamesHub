@@ -30,7 +30,7 @@ public class Rifle : AttackSystem, IPickable
 
     private void OnDisable()
     {
-        ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
+        ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     private void Update()

@@ -19,6 +19,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     [SerializeField] private PickRandomItemSO pickRandomBoss;
     [SerializeField] private GameObject arrow;
 
+    public GameObject[] teleports;
     public Transform bossSpawn;
     public GameObject warningMessage;
     public TMP_Text maxHealthShield;

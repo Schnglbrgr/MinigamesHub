@@ -2118,7 +2118,6 @@ GameObject:
   - component: {fileID: 7007622895281669736}
   - component: {fileID: 6509839172561494807}
   - component: {fileID: 2644479484148685921}
-  - component: {fileID: 1853451262022331226}
   - component: {fileID: 3048367002261006474}
   m_Layer: 0
   m_Name: Player
@@ -2165,7 +2164,7 @@ MonoBehaviour:
   collectWeapon: {fileID: 1949662826113436886}
   keysText: {fileID: 1410666924945186160}
   powerUps: {fileID: 7007622895281669736}
-  teleport: {fileID: 1853451262022331226}
+  teleport: {fileID: 0}
   keyInventory: 0
 --- !u!114 &8603658726021219839
 MonoBehaviour:
@@ -2324,32 +2323,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &1853451262022331226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2411342026925916160}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c0b066007ef04145af418059699cfb4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teleports:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  teleportText: {fileID: 7886372532739836715}
-  standingTime: 0
 --- !u!111 &3048367002261006474
 Animation:
   m_ObjectHideFlags: 0

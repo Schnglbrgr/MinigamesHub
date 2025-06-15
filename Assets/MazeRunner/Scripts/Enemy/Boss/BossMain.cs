@@ -7,6 +7,7 @@ public class BossMain : BossController
     [SerializeField] private GameObject enemyBullet;
 
     private GameObject player;
+    private GameObject bullet;
     private Vector2 direction;
     private float angle;
     private int pickRandomWay;
@@ -25,6 +26,8 @@ public class BossMain : BossController
         spawnRate = boss.spawnRate;
 
         fireRate = boss.fireRate;
+
+        timerAttack = 0f;
 
         timer = 0;
 
@@ -47,6 +50,11 @@ public class BossMain : BossController
     private void Start()
     {
         pickRandomWay = Random.Range(0, ways.Length);
+
+        healthText.text = $"{health} / {boss.health}";
+
+        healthBar.value = health / boss.health;
+
     }
 
     private void OnEnable()
@@ -70,6 +78,11 @@ public class BossMain : BossController
         transform.position = gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().bossSpawn.position;
 
         pickRandomWay = Random.Range(0, ways.Length);
+
+        healthText.text = $"{health} / {boss.health}";
+
+        healthBar.value = health / boss.health;
+
     }
 
     private void FixedUpdate()
@@ -84,9 +97,10 @@ public class BossMain : BossController
             timerSpawn -= Time.deltaTime;
         }
 
-        if (timer > 0)
+        if (timerAttack > 0)
         {
             timer -= Time.deltaTime;
+            timerAttack -= Time.deltaTime;
         }
 
         Attack();
@@ -122,9 +136,9 @@ public class BossMain : BossController
 
     private void Shoot()
     {
-        if (timer <= 0)
+        if (timerAttack <= 0)
         {
-            animationController.SetBool("isAttacking", true);
+            attackUI.SetActive(true);
             StartCoroutine(ShootBullet());
         }
     }
@@ -179,10 +193,22 @@ public class BossMain : BossController
 
     IEnumerator ShootBullet()
     {
-        yield return new WaitForSeconds(0.3f);
-        //gameManagerMazeRunner.GetComponent<PoolManager>().PoolInstance(enemyBullet);
-        //Instantiate(enemyBullet, shootPoint.position, gameObject.transform.rotation);
+        yield return new WaitForSeconds(1f);
+
+        attackUI.SetActive(false);
+
+        if (timer <= 0)
+        {
+            bullet = gameManagerMazeRunner.GetComponent<PoolManager>().PoolInstance(enemyBullet);
+
+            bullet.GetComponent<EnemyBullet>().speed = 5f;
+
+            bullet.transform.position = shootPoint.position;
+
+            bullet.transform.rotation = gameObject.transform.rotation;
+        }
+       
         timer = fireRate;
-        animationController.SetBool("isAttacking", false);
+        timerAttack = 3f;
     }
 }

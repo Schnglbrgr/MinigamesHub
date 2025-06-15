@@ -5,6 +5,8 @@ public class AttackEnemyLight : MonoBehaviour
     [SerializeField] private GameObject enemyBullet;
     [SerializeField] private Transform shootPoint;
 
+    private GameObject currentBullet;
+    private GameObject gameManagerMazeRunner;
     private GameObject player;
     private Vector3 targetRotation;
     private float angle;
@@ -15,6 +17,8 @@ public class AttackEnemyLight : MonoBehaviour
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController");
 
     }
 
@@ -53,9 +57,11 @@ public class AttackEnemyLight : MonoBehaviour
     {
         if (timer <= 0)
         {
-            Instantiate(enemyBullet, shootPoint.position, transform.rotation);
+            currentBullet = gameManagerMazeRunner.GetComponent<PoolManager>().PoolInstance(enemyBullet);
 
-            enemyBullet.GetComponent<EnemyBullet>().damage = damage;
+            currentBullet.transform.position = shootPoint.position;
+
+            currentBullet.GetComponent<EnemyBullet>().damage = damage;
 
             timer = fireRate;
         }

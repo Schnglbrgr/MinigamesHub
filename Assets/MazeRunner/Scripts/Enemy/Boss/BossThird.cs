@@ -1,8 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class BossThird : BossController
 {
     private GameObject player;
+    private GameObject weaponPlayer;
+    private Vector2 pushDirection;
+    private float pushForce;
 
     private void Awake()
     {
@@ -18,6 +22,8 @@ public class BossThird : BossController
 
         fireRate = boss.fireRate;
 
+        pushForce = 4f;
+
         timer = 0;
 
         timerSpawn = 0;
@@ -25,6 +31,10 @@ public class BossThird : BossController
         gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController");
 
         player = GameObject.FindGameObjectWithTag("Player");
+
+        healthBar.value = health / boss.health;
+
+        healthText.text = $"{health} / {boss.health}";
 
     }
 
@@ -47,6 +57,10 @@ public class BossThird : BossController
         timerSpawn = 0;
 
         transform.position = gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().bossSpawn.position;
+
+        healthBar.value = health / boss.health;
+
+        healthText.text = $"{health} / {boss.health}";
     }
 
     private void FixedUpdate()
@@ -66,7 +80,6 @@ public class BossThird : BossController
             timer -= Time.deltaTime;
         }
 
-        Attack();
     }
 
     public override void Movement()
@@ -78,6 +91,20 @@ public class BossThird : BossController
     {
         if (timer <= 0)
         {
+            Rigidbody2D rbPlayer = player.GetComponent<Rigidbody2D>();
+
+            if (player.GetComponent<CollectWeapon>().currentWeapon)
+            {
+                weaponPlayer = player.GetComponent<CollectWeapon>().currentWeapon;
+
+                weaponPlayer.GetComponent<RotateWeapon>().enabled = false;
+
+                weaponPlayer.GetComponent<AttackSystem>().enabled = false;
+            }
+
+            rbPlayer.AddForce(pushDirection * pushForce, ForceMode2D.Impulse);
+
+            StartCoroutine(StopAttack());
 
             timer = fireRate;
         }
@@ -126,6 +153,36 @@ public class BossThird : BossController
             damage *= 2;
 
             speed *= 2;
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
+
+        if (isDamageable != null)
+        {
+            isDamageable.TakeDamage(damage);
+
+            pushDirection = collision.transform.position - transform.position;
+
+            Attack();
+        }
+    }
+
+    IEnumerator StopAttack()
+    {
+        yield return new WaitForSeconds(3f);
+
+        player.GetComponent<PlayerController>().enabled = true;
+
+        if (player.GetComponent<CollectWeapon>().currentWeapon)
+        {
+            weaponPlayer = player.GetComponent<CollectWeapon>().currentWeapon;
+
+            weaponPlayer.GetComponent<RotateWeapon>().enabled = true;
+
+            weaponPlayer.GetComponent<AttackSystem>().enabled = true;
         }
     }
 }

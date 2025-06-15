@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    private float speed = 2f;
+    public float speed = 2f;
     public int damage;
 
     private void FixedUpdate()

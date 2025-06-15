@@ -1,72 +1,59 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class Teleport : MonoBehaviour
+public class Teleport : MonoBehaviour, IInteractive
 {
-
-    [SerializeField] private GameObject[] teleports;
     [SerializeField] private GameObject teleportText;
 
-    private CollectWeapon collectWeapon;
-    private GameObject currentPlayer;
-    private GameObject newPlayer;
-
     public float standingTime;
+    private bool canTeleport;
     private bool isStanding;
-    private float timer;
-    private float coolDown = 2f;
+
+    private GameManagerMazeRunner gameManagerMazeRunner;
+    private GameObject player;
 
     private void Awake()
     {
-        currentPlayer = gameObject;
+        gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>();
 
-        collectWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>();
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        canTeleport = true;
     }
 
     private void Update()
     {
-        if (timer > 0)
+
+        if (standingTime > 3)
         {
-            timer -= Time.deltaTime;
+            TeleportPlayer();
         }
     }
 
     public void TeleportPlayer()
     {
-        standingTime = 0f;
+        if (canTeleport)
+        {
+            standingTime = 0f;
 
-        timer = coolDown;
+            int selectTeleport = Random.Range(0, gameManagerMazeRunner.teleports.Length);
 
-        int selectTeleport = Random.Range(0, teleports.Length);
+            player.transform.position = gameManagerMazeRunner.teleports[selectTeleport].transform.position;
 
-        GetComponent<MovementSystem>().enabled = false;
+            StopCoroutine(CountDownTeleport());
 
-        newPlayer = Instantiate(currentPlayer, teleports[selectTeleport].transform.position, Quaternion.identity);
+            teleportText.SetActive(false);
 
-        collectWeapon.currentWeapon.transform.SetParent(newPlayer.transform);
+            canTeleport = false;
 
-        Destroy(currentPlayer);
-
-        StartCoroutine(TeleportWait());
-
-        StopCoroutine(CountDownTeleport());
-
-        teleportText.SetActive(false);
-
+            StartCoroutine(CanTeleport());
+        }
     }
 
-    IEnumerator TeleportWait()
+    public void StartInteraction()
     {
-        yield return new WaitForSeconds(0.5f);
-        GetComponent<MovementSystem>().enabled = true;
-        currentPlayer = newPlayer;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Teleport")
+        if (canTeleport)
         {
             isStanding = true;
 
@@ -78,21 +65,18 @@ public class Teleport : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    public void ExitInteraction()
     {
-        if (collision.gameObject.tag == "Teleport" && timer <= 0)
-        {
-            isStanding = false;
+        isStanding = false;
 
-            standingTime = 0f;
+        standingTime = 0f;
 
-            StopCoroutine(CountDownTeleport());
+        StopCoroutine(CountDownTeleport());
 
-            teleportText.SetActive(false);
+        teleportText.SetActive(false);
 
-            StopCoroutine(StandingTime());
+        StopCoroutine(StandingTime());
 
-        }
     }
 
     IEnumerator CountDownTeleport()
@@ -104,7 +88,12 @@ public class Teleport : MonoBehaviour
 
         yield return new WaitForSeconds(1);
         teleportText.GetComponentInChildren<TMP_Text>().text = "Teleporting: 3";
+    }
 
+    IEnumerator CanTeleport()
+    {
+        yield return new WaitForSeconds(5f);
+        canTeleport = true;
     }
 
     IEnumerator StandingTime()

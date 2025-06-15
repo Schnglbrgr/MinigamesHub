@@ -12,6 +12,7 @@ public abstract class BossController : MonoBehaviour, IDamageable
     public float spawnRate;
     public float timer;
     public float timerSpawn;
+    public float timerAttack;
     public BossMazeRunnerSO boss;
     public Transform spawnPoint;
     public Transform shootPoint;
@@ -20,6 +21,7 @@ public abstract class BossController : MonoBehaviour, IDamageable
     public Animator animationController;
     public Slider healthBar;
     public TMP_Text healthText;
+    public GameObject attackUI;
 
     public abstract void Movement();
 

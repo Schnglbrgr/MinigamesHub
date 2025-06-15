@@ -2,22 +2,16 @@ using UnityEngine;
 
 public class EnemyHigh : EnemyController
 {
-    [SerializeField] private EnemyMazeRunnerSO enemy;
     [SerializeField] private Transform[] patrolsPoints;
     [SerializeField] private AttackEnemyHigh attack;
 
-    private ManaSystem manaSystem;
     private Transform wayParent;
-    private float speed = 1f;
     private int randomNum;
-
-    private int currentHealth;
-    private int damage;
-    private int manaReward;
 
     private void Awake()
     {
         wayParent = GameObject.FindGameObjectWithTag("Ways").GetComponent<Transform>();
+
         manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
 
         for (int x = 0; x < patrolsPoints.Length; x++)
@@ -28,8 +22,16 @@ public class EnemyHigh : EnemyController
         randomNum = Random.Range(0, patrolsPoints.Length);
 
         currentHealth = enemy.health;
+
         damage = enemy.damage;
+
+        speed = enemy.speed;
+
         manaReward = enemy.mana;
+
+        hpBar.value = currentHealth / enemy.health;
+
+        hpText.text = $"{currentHealth} / {enemy.health}";
     }
 
     private void FixedUpdate()
@@ -60,7 +62,13 @@ public class EnemyHigh : EnemyController
     public override void TakeDamage(int damage)
     {
         currentHealth -= damage;
+
+        hpBar.value = currentHealth / enemy.health;
+
+        hpText.text = $"{currentHealth} / {enemy.health}";
+
         CheckHealth();
+
         GetComponent<Animation>().Play();
     }
 
@@ -72,6 +80,8 @@ public class EnemyHigh : EnemyController
             {
                 manaSystem.mana += manaReward;
             }
+
+            Instantiate(dropRandomItem.SelectRandomObject(), spawnItem.position, Quaternion.identity);
 
             gameObject.SetActive(false);
         }

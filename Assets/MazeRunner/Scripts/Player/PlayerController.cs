@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,19 +7,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CollectWeapon collectWeapon;
     [SerializeField] private TMP_Text keysText;
     [SerializeField] private PowerUps powerUps;
-    [SerializeField] private Teleport teleport;
-
-    private GameManagerMazeRunner gameManagerMazeRunner;
-    private Camera mainCamera;
 
     public int keyInventory;
 
-    private void Awake()
-    {
-        gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>();
-
-        mainCamera = transform.GetChild(2).gameObject.GetComponent<Camera>();
-    }
 
     private void Start()
     {
@@ -34,15 +23,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-
         if (Input.GetKey(KeyCode.F))
         {
             powerUps.PowerUpsScreen();
-        }
-
-        if (teleport.standingTime >= 3)
-        {
-            teleport.TeleportPlayer();
         }
 
     }
@@ -62,23 +45,26 @@ public class PlayerController : MonoBehaviour
     {
         IPickable isPickable = collision.gameObject.GetComponent<IPickable>();
 
+        IInteractive isInteractive = collision.gameObject.GetComponent<IInteractive>();
+
         if (isPickable != null)
         {
             isPickable.TakeItem();
         }
-
-        if (collision.gameObject.tag == "Door")
+        else if (isInteractive != null)
         {
-            gameManagerMazeRunner.StartBoss();
-
+            isInteractive.StartInteraction();
         }
+
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Door")
+        IInteractive isInteractive = collision.gameObject.GetComponent<IInteractive>();
+
+        if (isInteractive != null)
         {
-            gameManagerMazeRunner.warningMessage.SetActive(false);
+            isInteractive.ExitInteraction();
         }
     }
 

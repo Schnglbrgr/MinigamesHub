@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 300
   damage: 55
-  speed: 5
+  speed: 2.5
   manaReward: 70
   fireRate: 0.5
   spawnRate: 15
