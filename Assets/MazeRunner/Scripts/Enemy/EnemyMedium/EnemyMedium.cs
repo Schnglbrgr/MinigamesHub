@@ -52,7 +52,7 @@ public class EnemyMedium : EnemyController
 
         CheckHealth();
 
-        GetComponent<Animation>().Play();
+        animationController.SetBool("isHit", true);
     }
 
     public override void CheckHealth()
@@ -75,6 +75,15 @@ public class EnemyMedium : EnemyController
             enemy.PushItems(dropItem.GetComponent<Rigidbody2D>(), Vector2.down, 0.5f);
 
             enemy.PushItems(dropAmmo.GetComponent<Rigidbody2D>(), Vector2.up, 0.5f);
+
+            player.GetComponent<PlayerController>().killsInRow++;
+
+            if (player.GetComponent<PlayerController>().killsInRow >= 5)
+            {
+                currentElemental = Instantiate(pickElementalWeapon.SelectRandomObject(), spawnItem.position, Quaternion.identity);
+
+                player.GetComponent<PlayerController>().killsInRow = 0;
+            }
 
             gameObject.SetActive(false);
         }

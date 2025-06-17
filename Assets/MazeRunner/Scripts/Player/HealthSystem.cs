@@ -11,6 +11,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
     [SerializeField] private TMP_Text shieldText;
 
     private GameManagerMazeRunner gameManagerMazeRunner;
+
     public int currentHealth;
     public int currrentShield;
     public int maxShield = 50;
@@ -32,6 +33,7 @@ public class HealthSystem : MonoBehaviour, IDamageable
     private void Update()
     {
         CheckHealth();
+
     }
 
     public void TakeDamage(int damage)
@@ -47,27 +49,29 @@ public class HealthSystem : MonoBehaviour, IDamageable
             currrentShield = Mathf.Max(currrentShield - damage, 0);
         }
 
-        healthText.text = $"{currentHealth} / {maxHealth}";
-
-        shieldText.text = $"{currrentShield} / {maxShield}";
+        GetComponent<PlayerController>().killsInRow = 0;
     }
 
     private void CheckHealth()
     {
+
         healthBar.value = currentHealth / maxHealth;
 
         shieldBar.value = currrentShield / maxShield;
 
+        healthText.text = $"{currentHealth} / {maxHealth}";
+
+        shieldText.text = $"{currrentShield} / {maxShield}";
+
         if (currentHealth <= 0)
         {
-            gameManagerMazeRunner.Lose();
-            Destroy(gameObject);
+            gameManagerMazeRunner.Lose();            
         }
     }
 
-    public void AddShield()
+    public void AddShield(int shieldBonus)
     {
-        currrentShield += 10;
+        currrentShield += shieldBonus;
     }
 
     public void AddHealth(int healthBonus)

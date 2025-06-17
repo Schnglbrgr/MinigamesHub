@@ -20,7 +20,7 @@ public class ShieldPickUp : MonoBehaviour, IPickable
     {
         if (healthSystem.currrentShield < healthSystem.maxShield)
         {
-            healthSystem.AddShield();
+            healthSystem.AddShield(10);
             Destroy(gameObject);
         }
         else

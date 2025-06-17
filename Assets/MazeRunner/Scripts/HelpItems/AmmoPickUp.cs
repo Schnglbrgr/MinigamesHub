@@ -19,11 +19,8 @@ public class AmmoPickUp : MonoBehaviour, IPickable
 
     public void TakeItem()
     {
-        if (attackSystem.currentAmmo > 0)
-        {
-            attackSystem.currentAmmo = Mathf.Max(attackSystem.currentAmmo + ammoReward, attackSystem.maxAmmo);
+        attackSystem.currentAmmo += ammoReward;
 
-            poolManager.Return(player.GetComponent<CollectWeapon>().ammoPrefab, gameObject);
-        }
+        poolManager.Return(player.GetComponent<CollectWeapon>().ammoPrefab, gameObject);
     }
 }

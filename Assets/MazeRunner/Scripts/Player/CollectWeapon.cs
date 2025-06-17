@@ -4,8 +4,7 @@ using UnityEngine;
 public class CollectWeapon : MonoBehaviour
 {
     [SerializeField] private Transform gunPosition;
-    [SerializeField] private Transform currentWeaponInvPosition;
-    [SerializeField] private GameObject dropWeaponText;
+    [SerializeField] private Transform currentWeaponInvPosition;   
     [SerializeField] private Transform weaponsInMap;
     [SerializeField] private GameObject inventoryFull;
 
@@ -17,6 +16,7 @@ public class CollectWeapon : MonoBehaviour
     private GameObject currentWeaponInv;
     public GameObject bulletPrefab;
     public GameObject ammoPrefab;
+    public GameObject dropWeaponText;
 
     private void Awake()
     {
@@ -47,7 +47,14 @@ public class CollectWeapon : MonoBehaviour
 
             currentWeaponInv = Instantiate(grabWeapon, currentWeaponInvPosition.position, Quaternion.identity, player);
 
-            currentWeapon.GetComponent<AttackSystem>().ControlEnable(true);
+            if (currentWeapon.GetComponent<AttackSystem>() != null)
+            {
+                currentWeapon.GetComponent<AttackSystem>().ControlEnable(true);
+            }
+            else if (currentWeapon.GetComponent<ElementalWeaponController>() != null)
+            {
+                currentWeapon.GetComponent<ElementalWeaponController>().ControlEnable(true);
+            }
 
             dropWeaponText.SetActive(true);
 
@@ -62,13 +69,20 @@ public class CollectWeapon : MonoBehaviour
         }
     }
 
-    private void DropWeapon()
+    public void DropWeapon()
     {
         if (Input.GetMouseButton(1))
         {
             currentWeapon.transform.SetParent(weaponsInMap);
 
-            currentWeapon.GetComponent<AttackSystem>().ControlEnable(false);
+            if (currentWeapon.GetComponent<AttackSystem>() != null)
+            {
+                currentWeapon.GetComponent<AttackSystem>().ControlEnable(false);
+            }
+            else if (currentWeapon.GetComponent<ElementalWeaponController>() != null)
+            {
+                currentWeapon.GetComponent<ElementalWeaponController>().ControlEnable(false);
+            }
 
             currentWeapon = null;
 
@@ -76,9 +90,14 @@ public class CollectWeapon : MonoBehaviour
 
             timer = coolDown;
 
-            Destroy(currentWeaponInv);
+            DestroyWeaponInv();
 
         }
+    }
+
+    public void DestroyWeaponInv()
+    {
+        Destroy(currentWeaponInv);
     }
 
     IEnumerator StopWarning()

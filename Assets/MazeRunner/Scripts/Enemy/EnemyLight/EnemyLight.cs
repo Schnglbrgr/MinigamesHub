@@ -5,6 +5,7 @@ public class EnemyLight : EnemyController
     [SerializeField] private Transform[] patrolsPoints;
     [SerializeField] private AttackEnemyLight attack;
 
+    private GameObject player;
     private Transform wayParent;
     private int randomNum;
 
@@ -15,6 +16,8 @@ public class EnemyLight : EnemyController
         manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
 
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
 
         for (int x = 0; x < patrolsPoints.Length; x++)
         {
@@ -72,7 +75,7 @@ public class EnemyLight : EnemyController
 
         CheckHealth();
 
-        GetComponent<Animation>().Play();
+        animationController.SetBool("isHit", true);
 
     }
 
@@ -96,6 +99,15 @@ public class EnemyLight : EnemyController
             enemy.PushItems(dropItem.GetComponent<Rigidbody2D>(), Vector2.down, 0.5f);
 
             enemy.PushItems(dropAmmo.GetComponent<Rigidbody2D>(), Vector2.up, 0.5f);
+
+            player.GetComponent<PlayerController>().killsInRow++;
+
+            if (player.GetComponent<PlayerController>().killsInRow >= 5)
+            {
+                currentElemental = Instantiate(pickElementalWeapon.SelectRandomObject(), spawnItem.position, Quaternion.identity);
+
+                player.GetComponent<PlayerController>().killsInRow = 0;
+            }
 
             gameObject.SetActive(false);
         }
