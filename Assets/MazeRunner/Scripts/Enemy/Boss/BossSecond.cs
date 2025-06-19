@@ -164,7 +164,6 @@ public class BossSecond : BossController
         animationController.SetBool("isAttacking", false);
 
         timer = fireRate;
-
     }
 
     public IEnumerator MakeDamage(IDamageable isDamageable)

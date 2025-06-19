@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 5794428059277174778}
   - component: {fileID: 2061474428604678321}
   - component: {fileID: 4559369821865566998}
-  - component: {fileID: 408163222937065703}
+  - component: {fileID: 4425492638828263422}
   m_Layer: 0
   m_Name: EnemyMedium
   m_TagString: Enemy
@@ -602,6 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f578c2804557694d8981559d88d3210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pickElementalWeapon: {fileID: 11400000, guid: 1f9f61cb244c9fb49aea2ffa39e03870, type: 2}
   dropRandomItem: {fileID: 11400000, guid: 61926cc95407b07439e2ad3b86348082, type: 2}
   enemy: {fileID: 11400000, guid: 5a9d951fac3335743b4473f2bcd27812, type: 2}
   hpBar: {fileID: 5778934050751039289}
@@ -610,6 +611,10 @@ MonoBehaviour:
   manaSystem: {fileID: 0}
   dropAmmo: {fileID: 0}
   ammoPrefab: {fileID: 7211403548733091775, guid: c40a08e0fd1ae944fb9394ce0ab74d90, type: 3}
+  dropItem: {fileID: 0}
+  poolManager: {fileID: 0}
+  currentElemental: {fileID: 0}
+  animationController: {fileID: 4425492638828263422}
   currentHealth: 0
   damage: 0
   manaReward: 0
@@ -706,23 +711,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!111 &408163222937065703
-Animation:
+--- !u!95 &4425492638828263422
+Animator:
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5245605685648393930}
   m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: 24d4706f7676c494f9fc052f46154180, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 24d4706f7676c494f9fc052f46154180, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 70ea037cbd749464ba1254f93bb149c1, type: 2}
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_CullingType: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6865657497010257348
 GameObject:
   m_ObjectHideFlags: 0

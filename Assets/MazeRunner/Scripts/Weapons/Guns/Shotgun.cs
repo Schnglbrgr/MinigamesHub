@@ -27,7 +27,7 @@ public class Shotgun : AttackSystem, IPickable
 
         timer = 0f;
 
-        pushForce = 4f;
+        pushForce = 2f;
 
     }
     private void OnEnable()

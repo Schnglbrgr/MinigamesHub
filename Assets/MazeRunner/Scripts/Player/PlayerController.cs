@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private CollectWeapon collectWeapon;
     [SerializeField] private TMP_Text keysText;
     [SerializeField] private PowerUps powerUps;
+    [SerializeField] private TMP_Text killsInRowText;
 
     public int keyInventory;
-
+    public int killsInRow = 0;
 
     private void Start()
     {
@@ -18,6 +19,8 @@ public class PlayerController : MonoBehaviour
         keysText.text = $"{keyInventory} / 10";
 
         powerUps.ActivatePowerUps();
+
+        killsInRowText.text = $"KillStreak: {killsInRow}";
 
     }
 
@@ -28,6 +31,7 @@ public class PlayerController : MonoBehaviour
             powerUps.PowerUpsScreen();
         }
 
+        killsInRowText.text = $"KillStreak: {killsInRow}";
     }
 
     private void FixedUpdate()

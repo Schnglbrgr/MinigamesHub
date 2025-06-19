@@ -88,7 +88,7 @@ public class PowerUps : MonoBehaviour
 
     private void HealthPowerUp()
     {
-        if (currentMana >= healthCost && currentLevelHealth <= 2)
+        if (currentMana >= healthCost && currentLevelHealth <= 2 && healthSystem.currentHealth < 100)
         {
             manaSystem.mana = Mathf.Max(manaSystem.mana - healthCost, 0);
 
@@ -120,7 +120,7 @@ public class PowerUps : MonoBehaviour
 
             currentLevelShield++;
 
-            healthSystem.AddShield();
+            healthSystem.AddShield(50);
 
             shield.transform.GetChild(2).GetComponent<TMP_Text>().text = $"Level {currentLevelShield}";
         }

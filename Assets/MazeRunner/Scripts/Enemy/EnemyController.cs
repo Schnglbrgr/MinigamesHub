@@ -4,6 +4,7 @@ using TMPro;
 
 public abstract class EnemyController : MonoBehaviour, IDamageable
 {
+    public PickRandomItemSO pickElementalWeapon;
     public PickRandomItemSO dropRandomItem;
     public EnemyMazeRunnerSO enemy;
     public Slider hpBar;
@@ -14,6 +15,8 @@ public abstract class EnemyController : MonoBehaviour, IDamageable
     public GameObject ammoPrefab;
     public GameObject dropItem;
     public PoolManager poolManager;
+    public GameObject currentElemental;
+    public Animator animationController;
 
     public float currentHealth;
     public int damage;
