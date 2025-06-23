@@ -45,12 +45,6 @@ public class GameManagerTetris : MonoBehaviour
     private GameObject currentPrefab;
     public Transform[,] grid;
     public Vector2Int gridDimension = new Vector2Int(10, 20);
-    private AudioControllerTetris audioController;
-
-    private void Awake()
-    {
-        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerTetris>();
-    }
 
     private void Start()
     {
@@ -73,8 +67,6 @@ public class GameManagerTetris : MonoBehaviour
         PowerUps();
 
         isHolding = false;
-
-        holdPrefabText.text = "Hold Block: Q";
 
         Time.timeScale = 1f;
     }
@@ -116,8 +108,7 @@ public class GameManagerTetris : MonoBehaviour
         currentPrefab.GetComponent<PlayerTetris>().fallTime = fallTime;
 
         powerUpActive = false;
-
-        audioController.MakeSound(audioController.selectPiece);
+       
 
         if (!IsValidMove(currentPrefab.transform))
         {
@@ -290,7 +281,6 @@ public class GameManagerTetris : MonoBehaviour
         Destroy(currentPrefab);
         score = Mathf.Max(score - 50, 0);
         level = Mathf.Max(level--, 1);
-        audioController.MakeSound(audioController.loseHeart);
 
         SpawnNewBlock();
     }
@@ -301,7 +291,7 @@ public class GameManagerTetris : MonoBehaviour
         {
             level += 1;
             fallTime = Mathf.Max(fallTime -= 0.05f, 0);
-            audioController.MakeSound(audioController.levelUp);
+
             invertoryBomb = Mathf.Max(invertoryBomb++, 3);
             invertoryChangePiece = Mathf.Max(invertoryBomb++, 3);
             invertorySelectPiece = Mathf.Max(invertoryBomb++, 3);
@@ -399,6 +389,7 @@ public class GameManagerTetris : MonoBehaviour
     {
         ChangeColorButton(1, Color.green);
 
+
         Instantiate(prefabs[prefabNum], spawnPoint.position, Quaternion.identity);
 
         selectPrefab.SetActive(false);
@@ -475,8 +466,6 @@ public class GameManagerTetris : MonoBehaviour
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
 
         restart_Paused.onClick.AddListener(Start);
-
-        audioController.MakeSound(audioController.gameOver);
 
     }
 
