@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickRandomWeapon: {fileID: 11400000, guid: 61926cc95407b07439e2ad3b86348082, type: 2}
   pickRandomItem: {fileID: 11400000, guid: 1bd5ec1897bb7d048b31aa49718627a0, type: 2}
+  openChest: {fileID: 54737598813693914, guid: 557225c45930b414aa5fee7576cd3cd1, type: 3}
   weaponsSpawn: {fileID: 4582217664484595488}
   itemSpawn: {fileID: 5073629368943278490}
   holdText: {fileID: 6822364311363350078}

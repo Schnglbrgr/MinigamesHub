@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class AttackSystem : MonoBehaviour
 {
@@ -14,13 +15,14 @@ public abstract class AttackSystem : MonoBehaviour
     public WeaponsSO myWeapon;
     public GameObject currentBullet;
     public AudioControllerMazeRunner audioController;
+    public InputActionReference shoot;
 
     public int currentAmmo;
     public float timer;
     public int maxAmmo;
 
 
-    public abstract void Shoot();
+    public abstract void Shoot(InputAction.CallbackContext obj);
 
     public virtual void Rotation()
     {

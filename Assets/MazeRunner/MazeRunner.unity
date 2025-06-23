@@ -28771,6 +28771,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3354002644869243356, guid: 811362c74cca3a048b1537de26d14c2f, type: 3}
+      propertyPath: shoot
+      value: 
+      objectReference: {fileID: 4061798964826020863, guid: 557225c45930b414aa5fee7576cd3cd1, type: 3}
+    - target: {fileID: 3354002644869243356, guid: 811362c74cca3a048b1537de26d14c2f, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
@@ -51061,11 +51065,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 85611169934073427, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 210
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 85611169934073427, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -400
+      value: -16.35
       objectReference: {fileID: 0}
     - target: {fileID: 85611169934073427, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -51127,9 +51131,45 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5972491269502973096, guid: a5282d01985c2c944957c931644b11a0, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 153.9
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Id
+      value: d53219d7-cea6-44fa-95a5-5551f218b5bd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Name
+      value: Power Up
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Actions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Bindings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Actions.Array.data[0].m_Id
+      value: d06222e7-f779-43aa-acb1-faa7e5f6f804
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Bindings.Array.data[0].m_Id
+      value: 040086f2-e0f8-4202-b15f-da800946d5a6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Actions.Array.data[0].m_Name
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Actions.Array.data[0].m_Type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Bindings.Array.data[0].m_Action
+      value: New action
+      objectReference: {fileID: 0}
+    - target: {fileID: 6606333869234934035, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: powerUp.m_Actions.Array.data[0].m_ExpectedControlType
+      value: Button
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

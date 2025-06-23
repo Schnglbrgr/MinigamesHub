@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PowerUps : MonoBehaviour
@@ -49,7 +50,7 @@ public class PowerUps : MonoBehaviour
         currentMana = manaSystem.mana;
     }
 
-    public void PowerUpsScreen()
+    public void PowerUpsScreen(InputAction.CallbackContext obj)
     {
         powerUpsHUD.SetActive(true);
 

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shotgun : AttackSystem, IPickable
 {
@@ -35,11 +36,15 @@ public class Shotgun : AttackSystem, IPickable
     private void OnEnable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
+
+        shoot.action.started += Shoot;
     }
 
     private void OnDisable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
+
+        shoot.action.started -= Shoot;
     }
 
     private void Update()
@@ -62,10 +67,9 @@ public class Shotgun : AttackSystem, IPickable
 
         Rotation();
 
-        Shoot();
     }
 
-    public override void Shoot()
+    public override void Shoot(InputAction.CallbackContext obj)
     {
         if (Input.GetMouseButton(0) && timer <= 0 && currentAmmo > 0)
         {
