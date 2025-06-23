@@ -26,7 +26,7 @@ public class PowerUpSpeed : PowerUpController, IPickable
     public override void GivePowerUp()
     {
         movementSpacebattle.currentSpeed = speedBoost;
-        movementSpacebattle.StopBoost(timer);
+        movementSpacebattle.StopBoostTimer(timer);
         attackSpaceBattle.ReturnColor(timer);
         spaceBattleManager.poolManager.Return(GetComponent<MovementPowerUps>().prefab, gameObject);
     }
