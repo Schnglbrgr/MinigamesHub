@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TMP_Text killsInRowText;
 
     public int keyInventory;
+
     public int killsInRow = 0;
 
     private void Start()

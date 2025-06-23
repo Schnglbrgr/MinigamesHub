@@ -5,6 +5,16 @@ public class EnemyBullet : MonoBehaviour
     public float speed = 2f;
     public int damage;
 
+    private AudioControllerMazeRunner audioController;
+
+    private void Awake()
+    {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
+        audioController.MakeSound(audioController.shootEnemy);
+
+    }
+
     private void FixedUpdate()
     {
         transform.position += transform.up * speed * Time.deltaTime;

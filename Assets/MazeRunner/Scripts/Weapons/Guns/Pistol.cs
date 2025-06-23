@@ -6,6 +6,10 @@ public class Pistol : AttackSystem, IPickable
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
+        //audioController.MakeSound(audioController.collectWeapon);
+
         bullet.GetComponent<Bullet>().damage = myWeapon.damage;
 
         maxAmmo = myWeapon.maxAmmo;
@@ -61,6 +65,8 @@ public class Pistol : AttackSystem, IPickable
     {
         if (Input.GetMouseButton(0) && timer <= 0 && currentAmmo > 0)
         {
+            audioController.MakeSound(audioController.shootPlayer);
+
             timer = myWeapon.fireRate;
 
             currentAmmo--;
@@ -71,6 +77,7 @@ public class Pistol : AttackSystem, IPickable
 
             currentBullet.transform.rotation = gameObject.transform.rotation;
         }
+        
     }
 
     public void TakeItem()

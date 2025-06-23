@@ -13,6 +13,7 @@ public abstract class AttackSystem : MonoBehaviour
     public GameObject warningAmmo;
     public WeaponsSO myWeapon;
     public GameObject currentBullet;
+    public AudioControllerMazeRunner audioController;
 
     public int currentAmmo;
     public float timer;

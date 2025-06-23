@@ -9,6 +9,8 @@ public class Shotgun : AttackSystem, IPickable
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         bullet.GetComponent<Bullet>().damage = myWeapon.damage;
 
         maxAmmo = myWeapon.maxAmmo;
@@ -67,7 +69,10 @@ public class Shotgun : AttackSystem, IPickable
     {
         if (Input.GetMouseButton(0) && timer <= 0 && currentAmmo > 0)
         {
+            audioController.MakeSound(audioController.shootPlayer);
+
             timer = myWeapon.fireRate;
+
             currentAmmo--;
 
             currentBullet = poolManager.PoolInstance(bullet);
@@ -78,6 +83,7 @@ public class Shotgun : AttackSystem, IPickable
 
             Recoil();
         }
+
     }
 
     void Recoil()

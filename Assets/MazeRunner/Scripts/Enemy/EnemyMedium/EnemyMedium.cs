@@ -6,6 +6,8 @@ public class EnemyMedium : EnemyController
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         currentHealth = enemy.health;
 
         damage = enemy.damage;
@@ -53,6 +55,8 @@ public class EnemyMedium : EnemyController
         CheckHealth();
 
         animationController.SetBool("isHit", true);
+
+        audioController.MakeSound(audioController.getHit);
     }
 
     public override void CheckHealth()

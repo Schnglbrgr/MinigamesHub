@@ -17,6 +17,7 @@ public abstract class EnemyController : MonoBehaviour, IDamageable
     public PoolManager poolManager;
     public GameObject currentElemental;
     public Animator animationController;
+    public AudioControllerMazeRunner audioController;
 
     public float currentHealth;
     public int damage;
