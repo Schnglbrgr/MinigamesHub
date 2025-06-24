@@ -4,6 +4,7 @@ using TMPro;
 
 public abstract class EnemyController : MonoBehaviour, IDamageable
 {
+    [Header("----Components----")]
     public PickRandomItemSO pickElementalWeapon;
     public PickRandomItemSO dropRandomItem;
     public EnemyMazeRunnerSO enemy;
@@ -19,6 +20,7 @@ public abstract class EnemyController : MonoBehaviour, IDamageable
     public Animator animationController;
     public AudioControllerMazeRunner audioController;
 
+    [Header("----Variables----")]
     public float currentHealth;
     public int damage;
     public int manaReward;

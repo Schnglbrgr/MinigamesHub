@@ -18,7 +18,6 @@ public class CollectWeapon : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject ammoPrefab;
     public GameObject dropWeaponText;
-    public InputActionReference dropWeapon;
 
     private void Awake()
     {
@@ -34,10 +33,6 @@ public class CollectWeapon : MonoBehaviour
             timer -= Time.deltaTime;
         }
 
-        if (currentWeapon != null)
-        {
-            dropWeapon.action.started += DropWeapon;
-        }
     }
 
     public void TakeWeapon(GameObject grabWeapon)
@@ -70,9 +65,9 @@ public class CollectWeapon : MonoBehaviour
         }
     }
 
-    public void DropWeapon(InputAction.CallbackContext obj)
+    public void DropWeapon(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButton(1))
+        if (currentWeapon != null && context.performed)
         {
             currentWeapon.transform.SetParent(weaponsInMap);
 
@@ -87,12 +82,11 @@ public class CollectWeapon : MonoBehaviour
 
             currentWeapon = null;
 
-            dropWeaponText.SetActive(false);           
+            dropWeaponText.SetActive(false);
 
             timer = coolDown;
 
             DestroyWeaponInv();
-
         }
     }
 

@@ -133,6 +133,16 @@ public class GameManagerMazeRunner : MonoBehaviour
 
     }
 
+    public void Pause()
+    {
+        player.playerInput.SwitchCurrentActionMap("PauseGame");
+    }
+
+    public void ExitPause()
+    {
+        player.playerInput.SwitchCurrentActionMap("GamePlay");
+    }
+
     private void SpawnRandonEnemies()
     {
         for (int x = 0; x < enemySpawn.Length; x++)

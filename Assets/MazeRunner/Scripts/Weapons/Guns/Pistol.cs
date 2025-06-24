@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class Pistol : AttackSystem, IPickable
 {
+    public InputActionReference shoot;
 
     private void Awake()
     {
@@ -33,14 +34,11 @@ public class Pistol : AttackSystem, IPickable
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
 
-        shoot.action.started += Shoot;
     }
 
     private void OnDisable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
-
-        shoot.action.started -= Shoot;
     }
 
     private void Update()
@@ -65,9 +63,9 @@ public class Pistol : AttackSystem, IPickable
 
     }
 
-    public override void Shoot(InputAction.CallbackContext obj)
+    public override void Shoot(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButton(0) && timer <= 0 && currentAmmo > 0)
+        if (timer <= 0 && currentAmmo > 0)
         {
             audioController.MakeSound(audioController.shootPlayer);
 
@@ -80,8 +78,7 @@ public class Pistol : AttackSystem, IPickable
             currentBullet.transform.position = shootPoint.position;
 
             currentBullet.transform.rotation = gameObject.transform.rotation;
-        }
-        
+        }     
     }
 
     public void TakeItem()

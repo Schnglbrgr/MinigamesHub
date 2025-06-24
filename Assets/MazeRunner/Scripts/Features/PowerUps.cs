@@ -17,6 +17,7 @@ public class PowerUps : MonoBehaviour
     private MovementSystem movementSystem;
     private HealthSystem healthSystem;
     private AudioControllerMazeRunner audioController;
+    public PlayerInput playerInput;
 
     private float speedCost = 30f;
     private float healthCost = 50f;
@@ -54,6 +55,8 @@ public class PowerUps : MonoBehaviour
     {
         powerUpsHUD.SetActive(true);
 
+        playerInput.SwitchCurrentActionMap("PowerUpsScreen");
+
         Time.timeScale = 0f;
     }
 
@@ -64,8 +67,6 @@ public class PowerUps : MonoBehaviour
         health.onClick.AddListener(HealthPowerUp);
 
         shield.onClick.AddListener(ShieldPowerUp);
-
-        exit.onClick.AddListener(Exit);
     }
 
     private void SpeedPowerUp()
@@ -148,9 +149,11 @@ public class PowerUps : MonoBehaviour
         }
     }
 
-    private void Exit()
+    public void Exit(InputAction.CallbackContext obj)
     {
         powerUpsHUD.SetActive(false);
+
+        playerInput.SwitchCurrentActionMap("GamePlay");
 
         Time.timeScale = 1f;
     }

@@ -30,14 +30,11 @@ public class Rifle : AttackSystem, IPickable
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
 
-        shoot.action.started += Shoot;
     }
 
     private void OnDisable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
-
-        shoot.action.started -= Shoot;
     }
 
     private void Update()

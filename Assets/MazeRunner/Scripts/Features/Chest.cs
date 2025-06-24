@@ -2,50 +2,47 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class Chest : MonoBehaviour
 {
     public PickRandomItemSO pickRandomWeapon;
     public PickRandomItemSO pickRandomItem;
-    public InputActionReference openChest;
 
     [SerializeField] private Transform weaponsSpawn;
     [SerializeField] private Transform itemSpawn;
     [SerializeField] private GameObject holdText;
 
     private GameObject player;
-    private bool isHolding;
-    private bool chestIsUsed = false;
+    private bool chestIsUsed;
+    private bool inRange;
+
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        chestIsUsed = false;
     }
-
 
     private void Update()
     {
-        openChest.action.started += OpenChest;
+        CheckDistance();
     }
 
-    private void OpenChest(InputAction.CallbackContext obj)
-    {
-        CheckDistance();
-
-        if (isHolding && !chestIsUsed)
+    public void OpenChest(InputAction.CallbackContext context)
+    {       
+        if (!chestIsUsed && context.performed && inRange)
         {
             Instantiate(pickRandomWeapon.SelectRandomObject(), weaponsSpawn.position, Quaternion.identity);
             Instantiate(pickRandomItem.SelectRandomObject(), itemSpawn.position, Quaternion.identity);
             chestIsUsed = true;
         }
-        else if (isHolding && chestIsUsed && Input.GetKeyDown(KeyCode.E))
+        else if (chestIsUsed && context.performed && inRange)
         {
             holdText.GetComponentInChildren<TMP_Text>().text = "Chest is empty";
             holdText.GetComponentInChildren<TMP_Text>().color = Color.red;
-
             StartCoroutine(ReturnText());
         }
+
     }
 
     private void CheckDistance()
@@ -53,12 +50,12 @@ public class Chest : MonoBehaviour
         if (Vector2.Distance(gameObject.transform.position, player.transform.position) < 3f)
         {
             holdText.SetActive(true);
-            isHolding = true;
+            inRange = true;
         }
         else
         {
             holdText.SetActive(false);
-            isHolding = false;
+            inRange = false;
         }
     }
 

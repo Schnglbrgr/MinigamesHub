@@ -2166,7 +2166,6 @@ MonoBehaviour:
   keysText: {fileID: 1410666924945186160}
   powerUps: {fileID: 7007622895281669736}
   killsInRowText: {fileID: 2563488888836869426}
-  powerUpsScreen: {fileID: 530098555925914770, guid: 557225c45930b414aa5fee7576cd3cd1, type: 3}
   keyInventory: 0
   killsInRow: 0
 --- !u!114 &8603658726021219839
@@ -2223,7 +2222,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 1025772553122010153, guid: 45f4aacf973a5594c88389a2685640a9, type: 3}
   ammoPrefab: {fileID: 7211403548733091775, guid: c40a08e0fd1ae944fb9394ce0ab74d90, type: 3}
   dropWeaponText: {fileID: 2478925084306295475}
-  dropWeapon: {fileID: -2574417721509814583, guid: 557225c45930b414aa5fee7576cd3cd1, type: 3}
 --- !u!114 &7476028181195625484
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2257,6 +2255,7 @@ MonoBehaviour:
   exit: {fileID: 7302935920538504854}
   powerUpsHUD: {fileID: 4108374741814737165}
   warningMana: {fileID: 6741677579829471026}
+  playerInput: {fileID: 37550185748201968}
 --- !u!61 &6509839172561494807
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2360,7 +2359,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 557225c45930b414aa5fee7576cd3cd1, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -2371,7 +2370,183 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 94ba1c09-a50a-4fc4-b5ff-00d3bea59b3b
+    m_ActionName: 'GamePlay/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/DualSenseGamepadHID/leftStick/up,/DualSenseGamepadHID/leftStick/down,/DualSenseGamepadHID/leftStick/left,/DualSenseGamepadHID/leftStick/right]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3354002644869243356, guid: 811362c74cca3a048b1537de26d14c2f, type: 3}
+        m_TargetAssemblyTypeName: Pistol, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -4035690455610813105, guid: e8d43e1cd3d7d0f4bb8a0adca9d579b6, type: 3}
+        m_TargetAssemblyTypeName: Rifle, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -7130432850678675377, guid: d5ae07ee3ed891348ac4074b30db2536, type: 3}
+        m_TargetAssemblyTypeName: Shotgun, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: -8226568181152297976, guid: 32df7502b85144a4a922ad0ff3faf0e5, type: 3}
+        m_TargetAssemblyTypeName: Smg, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2851947952222222118, guid: ca3d4e4b4bfcf0941bae5987746089b2, type: 3}
+        m_TargetAssemblyTypeName: ElectricityWeapon, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5467817522802047206, guid: bc1b5f60875641c44bb4a20c02e83e82, type: 3}
+        m_TargetAssemblyTypeName: FireWeapon, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3296577986344912094, guid: 2d59b48eff95b304792c5cd520d506e1, type: 3}
+        m_TargetAssemblyTypeName: IceWeapon, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 8727206270447631201, guid: 313e5a992b256e54b8f1ce42f271a537, type: 3}
+        m_TargetAssemblyTypeName: VoidWeapon, Assembly-CSharp
+        m_MethodName: Attack
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5bbb06e1-5d36-4c77-8354-6381a86649d4
+    m_ActionName: 'GamePlay/Shoot[/Mouse/leftButton,/DualSenseGamepadHID/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1949662826113436886}
+        m_TargetAssemblyTypeName: CollectWeapon, Assembly-CSharp
+        m_MethodName: DropWeapon
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e8c8e2a9-6e44-41f4-85a9-b34a73fd3773
+    m_ActionName: 'GamePlay/DropWeapon[/Mouse/rightButton,/DualSenseGamepadHID/buttonEast]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7007622895281669736}
+        m_TargetAssemblyTypeName: PowerUps, Assembly-CSharp
+        m_MethodName: PowerUpsScreen
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 49667ce0-9ba5-496d-8093-5032bd59fea5
+    m_ActionName: 'GamePlay/PowerUps[/Keyboard/f,/DualSenseGamepadHID/buttonNorth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9658dbd6-c361-45c4-a79c-fb0d39a47fb4
+    m_ActionName: 'GamePlay/OpenChest[/Keyboard/e,/DualSenseGamepadHID/buttonWest]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e9ec2698-89b2-46fd-9fa2-6272f37348a7
+    m_ActionName: GamePlay/RotateWeapon
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c5fa0778-ce88-45e4-8888-cf09e6e8d762
+    m_ActionName: 'GamePlay/PausedGame[/Keyboard/escape,/DualSenseGamepadHID/start]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 0d16d8e0-620b-4fe8-89a7-9fa30dc3c7d7
+    m_ActionName: 'PowerUpsScreen/SelectPowerUP[/DualSenseGamepadHID/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7007622895281669736}
+        m_TargetAssemblyTypeName: PowerUps, Assembly-CSharp
+        m_MethodName: Exit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: c76b06e6-b163-4c92-9818-1d6ad41281bb
+    m_ActionName: 'PowerUpsScreen/CloseScreen[/DualSenseGamepadHID/buttonEast,/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c34d8232-6ab7-4fcd-8ba9-6600ede891d6
+    m_ActionName: 'PauseGame/Select[/DualSenseGamepadHID/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 7e4c1065-9fcf-484f-aba9-527907c637f1
+    m_ActionName: 'PauseGame/Exit[/Keyboard/escape,/DualSenseGamepadHID/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: GamePlay
