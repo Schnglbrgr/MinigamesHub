@@ -1,12 +1,13 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GameManagerTetris : MonoBehaviour
 {
-    [Header ("----Components----")]
-
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private TMP_Text lose_PausedText;
@@ -26,13 +27,6 @@ public class GameManagerTetris : MonoBehaviour
     [SerializeField] private TMP_Text slowCamText;
     [SerializeField] private Transform holdPrefabSpawn;
     [SerializeField] private TMP_Text holdPrefabText;
-    public GameObject nextPrefab;
-    private GameObject holdPrefab;
-    private GameObject currentPrefab;
-    public Transform[,] grid;
-    private AudioControllerTetris audioController;
-
-    [Header("----Variables----")]
 
     public int score;
     private int level;
@@ -45,12 +39,12 @@ public class GameManagerTetris : MonoBehaviour
     private float invertorySlowMotion = 1f;
     public bool powerUpActive;
     private bool isHolding;
-    public Vector2Int gridDimension = new Vector2Int(10, 20);
 
-    private void Awake()
-    {
-        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerTetris>();
-    }
+    public GameObject nextPrefab;
+    private GameObject holdPrefab;
+    private GameObject currentPrefab;
+    public Transform[,] grid;
+    public Vector2Int gridDimension = new Vector2Int(10, 20);
 
     private void Start()
     {
@@ -73,8 +67,6 @@ public class GameManagerTetris : MonoBehaviour
         PowerUps();
 
         isHolding = false;
-
-        holdPrefabText.text = "Hold Block: Q";
 
         Time.timeScale = 1f;
     }
@@ -100,6 +92,9 @@ public class GameManagerTetris : MonoBehaviour
                 ChangeColorButton(x, Color.green);
             }
         }
+
+
+
         HoldPrefab();
 
     }
@@ -119,8 +114,6 @@ public class GameManagerTetris : MonoBehaviour
         {
             LoseHearts();
         }
-
-        audioController.MakeSound(audioController.selectPiece);
     }
 
     public void NextPrefab()
@@ -267,8 +260,6 @@ public class GameManagerTetris : MonoBehaviour
     {
         heartsCount--;
 
-        audioController.MakeSound(audioController.loseHeart);
-
         for (int y = 0; y < gridDimension.y; y++)
         {
             for (int x = 0; x < gridDimension.x; x++)
@@ -305,8 +296,6 @@ public class GameManagerTetris : MonoBehaviour
             invertoryChangePiece = Mathf.Max(invertoryBomb++, 3);
             invertorySelectPiece = Mathf.Max(invertoryBomb++, 3);
             invertorySlowMotion = Mathf.Max(invertoryBomb++, 3);
-
-            audioController.MakeSound(audioController.levelUp);
         }
 
     }
@@ -475,8 +464,6 @@ public class GameManagerTetris : MonoBehaviour
         lose_PausedText.text = "You Lost";
 
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
-
-        audioController.MakeSound(audioController.gameOver);
 
         restart_Paused.onClick.AddListener(Start);
 
