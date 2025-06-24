@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class AttackSpaceBattle : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class AttackSpaceBattle : MonoBehaviour
     public GameObject bullet;
     public PoolManagerSO bulletPool;
     private GameObject currentBullet;
+    public InputActionReference shoot;
 
     private float fireRate = 0.5f;
     public float currentFireRate;
@@ -24,9 +26,19 @@ public class AttackSpaceBattle : MonoBehaviour
         currentColor = GetComponent<SpriteRenderer>().color;
     }
 
-    public void Attack()
+    private void OnEnable()
     {
-        if (timer <= 0 && Input.GetMouseButton(0))
+        shoot.action.started += Attack;
+    }
+
+    private void OnDisable()
+    {
+        shoot.action.started -= Attack;
+    }
+
+    public void Attack(InputAction.CallbackContext obj)
+    {
+        if (timer <= 0)
         {
             currentBullet = bulletPool.CreateObject(bullet);
             timer = currentFireRate;
@@ -39,9 +51,6 @@ public class AttackSpaceBattle : MonoBehaviour
         {
             timer -= Time.deltaTime;
         }
-
-        Attack();
-
     }
 
     public void StopDamage(float timer)

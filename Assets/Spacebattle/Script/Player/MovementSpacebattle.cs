@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementSpacebattle : MonoBehaviour
 {
@@ -9,57 +10,34 @@ public class MovementSpacebattle : MonoBehaviour
 
     private SpaceBattleManager spaceBattleManager;
 
+    public InputActionReference movement;
+
+    private Vector2 direction;
+
+    private Rigidbody2D rb;
+
     private void Awake()
     {
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
 
         currentSpeed = speed;
+
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
     {
-        Movement();
+        direction = movement.action.ReadValue<Vector2>();
+
+        MovePlayer();
     }
 
-    public void Movement()
+    void MovePlayer()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            MovePlayer(Vector3.up);
-        }
-        else if (Input.GetKey(KeyCode.S))
-        {
-            MovePlayer(Vector3.down);
-
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            MovePlayer(Vector3.left);
-
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            MovePlayer(Vector3.right);
-        }
+        rb.linearVelocity = new Vector2(direction.x * speed, direction.y * speed);
     }
 
-    void MovePlayer(Vector3 direction)
-    {
-        transform.position += direction * currentSpeed * Time.deltaTime;
-
-        if (!spaceBattleManager.InsideMap(transform))
-        {
-            transform.position -= direction;
-        }
-
-    }
-
-    public void StopBoost(float timer)
-    {
-        StartCoroutine(StopBoostTimer(timer));
-    }
-
-    IEnumerator StopBoostTimer(float timer)
+    public IEnumerator StopBoostTimer(float timer)
     {
         yield return new WaitForSeconds(timer);
         currentSpeed = speed;
