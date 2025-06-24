@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,7 +10,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PowerUps powerUps;
     [SerializeField] private TMP_Text killsInRowText;
 
+    public InputActionReference powerUpsScreen;
+
     public int keyInventory;
+
     public int killsInRow = 0;
 
     private void Start()
@@ -26,10 +30,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.F))
-        {
-            powerUps.PowerUpsScreen();
-        }
+        powerUpsScreen.action.started += powerUps.PowerUpsScreen;
 
         killsInRowText.text = $"KillStreak: {killsInRow}";
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class PowerUps : MonoBehaviour
@@ -15,6 +16,7 @@ public class PowerUps : MonoBehaviour
     private ManaSystem manaSystem;
     private MovementSystem movementSystem;
     private HealthSystem healthSystem;
+    private AudioControllerMazeRunner audioController;
 
     private float speedCost = 30f;
     private float healthCost = 50f;
@@ -28,6 +30,8 @@ public class PowerUps : MonoBehaviour
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         manaSystem = GetComponent<ManaSystem>();
 
         movementSystem = GetComponent<MovementSystem>();
@@ -46,7 +50,7 @@ public class PowerUps : MonoBehaviour
         currentMana = manaSystem.mana;
     }
 
-    public void PowerUpsScreen()
+    public void PowerUpsScreen(InputAction.CallbackContext obj)
     {
         powerUpsHUD.SetActive(true);
 
@@ -70,6 +74,8 @@ public class PowerUps : MonoBehaviour
         {
             manaSystem.mana = Mathf.Max(manaSystem.mana - speedCost, 0);
 
+            audioController.MakeSound(audioController.levelUp);
+
             currentLevelSpeed++;
 
             movementSystem.speed += 0.5f;
@@ -91,6 +97,8 @@ public class PowerUps : MonoBehaviour
         if (currentMana >= healthCost && currentLevelHealth <= 2 && healthSystem.currentHealth < 100)
         {
             manaSystem.mana = Mathf.Max(manaSystem.mana - healthCost, 0);
+
+            audioController.MakeSound(audioController.levelUp);
 
             currentLevelHealth++;
 
@@ -117,6 +125,8 @@ public class PowerUps : MonoBehaviour
         if (currentMana >= shieldCost && currentLevelShield <= 3 && healthSystem.currrentShield < healthSystem.maxShield)
         {
             manaSystem.mana = Mathf.Max(manaSystem.mana - shieldCost, 0);
+
+            audioController.MakeSound(audioController.levelUp);
 
             currentLevelShield++;
 

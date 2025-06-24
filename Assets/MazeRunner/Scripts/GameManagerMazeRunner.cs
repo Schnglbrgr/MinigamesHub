@@ -26,11 +26,15 @@ public class GameManagerMazeRunner : MonoBehaviour
     public GameObject currentBoss;
     public PlayerController player;
     private Animation openDoor;
+    private AudioControllerMazeRunner audioController;
 
     public int deathBoss;
+    public bool bossActive = false;
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         for (int x = 0; x < weapons.Length; x++)
         {
             weapons[x].GetComponent<AttackSystem>().ammoHUD = GameObject.FindGameObjectWithTag("Ammo");
@@ -63,19 +67,31 @@ public class GameManagerMazeRunner : MonoBehaviour
         {
             openDoor.Play();
 
+            bossActive = true;
+
             arrow.SetActive(true);
 
-            currentBoss = pickRandomBoss.SelectRandomObject();
-
-            GetComponent<PoolManager>().PoolInstance(currentBoss);
+            Invoke("SpawnBoss", 30);
 
             player.keyInventory = 0;
+
+            audioController.musicSound.clip = audioController.finalBoss;
+
+            audioController.musicSound.Play();
 
         }
         else if (player.keyInventory < 10)
         {
             warningMessage.SetActive(true);
         }
+
+    }
+
+    private void SpawnBoss()
+    {
+        currentBoss = pickRandomBoss.SelectRandomObject();
+
+        GetComponent<PoolManager>().PoolInstance(currentBoss);
 
     }
 
@@ -88,6 +104,8 @@ public class GameManagerMazeRunner : MonoBehaviour
             win_loseText.text = "You Win!";
 
             win_loseText.color = Color.green;
+
+            audioController.MakeSound(audioController.win);
 
             restart.onClick.AddListener(Restart);
 
@@ -108,6 +126,8 @@ public class GameManagerMazeRunner : MonoBehaviour
         win_loseText.text = "You Lose!";
 
         win_loseText.color = Color.red;
+
+        audioController.MakeSound(audioController.gameOver);
 
         Time.timeScale = 0f;
 

@@ -11,6 +11,8 @@ public class EnemyHigh : EnemyController
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         wayParent = GameObject.FindGameObjectWithTag("Ways").GetComponent<Transform>();
 
         manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
@@ -75,6 +77,8 @@ public class EnemyHigh : EnemyController
         CheckHealth();
 
         animationController.SetBool("isHit", true);
+
+        audioController.MakeSound(audioController.getHit);
     }
 
     public override void CheckHealth()

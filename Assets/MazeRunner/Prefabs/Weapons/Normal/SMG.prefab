@@ -608,6 +608,8 @@ MonoBehaviour:
   warningAmmo: {fileID: 0}
   myWeapon: {fileID: 11400000, guid: e6fad4e7bacd1064e886623147f77f04, type: 2}
   currentBullet: {fileID: 0}
+  audioController: {fileID: 0}
+  shoot: {fileID: 4061798964826020863, guid: 557225c45930b414aa5fee7576cd3cd1, type: 3}
   currentAmmo: 0
   timer: 0
   maxAmmo: 0

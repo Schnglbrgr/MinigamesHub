@@ -6,10 +6,13 @@ public class ManaPickUp : MonoBehaviour, IPickable
 {
     private ManaSystem manaSystem;
     private TMP_Text warningText;
+    private AudioControllerMazeRunner audioController;
 
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         manaSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<ManaSystem>();
 
         warningText = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>().maxHealthShield;
@@ -21,6 +24,7 @@ public class ManaPickUp : MonoBehaviour, IPickable
         if (manaSystem.mana < 100)
         {
             manaSystem.mana += 10;
+            audioController.MakeSound(audioController.collectWeapon);
             Destroy(gameObject);
         }
         else

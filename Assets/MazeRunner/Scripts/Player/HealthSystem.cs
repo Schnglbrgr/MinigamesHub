@@ -11,19 +11,26 @@ public class HealthSystem : MonoBehaviour, IDamageable
     [SerializeField] private TMP_Text shieldText;
 
     private GameManagerMazeRunner gameManagerMazeRunner;
+    private AudioControllerMazeRunner audioController;
 
-    public int currentHealth;
+    public float currentHealth;
     public int currrentShield;
     public int maxShield = 50;
     public int maxHealth = 100;
+    private bool startHealing;
 
     private void Awake()
     {
+
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         gameManagerMazeRunner = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>();
 
         currentHealth = maxHealth;
 
         currrentShield = maxShield;
+
+        startHealing = false;
 
         healthText.text = $"{currentHealth} / {maxHealth}";
 
@@ -33,12 +40,13 @@ public class HealthSystem : MonoBehaviour, IDamageable
     private void Update()
     {
         CheckHealth();
-
     }
 
     public void TakeDamage(int damage)
     {
         GetComponent<Animation>().Play();
+
+        audioController.MakeSound(audioController.getHit);
 
         if (currrentShield <= 0)
         {
@@ -50,6 +58,13 @@ public class HealthSystem : MonoBehaviour, IDamageable
         }
 
         GetComponent<PlayerController>().killsInRow = 0;
+
+        if (gameManagerMazeRunner.bossActive)
+        {
+            startHealing = false;
+
+            StopCoroutine(ReciveHealth());
+        }
     }
 
     private void CheckHealth()
@@ -67,16 +82,36 @@ public class HealthSystem : MonoBehaviour, IDamageable
         {
             gameManagerMazeRunner.Lose();            
         }
+        else if (gameManagerMazeRunner.bossActive)
+        {
+            StartCoroutine(ReciveHealth());
+        }
+    }
+
+    private IEnumerator ReciveHealth()
+    {
+        while (startHealing)
+        {
+            if (currentHealth < 100)
+            {
+                currentHealth += Time.deltaTime;
+                yield return null;
+            }
+            yield return null;
+        }
     }
 
     public void AddShield(int shieldBonus)
     {
         currrentShield += shieldBonus;
+        audioController.MakeSound(audioController.getHealed);
     }
 
     public void AddHealth(int healthBonus)
     {
         currentHealth += healthBonus;
+
+        audioController.MakeSound(audioController.getHealed);
     }
    
 }

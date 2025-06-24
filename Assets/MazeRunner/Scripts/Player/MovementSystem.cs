@@ -1,12 +1,12 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class MovementSystem : MonoBehaviour
 {
     private Vector2 direction;
     private Rigidbody2D rb;
+    public InputActionReference movement;
 
-    private float movementX;
-    private float movementY;
     public float speed = 3f;
 
     private void Awake()
@@ -14,13 +14,9 @@ public class MovementSystem : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-
     public void Movement()
     {
-        movementX = Input.GetAxis("Horizontal");
-        movementY = Input.GetAxis("Vertical");
-
-        direction = new Vector2(movementX,movementY);
+        direction = movement.action.ReadValue<Vector2>();
 
         rb.AddForce(direction * speed);
 

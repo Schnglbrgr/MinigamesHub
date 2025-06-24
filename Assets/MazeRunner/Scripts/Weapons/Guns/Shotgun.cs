@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shotgun : AttackSystem, IPickable
 {
@@ -9,6 +10,8 @@ public class Shotgun : AttackSystem, IPickable
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         bullet.GetComponent<Bullet>().damage = myWeapon.damage;
 
         maxAmmo = myWeapon.maxAmmo;
@@ -33,11 +36,15 @@ public class Shotgun : AttackSystem, IPickable
     private void OnEnable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
+
+        shoot.action.started += Shoot;
     }
 
     private void OnDisable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
+
+        shoot.action.started -= Shoot;
     }
 
     private void Update()
@@ -60,14 +67,16 @@ public class Shotgun : AttackSystem, IPickable
 
         Rotation();
 
-        Shoot();
     }
 
-    public override void Shoot()
+    public override void Shoot(InputAction.CallbackContext obj)
     {
         if (Input.GetMouseButton(0) && timer <= 0 && currentAmmo > 0)
         {
+            audioController.MakeSound(audioController.shootPlayer);
+
             timer = myWeapon.fireRate;
+
             currentAmmo--;
 
             currentBullet = poolManager.PoolInstance(bullet);
@@ -78,6 +87,7 @@ public class Shotgun : AttackSystem, IPickable
 
             Recoil();
         }
+
     }
 
     void Recoil()

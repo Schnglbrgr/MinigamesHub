@@ -1,12 +1,14 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Chest : MonoBehaviour
 {
     public PickRandomItemSO pickRandomWeapon;
     public PickRandomItemSO pickRandomItem;
+    public InputActionReference openChest;
 
     [SerializeField] private Transform weaponsSpawn;
     [SerializeField] private Transform itemSpawn;
@@ -21,18 +23,21 @@ public class Chest : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
+
     private void Update()
+    {
+        openChest.action.started += OpenChest;
+    }
+
+    private void OpenChest(InputAction.CallbackContext obj)
     {
         CheckDistance();
 
         if (isHolding && !chestIsUsed)
         {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                Instantiate(pickRandomWeapon.SelectRandomObject(), weaponsSpawn.position, Quaternion.identity);
-                Instantiate(pickRandomItem.SelectRandomObject(),itemSpawn.position,Quaternion.identity);
-                chestIsUsed = true;
-            }
+            Instantiate(pickRandomWeapon.SelectRandomObject(), weaponsSpawn.position, Quaternion.identity);
+            Instantiate(pickRandomItem.SelectRandomObject(), itemSpawn.position, Quaternion.identity);
+            chestIsUsed = true;
         }
         else if (isHolding && chestIsUsed && Input.GetKeyDown(KeyCode.E))
         {

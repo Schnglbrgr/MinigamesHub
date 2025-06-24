@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CollectWeapon : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class CollectWeapon : MonoBehaviour
     public GameObject bulletPrefab;
     public GameObject ammoPrefab;
     public GameObject dropWeaponText;
+    public InputActionReference dropWeapon;
 
     private void Awake()
     {
@@ -34,9 +36,8 @@ public class CollectWeapon : MonoBehaviour
 
         if (currentWeapon != null)
         {
-            DropWeapon();
+            dropWeapon.action.started += DropWeapon;
         }
-
     }
 
     public void TakeWeapon(GameObject grabWeapon)
@@ -69,7 +70,7 @@ public class CollectWeapon : MonoBehaviour
         }
     }
 
-    public void DropWeapon()
+    public void DropWeapon(InputAction.CallbackContext obj)
     {
         if (Input.GetMouseButton(1))
         {

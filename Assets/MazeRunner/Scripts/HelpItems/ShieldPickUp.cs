@@ -6,10 +6,12 @@ public class ShieldPickUp : MonoBehaviour, IPickable
 {
     private HealthSystem healthSystem;
     private TMP_Text warningText;
-
+    private AudioControllerMazeRunner audioController;
 
     private void Awake()
     {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
         healthSystem = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSystem>();
 
         warningText = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerMazeRunner>().maxHealthShield;
@@ -21,6 +23,9 @@ public class ShieldPickUp : MonoBehaviour, IPickable
         if (healthSystem.currrentShield < healthSystem.maxShield)
         {
             healthSystem.AddShield(10);
+
+            audioController.MakeSound(audioController.collectWeapon);
+
             Destroy(gameObject);
         }
         else
