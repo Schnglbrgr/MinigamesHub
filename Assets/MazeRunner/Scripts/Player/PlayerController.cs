@@ -9,8 +9,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TMP_Text keysText;
     [SerializeField] private PowerUps powerUps;
     [SerializeField] private TMP_Text killsInRowText;
-
-    public InputActionReference powerUpsScreen;
+    public PlayerInput playerInput;
 
     public int keyInventory;
 
@@ -30,8 +29,6 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        powerUpsScreen.action.started += powerUps.PowerUpsScreen;
-
         killsInRowText.text = $"KillStreak: {killsInRow}";
     }
 
@@ -44,7 +41,6 @@ public class PlayerController : MonoBehaviour
     {
         keysText.text = $"{keyInventory} / 10";
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

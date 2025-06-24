@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public abstract class AttackSystem : MonoBehaviour
 {
+    [Header ("----Components----")]
     public RotateWeapon rotateWeapon;
     public CollectWeapon collectWeapon; 
     public GameObject bullet;
@@ -15,8 +16,8 @@ public abstract class AttackSystem : MonoBehaviour
     public WeaponsSO myWeapon;
     public GameObject currentBullet;
     public AudioControllerMazeRunner audioController;
-    public InputActionReference shoot;
 
+    [Header("----Variables----")]
     public int currentAmmo;
     public float timer;
     public int maxAmmo;

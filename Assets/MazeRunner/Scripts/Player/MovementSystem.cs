@@ -12,6 +12,7 @@ public class MovementSystem : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     public void Movement()
@@ -19,7 +20,6 @@ public class MovementSystem : MonoBehaviour
         direction = movement.action.ReadValue<Vector2>();
 
         rb.AddForce(direction * speed);
-
     }
 
     
