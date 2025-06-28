@@ -6,9 +6,6 @@ TagManager:
   tags:
   - Wall
   - Floor
-  - Enemy
-  - Boss
-  - AudioController
   layers:
   - Default
   - TransparentFX
