@@ -2,15 +2,14 @@ using UnityEngine;
 
 public class PowerUpFireRate : PowerUpController, IPickable
 {
-    private AttackSpaceBattle attackSpaceBattle;
-    private SpaceBattleManager spaceBattleManager;
+
     private float timer = 3f;
 
     private void Awake()
     {
         attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
-
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
     }
 
     public override void GivePowerUp()
@@ -24,6 +23,7 @@ public class PowerUpFireRate : PowerUpController, IPickable
     public void PickItem()
     {
         GivePowerUp();
+        audioController.MakeSound(audioController.pickPowerUp);
     }
 
 }

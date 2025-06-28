@@ -3,15 +3,13 @@ using UnityEngine;
 public class PowerUpHealth : PowerUpController, IPickable
 {
     private HealthSpaceBattle healthSpaceBattle;
-    private AttackSpaceBattle attackSpaceBattle;
-    private SpaceBattleManager spaceBattleManager;
 
     private void Awake()
     {
         healthSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthSpaceBattle>();
         attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
-
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
     }
 
     public override void GivePowerUp()
@@ -27,5 +25,6 @@ public class PowerUpHealth : PowerUpController, IPickable
     public void PickItem()
     {
         GivePowerUp();
+        audioController.MakeSound(audioController.pickPowerUp);
     }
 }

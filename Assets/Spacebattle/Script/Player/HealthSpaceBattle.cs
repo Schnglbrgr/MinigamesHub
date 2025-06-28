@@ -7,6 +7,8 @@ public class HealthSpaceBattle : MonoBehaviour, IDamageable
     [SerializeField] private Slider hpBar;
 
     private TMP_Text hpText;
+    private AudioControllerSpaceBattle audioController;
+
     private int health = 100;
     public int currentHealth;
 
@@ -15,6 +17,8 @@ public class HealthSpaceBattle : MonoBehaviour, IDamageable
         currentHealth = health;
 
         hpText = hpBar.GetComponentInChildren<TMP_Text>();
+
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
     }
 
     private void OnDisable()
@@ -44,5 +48,7 @@ public class HealthSpaceBattle : MonoBehaviour, IDamageable
         CheckHealth();
 
         GetComponent<Animation>().Play();
+
+        audioController.MakeSound(audioController.getHit);
     }
 }

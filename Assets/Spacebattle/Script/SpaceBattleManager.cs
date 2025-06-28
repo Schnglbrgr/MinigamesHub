@@ -1,30 +1,34 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class SpaceBattleManager : MonoBehaviour
 {
+    [Header ("----Components----")]
     [SerializeField] private GameObject player;
     [SerializeField] private TMP_Text scoreText;
     [SerializeField] private GameObject lose_PausedHUD;
     [SerializeField] private TMP_Text lose_PausedText;
     [SerializeField] private Button restart_Paused;
-    [SerializeField] private TMP_Text timerText;
     [SerializeField] private WeightedPickerSO pickRandomEnemy;
     [SerializeField] private WeightedPickerSO pickRandomPowerUp;
 
     public PoolManagerSO poolManager;
-
-    private Vector2Int map = new Vector2Int(10,20);
-    public Vector3 randomSpawnPosition;
+    public GameObject bossEnemy;
+    public GameObject currentPrefabPowerUp;
     public GameObject[] powerUps;
+
     private GameObject currentEnemy;
     private GameObject currentPrefabEnemy;
-    public GameObject currentPrefabPowerUp;
     private GameObject currentPowerUp;
-    public GameObject bossEnemy;
+    private AudioControllerSpaceBattle audioController;
 
+    [Header("----Variables----")]
+    private Vector2Int map = new Vector2Int(10, 20);
+    public Vector3 randomSpawnPosition;
     private float timerEnemy;
     private float timerPowerUps;
     private float coolDownPowerUps = 15f;
@@ -32,6 +36,10 @@ public class SpaceBattleManager : MonoBehaviour
     public int score;
     public bool bossActive;
 
+    private void Awake()
+    {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
+    }
 
     private void Start()
     {
@@ -47,8 +55,6 @@ public class SpaceBattleManager : MonoBehaviour
     private void Update()
     {
         scoreText.text = $"Score: {score}";
-
-        PausedGame();
 
         if (timerEnemy > 0)
         {
@@ -118,43 +124,33 @@ public class SpaceBattleManager : MonoBehaviour
         }
     }
 
-    void PausedGame()
+    public void PausedGame()
     {
-        if (Input.GetKey(KeyCode.Escape))
-        {
+        lose_PausedHUD.SetActive(true);
 
-            lose_PausedHUD.SetActive(true);
+        lose_PausedText.text = "Game Paused";
 
-            lose_PausedText.text = "Game Paused";
+        restart_Paused.GetComponentInChildren<TMP_Text>().text = "Resume";
 
-            restart_Paused.GetComponentInChildren<TMP_Text>().text = "Resume";
+        EventSystem.current.SetSelectedGameObject(restart_Paused.gameObject);
 
-            Time.timeScale = 0f;
-
-            restart_Paused.onClick.AddListener(() => StartCoroutine(ResumeGame()));
-
-        }
+        Time.timeScale = 0f;
     }
 
-    IEnumerator ResumeGame()
+    public void Resume()
     {
         lose_PausedHUD.SetActive(false);
 
-        timerText.text = "3";
+        EventSystem.current.SetSelectedGameObject(null);
 
-        Time.timeScale = 0.1f;
-
-        yield return new WaitForSeconds(0.1f);
-        timerText.text = "2";
-
-        yield return new WaitForSeconds(0.1f);
-        timerText.text = "1";
-
-        yield return new WaitForSeconds(0.1f);
-        timerText.text = "";
-
-
+        Time.timeScale = 1f;
     }
+
+    public void Restart()
+    {
+        Start();
+    }
+
     public void EndGame()
     {
         Destroy(currentEnemy);
@@ -168,6 +164,8 @@ public class SpaceBattleManager : MonoBehaviour
         lose_PausedText.text = "You Lose";
 
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
+
+        audioController.MakeSound(audioController.gameOver);
 
         Time.timeScale = 0f;
 
