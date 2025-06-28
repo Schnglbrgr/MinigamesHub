@@ -1,9 +1,12 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameManagerMazeRunner : MonoBehaviour
 {
+    [Header ("----Components----")]
+
     [SerializeField] private GameObject win_loseHUD;
     [SerializeField] private TMP_Text win_loseText;
     [SerializeField] private Button restart;
@@ -18,6 +21,8 @@ public class GameManagerMazeRunner : MonoBehaviour
     [SerializeField] private PickRandomItemSO pickRandomEnemy;
     [SerializeField] private PickRandomItemSO pickRandomBoss;
     [SerializeField] private GameObject arrow;
+    [SerializeField] private GameObject pauseHUD;
+    [SerializeField] private GameObject resumeButton;
 
     public GameObject[] teleports;
     public Transform bossSpawn;
@@ -28,6 +33,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     private Animation openDoor;
     private AudioControllerMazeRunner audioController;
 
+    [Header("----Variables----")]
     public int deathBoss;
     public bool bossActive = false;
 
@@ -109,6 +115,8 @@ public class GameManagerMazeRunner : MonoBehaviour
 
             restart.onClick.AddListener(Restart);
 
+            EventSystem.current.SetSelectedGameObject(restart.gameObject);
+
             Time.timeScale = 0f;
         }
     }
@@ -129,18 +137,32 @@ public class GameManagerMazeRunner : MonoBehaviour
 
         audioController.MakeSound(audioController.gameOver);
 
+        EventSystem.current.SetSelectedGameObject(restart.gameObject);
+
         Time.timeScale = 0f;
 
     }
 
     public void Pause()
     {
+        pauseHUD.SetActive(true);
+
         player.playerInput.SwitchCurrentActionMap("PauseGame");
+
+        EventSystem.current.SetSelectedGameObject(resumeButton);
+
+        Time.timeScale = 0f;
     }
 
     public void ExitPause()
     {
+        pauseHUD.SetActive(false);
+
         player.playerInput.SwitchCurrentActionMap("GamePlay");
+
+        EventSystem.current.SetSelectedGameObject(null);
+
+        Time.timeScale = 1f;
     }
 
     private void SpawnRandonEnemies()

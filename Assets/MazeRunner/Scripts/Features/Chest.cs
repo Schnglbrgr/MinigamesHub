@@ -11,16 +11,26 @@ public class Chest : MonoBehaviour
     [SerializeField] private Transform weaponsSpawn;
     [SerializeField] private Transform itemSpawn;
     [SerializeField] private GameObject holdText;
+    [SerializeField] private InputActionReference openChest;
 
     private GameObject player;
-    private bool chestIsUsed;
-    private bool inRange;
-
+    public bool chestIsUsed;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
         chestIsUsed = false;
+    }
+
+    private void OnEnable()
+    {
+        openChest.action.started += OpenChest;
+    }
+
+    private void OnDisable()
+    {
+        openChest.action.started -= OpenChest;
     }
 
     private void Update()
@@ -30,17 +40,17 @@ public class Chest : MonoBehaviour
 
     public void OpenChest(InputAction.CallbackContext context)
     {       
-        if (!chestIsUsed && context.performed && inRange)
+        if (!chestIsUsed && context.performed)
         {
             Instantiate(pickRandomWeapon.SelectRandomObject(), weaponsSpawn.position, Quaternion.identity);
             Instantiate(pickRandomItem.SelectRandomObject(), itemSpawn.position, Quaternion.identity);
             chestIsUsed = true;
         }
-        else if (chestIsUsed && context.performed && inRange)
+        else if (chestIsUsed && context.performed)
         {
             holdText.GetComponentInChildren<TMP_Text>().text = "Chest is empty";
             holdText.GetComponentInChildren<TMP_Text>().color = Color.red;
-            StartCoroutine(ReturnText());
+            //StartCoroutine(ReturnText());
         }
 
     }
@@ -50,12 +60,12 @@ public class Chest : MonoBehaviour
         if (Vector2.Distance(gameObject.transform.position, player.transform.position) < 3f)
         {
             holdText.SetActive(true);
-            inRange = true;
+            holdText.GetComponentInChildren<TMP_Text>().text = "Hold E";
+            holdText.GetComponentInChildren<TMP_Text>().color = Color.white;
         }
         else
         {
             holdText.SetActive(false);
-            inRange = false;
         }
     }
 
