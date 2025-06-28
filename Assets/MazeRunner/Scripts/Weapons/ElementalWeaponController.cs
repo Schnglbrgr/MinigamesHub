@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public abstract class ElementalWeaponController : MonoBehaviour
 {
+    [Header ("----Components----")]
     public RotateWeapon rotateWeapon;
     public ElementalsSO elementalWeapon;
     public GameObject elementalBullet;
@@ -14,6 +15,7 @@ public abstract class ElementalWeaponController : MonoBehaviour
     public Slider hpBar;
     public Transform shootPoint;
 
+    [Header("----Variables----")]
     public float healthWeapon;
     public int damage;
     public float durationAttack;

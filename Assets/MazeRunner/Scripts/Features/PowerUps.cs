@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PowerUps : MonoBehaviour
 {
@@ -57,6 +58,8 @@ public class PowerUps : MonoBehaviour
 
         playerInput.SwitchCurrentActionMap("PowerUpsScreen");
 
+        EventSystem.current.SetSelectedGameObject(speed.gameObject);
+
         Time.timeScale = 0f;
     }
 
@@ -91,6 +94,7 @@ public class PowerUps : MonoBehaviour
         {
             warningMana.text = "Insufficient Mana";
         }
+
     }
 
     private void HealthPowerUp()
@@ -119,6 +123,7 @@ public class PowerUps : MonoBehaviour
         {
             warningMana.text = "Max Health";
         }
+
     }
 
     private void ShieldPowerUp()
@@ -147,6 +152,7 @@ public class PowerUps : MonoBehaviour
         {
             warningMana.text = "Max Shield";
         }
+
     }
 
     public void Exit(InputAction.CallbackContext obj)
