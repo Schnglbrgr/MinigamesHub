@@ -4,12 +4,16 @@ using UnityEngine.InputSystem;
 
 public class AttackSpaceBattle : MonoBehaviour
 {
+    [Header ("----Components----")]
     public Transform spawnPosition;
     public GameObject bullet;
     public PoolManagerSO bulletPool;
-    private GameObject currentBullet;
     public InputActionReference shoot;
 
+    private AudioControllerSpaceBattle audioController;
+    private GameObject currentBullet;
+
+    [Header("----Variables----")]
     private float fireRate = 0.5f;
     public float currentFireRate;
     private int damage = 1;
@@ -24,6 +28,8 @@ public class AttackSpaceBattle : MonoBehaviour
         currentFireRate = fireRate;
 
         currentColor = GetComponent<SpriteRenderer>().color;
+
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
     }
 
     private void OnEnable()
@@ -36,12 +42,13 @@ public class AttackSpaceBattle : MonoBehaviour
         shoot.action.started -= Attack;
     }
 
-    public void Attack(InputAction.CallbackContext obj)
+    public void Attack(InputAction.CallbackContext context)
     {
         if (timer <= 0)
         {
             currentBullet = bulletPool.CreateObject(bullet);
             timer = currentFireRate;
+            audioController.MakeSound(audioController.shoot);
         }
     }
 

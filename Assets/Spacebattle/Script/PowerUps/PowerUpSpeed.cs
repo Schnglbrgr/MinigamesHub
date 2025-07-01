@@ -2,9 +2,7 @@ using UnityEngine;
 
 public class PowerUpSpeed : PowerUpController, IPickable
 {
-    private AttackSpaceBattle attackSpaceBattle;
     private MovementSpacebattle movementSpacebattle;
-    private SpaceBattleManager spaceBattleManager;
 
     private float speedBoost;
     private float timer = 3f;
@@ -17,6 +15,8 @@ public class PowerUpSpeed : PowerUpController, IPickable
         attackSpaceBattle = GameObject.FindGameObjectWithTag("Player").GetComponent<AttackSpaceBattle>();
 
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
+
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
 
         currentSpeed = movementSpacebattle.currentSpeed;
 
@@ -34,5 +34,6 @@ public class PowerUpSpeed : PowerUpController, IPickable
     public void PickItem()
     {
         GivePowerUp();
+        audioController.MakeSound(audioController.pickPowerUp);
     }
 }

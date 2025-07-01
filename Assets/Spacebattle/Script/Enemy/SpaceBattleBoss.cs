@@ -13,6 +13,7 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     public GameObject bulletEnemy;
     public Transform spawnPointBullet;
     private SpaceBattleManager spaceBattleManager;
+    private AudioControllerSpaceBattle audioController;
 
     private int currentHealth;
     private float speed = 2f;
@@ -25,6 +26,8 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     private void Awake()
     {
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
+
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
 
         currentHealth = 15;
 
@@ -44,13 +47,23 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     private void OnEnable()
     {
         currentHealth = 15;
+
         transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
+
         randomWay = Random.Range(0, ways.Length);
+
+        audioController.musicSource.clip = audioController.bossFight;
+
+        audioController.musicSource.Play();
     }
 
     private void OnDisable()
     {
         hpBar.gameObject.SetActive(false);
+
+        audioController.musicSource.clip = audioController.bg;
+
+        audioController.musicSource.Play();
     }
 
     private void Start()
@@ -65,6 +78,7 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
         if (timerAttack > 0)
         {
             timerAttack -= Time.deltaTime;
+
             fireRate -= Time.deltaTime;
         }
 
@@ -110,9 +124,13 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             spaceBattleManager.bossActive = false;
+
             spaceBattleManager.SpawnEnemies();
+
             hpBar.gameObject.SetActive(false);
+
             coolDown = Mathf.Max(coolDown -= 0.5f, 0.5f);
+
             gameObject.SetActive(false);
         }
     }
