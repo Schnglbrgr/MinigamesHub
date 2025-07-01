@@ -22,7 +22,10 @@ public class AmmoPickUp : MonoBehaviour, IPickable
 
     public void TakeItem()
     {
-        attackSystem.currentAmmo += ammoReward;
+        if (attackSystem != null)
+        {
+            attackSystem.currentAmmo += ammoReward;
+        }
 
         audioController.MakeSound(audioController.collectWeapon);
 

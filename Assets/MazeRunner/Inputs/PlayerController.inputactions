@@ -47,7 +47,7 @@
                     "id": "9658dbd6-c361-45c4-a79c-fb0d39a47fb4",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold(duration=1)",
+                    "interactions": "",
                     "initialStateCheck": false
                 },
                 {
@@ -407,15 +407,6 @@
             "id": "151f9291-156b-4ccd-ab8b-09658ff8b24e",
             "actions": [
                 {
-                    "name": "SelectPowerUP",
-                    "type": "Button",
-                    "id": "0d16d8e0-620b-4fe8-89a7-9fa30dc3c7d7",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "CloseScreen",
                     "type": "Button",
                     "id": "c76b06e6-b163-4c92-9818-1d6ad41281bb",
@@ -426,17 +417,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "00552937-80cb-4208-acf8-6ac2877e0e14",
-                    "path": "<DualShockGamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";GamePad",
-                    "action": "SelectPowerUP",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "eb3ef58e-059e-46e1-b08a-983b35d2a926",
@@ -466,15 +446,6 @@
             "id": "67510e9f-76e3-4cb0-99b7-4eb4ed3f30c5",
             "actions": [
                 {
-                    "name": "Select",
-                    "type": "Button",
-                    "id": "c34d8232-6ab7-4fcd-8ba9-6600ede891d6",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Exit",
                     "type": "Button",
                     "id": "7e4c1065-9fcf-484f-aba9-527907c637f1",
@@ -485,17 +456,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "e929184a-2073-43cb-90f4-b2dfb4991d06",
-                    "path": "<DualShockGamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";GamePad",
-                    "action": "Select",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "3e1a8d78-3a39-47aa-9566-7aeb34cda16a",
