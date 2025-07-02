@@ -244,6 +244,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ChooseControl",
+            "id": "2187317d-f46a-4a5e-b9b9-0de1a2e79901",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "8aeb7495-890c-41bd-85e3-ba20df077595",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "350872c8-2f62-4b3a-ba16-b06cfc88dc11",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

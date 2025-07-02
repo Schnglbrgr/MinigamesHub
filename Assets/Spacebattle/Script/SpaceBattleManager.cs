@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +14,8 @@ public class SpaceBattleManager : MonoBehaviour
     [SerializeField] private Button restart_Paused;
     [SerializeField] private WeightedPickerSO pickRandomEnemy;
     [SerializeField] private WeightedPickerSO pickRandomPowerUp;
+    [SerializeField] private GameObject controlHUD;
+    [SerializeField] private GameObject keyboardButton;
 
     public PoolManagerSO poolManager;
     public GameObject bossEnemy;
@@ -25,6 +26,7 @@ public class SpaceBattleManager : MonoBehaviour
     private GameObject currentPrefabEnemy;
     private GameObject currentPowerUp;
     private AudioControllerSpaceBattle audioController;
+    private PlayerInput playerInput;
 
     [Header("----Variables----")]
     private Vector2Int map = new Vector2Int(10, 20);
@@ -39,14 +41,46 @@ public class SpaceBattleManager : MonoBehaviour
     private void Awake()
     {
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
+
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
     }
 
     private void Start()
     {
+        controlHUD.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(keyboardButton);
+
+        Time.timeScale = 0f;
+    }
+
+    public void Keyboard()
+    {
+        controlHUD.SetActive(false);
+
+        playerInput.SwitchCurrentActionMap("GamePlay");
+
+        playerInput.defaultControlScheme = "Keyboard";
+
+        StartGame();
+    }
+
+    public void Gamepad()
+    {
+        controlHUD.SetActive(false);
+
+        playerInput.SwitchCurrentActionMap("GamePlay");
+
+        playerInput.defaultControlScheme = "GamePad";
+
+        StartGame();
+    }
+
+    private void StartGame()
+    {
         Time.timeScale = 1f;
         lose_PausedHUD.SetActive(false);
         bossActive = false;
-        SpawnEnemies();
         score = 0;
         scoreText.text = $"Score: {score}";
         timerPowerUps = coolDownPowerUps;
