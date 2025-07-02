@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6959991058078246871}
   - component: {fileID: 5824215258855645079}
   - component: {fileID: 7944626357073191190}
+  - component: {fileID: 4693296065994264202}
   - component: {fileID: 7205616354281392235}
   - component: {fileID: 1573962561703128437}
   - component: {fileID: 1847747902492575003}
@@ -111,7 +112,9 @@ MonoBehaviour:
   bullet: {fileID: 1989240653225493358, guid: fe087a6da9786d04caba2d13414026c7, type: 3}
   bulletPool: {fileID: 11400000, guid: 74fcf95d5ed7cc4499488c19aea46e63, type: 2}
   shoot: {fileID: -3868056653459588366, guid: bf67a818863860e498061499bbf89b03, type: 3}
+  fireRate: 0.5
   currentFireRate: 0
+  damage: 1
   currentDamage: 0
 --- !u!114 &5824215258855645079
 MonoBehaviour:
@@ -142,6 +145,22 @@ MonoBehaviour:
   speed: 3
   currentSpeed: 0
   movement: {fileID: 6343117042437961416, guid: bf67a818863860e498061499bbf89b03, type: 3}
+--- !u!114 &4693296065994264202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6131101277939130378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2663b3613349583478f799f9c45cbf7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ultimateBar: {fileID: 0}
+  ultimateText: {fileID: 0}
+  ultimateCharge: 0
+  ultimateActive: 0
 --- !u!61 &7205616354281392235
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -282,10 +301,14 @@ MonoBehaviour:
     m_ActionId: 8a0edf94-93aa-4b22-9845-9f6c9089468f
     m_ActionName: 'GamePlay/Pause[/Keyboard/escape,/DualSenseGamepadHID/start]'
   - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8aeb7495-890c-41bd-85e3-ba20df077595
+    m_ActionName: ChooseControl/New action
+  - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SpaceBattleManager, Assembly-CSharp
-        m_MethodName: Resume
+      - m_Target: {fileID: 4693296065994264202}
+        m_TargetAssemblyTypeName: UltimateAttackSpaceBattle, Assembly-CSharp
+        m_MethodName: UltimateAttack
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -295,11 +318,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: f0b782e3-2866-4448-ba34-ea0ce21819bd
-    m_ActionName: 'Pause/Exit[/Keyboard/escape,/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID/start]'
+    m_ActionId: a4551a18-fbee-4e8f-a932-a4a1f1dde012
+    m_ActionName: 'GamePlay/Ultimate[/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/rightShoulder,/Keyboard/space]'
   m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
-  m_DefaultActionMap: GamePlay
+  m_DefaultActionMap: ChooseControl
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &7480445476862594099

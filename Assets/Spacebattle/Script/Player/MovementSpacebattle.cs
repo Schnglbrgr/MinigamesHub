@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class MovementSpacebattle : MonoBehaviour
 {
-    [SerializeField] private float speed = 3f;
+    public float speed = 3f;
 
     public float currentSpeed;
 

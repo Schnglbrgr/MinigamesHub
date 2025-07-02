@@ -27,6 +27,7 @@ public class SpaceBattleManager : MonoBehaviour
     private GameObject currentPowerUp;
     private AudioControllerSpaceBattle audioController;
     private PlayerInput playerInput;
+    private UltimateAttackSpaceBattle ultimateAttack;
 
     [Header("----Variables----")]
     private Vector2Int map = new Vector2Int(10, 20);
@@ -43,6 +44,8 @@ public class SpaceBattleManager : MonoBehaviour
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
 
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+
+        ultimateAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<UltimateAttackSpaceBattle>();
     }
 
     private void Start()
@@ -56,10 +59,6 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void Keyboard()
     {
-        controlHUD.SetActive(false);
-
-        playerInput.SwitchCurrentActionMap("GamePlay");
-
         playerInput.defaultControlScheme = "Keyboard";
 
         StartGame();
@@ -67,10 +66,6 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void Gamepad()
     {
-        controlHUD.SetActive(false);
-
-        playerInput.SwitchCurrentActionMap("GamePlay");
-
         playerInput.defaultControlScheme = "GamePad";
 
         StartGame();
@@ -79,11 +74,18 @@ public class SpaceBattleManager : MonoBehaviour
     private void StartGame()
     {
         Time.timeScale = 1f;
+
         lose_PausedHUD.SetActive(false);
+
         bossActive = false;
+
         score = 0;
+
         scoreText.text = $"Score: {score}";
+
         timerPowerUps = coolDownPowerUps;
+
+        controlHUD.SetActive(false);
     }
 
     private void Update()
@@ -122,7 +124,7 @@ public class SpaceBattleManager : MonoBehaviour
 
     private void SpawnPowerUps()
     {
-        if (timerPowerUps <= 0 && !bossActive)
+        if (timerPowerUps <= 0 && !bossActive && !ultimateAttack.ultimateActive)
         {
             currentPrefabPowerUp = pickRandomPowerUp.SelectRandomObject();
 

@@ -14,6 +14,7 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     public Transform spawnPointBullet;
     private SpaceBattleManager spaceBattleManager;
     private AudioControllerSpaceBattle audioController;
+    private UltimateAttackSpaceBattle ultimateAttack;
 
     private int currentHealth;
     private float speed = 2f;
@@ -22,12 +23,15 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     private float fireRate;
     private float timerAttack;
     private bool isAttacking;
+    private int ultimateReward = 20;
 
     private void Awake()
     {
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
 
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
+
+        ultimateAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<UltimateAttackSpaceBattle>();
 
         currentHealth = 15;
 
@@ -132,6 +136,11 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
             coolDown = Mathf.Max(coolDown -= 0.5f, 0.5f);
 
             gameObject.SetActive(false);
+
+            if (ultimateAttack.ultimateCharge < 100)
+            {
+                ultimateAttack.ultimateCharge += ultimateReward;
+            }
         }
     }
 

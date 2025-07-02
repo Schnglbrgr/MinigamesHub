@@ -14,9 +14,9 @@ public class AttackSpaceBattle : MonoBehaviour
     private GameObject currentBullet;
 
     [Header("----Variables----")]
-    private float fireRate = 0.5f;
+    public float fireRate = 0.5f;
     public float currentFireRate;
-    private int damage = 1;
+    public int damage = 1;
     public int currentDamage;
     private float timer = 0f;
     private Color currentColor;
