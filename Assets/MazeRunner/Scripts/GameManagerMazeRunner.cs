@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class GameManagerMazeRunner : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     public PlayerController player;
     private Animation openDoor;
     private AudioControllerMazeRunner audioController;
+    private PlayerInput playerInput;
 
     [Header("----Variables----")]
     public int deathBoss;
@@ -49,6 +51,9 @@ public class GameManagerMazeRunner : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         openDoor = GameObject.FindGameObjectWithTag("Wall").GetComponent<Animation>();
+
+        playerInput = player.GetComponent<PlayerInput>();
+
     }
 
     private void Start()
@@ -93,7 +98,7 @@ public class GameManagerMazeRunner : MonoBehaviour
 
     }
 
-    private void SpawnBoss()
+    public void SpawnBoss()
     {
         currentBoss = pickRandomBoss.SelectRandomObject();
 
@@ -116,6 +121,8 @@ public class GameManagerMazeRunner : MonoBehaviour
             restart.onClick.AddListener(Restart);
 
             EventSystem.current.SetSelectedGameObject(restart.gameObject);
+
+            playerInput.SwitchCurrentActionMap("Win");
 
             Time.timeScale = 0f;
         }

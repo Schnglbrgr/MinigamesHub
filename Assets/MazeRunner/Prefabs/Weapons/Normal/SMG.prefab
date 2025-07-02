@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 8232377581380424626}
   m_Layer: 6
   m_Name: SMG
-  m_TagString: Gun
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -609,7 +609,6 @@ MonoBehaviour:
   myWeapon: {fileID: 11400000, guid: e6fad4e7bacd1064e886623147f77f04, type: 2}
   currentBullet: {fileID: 0}
   audioController: {fileID: 0}
-  shoot: {fileID: 4061798964826020863, guid: 557225c45930b414aa5fee7576cd3cd1, type: 3}
   currentAmmo: 0
   timer: 0
   maxAmmo: 0

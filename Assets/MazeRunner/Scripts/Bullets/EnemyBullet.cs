@@ -4,22 +4,28 @@ public class EnemyBullet : MonoBehaviour
 {
     public float speed = 2f;
     public int damage;
+    public GameObject prefab;
 
     private AudioControllerMazeRunner audioController;
+    private PoolManager poolManager;
 
     private void Awake()
     {
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
 
-        audioController.MakeSound(audioController.shootEnemy);
+        poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
 
+        audioController.MakeSound(audioController.shootEnemy);
+    }
+
+    private void OnEnable()
+    {
+        audioController.MakeSound(audioController.shootEnemy);
     }
 
     private void FixedUpdate()
     {
         transform.position += transform.up * speed * Time.deltaTime;
-
-        Destroy(gameObject, 4);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -29,9 +35,10 @@ public class EnemyBullet : MonoBehaviour
         if (isDamageable != null && collision.gameObject.tag != "Enemy")
         {
             isDamageable.TakeDamage(damage);
-            Destroy(gameObject);
+
+            poolManager.Return(prefab, gameObject);
         }
 
-        Destroy(gameObject);
+        poolManager.Return(prefab, gameObject);
     }
 }
