@@ -1,13 +1,11 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class GameManagerTetris : MonoBehaviour
 {
+    [Header ("----Components----")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private TMP_Text lose_PausedText;
@@ -28,6 +26,13 @@ public class GameManagerTetris : MonoBehaviour
     [SerializeField] private Transform holdPrefabSpawn;
     [SerializeField] private TMP_Text holdPrefabText;
 
+    public GameObject nextPrefab;
+    private GameObject holdPrefab;
+    private GameObject currentPrefab;
+    public Transform[,] grid;
+
+
+    [Header("----Variables----")]
     public int score;
     private int level;
     private float fallTime;
@@ -39,11 +44,6 @@ public class GameManagerTetris : MonoBehaviour
     private float invertorySlowMotion = 1f;
     public bool powerUpActive;
     private bool isHolding;
-
-    public GameObject nextPrefab;
-    private GameObject holdPrefab;
-    private GameObject currentPrefab;
-    public Transform[,] grid;
     public Vector2Int gridDimension = new Vector2Int(10, 20);
 
     private void Start()
@@ -67,6 +67,8 @@ public class GameManagerTetris : MonoBehaviour
         PowerUps();
 
         isHolding = false;
+
+        holdPrefabText.text = "Hold Block: Q";
 
         Time.timeScale = 1f;
     }
@@ -92,8 +94,6 @@ public class GameManagerTetris : MonoBehaviour
                 ChangeColorButton(x, Color.green);
             }
         }
-
-
 
         HoldPrefab();
 
