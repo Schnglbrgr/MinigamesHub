@@ -615,6 +615,7 @@ MonoBehaviour:
   poolManager: {fileID: 0}
   currentElemental: {fileID: 0}
   animationController: {fileID: 4425492638828263422}
+  audioController: {fileID: 0}
   currentHealth: 0
   damage: 0
   manaReward: 0

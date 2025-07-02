@@ -15,22 +15,17 @@ public class Chest : MonoBehaviour
 
     private GameObject player;
     public bool chestIsUsed;
+    private bool inRange;
 
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         chestIsUsed = false;
-    }
 
-    private void OnEnable()
-    {
+        inRange = false;
+
         openChest.action.started += OpenChest;
-    }
-
-    private void OnDisable()
-    {
-        openChest.action.started -= OpenChest;
     }
 
     private void Update()
@@ -40,17 +35,11 @@ public class Chest : MonoBehaviour
 
     public void OpenChest(InputAction.CallbackContext context)
     {       
-        if (!chestIsUsed && context.performed)
+        if (!chestIsUsed && inRange)
         {
             Instantiate(pickRandomWeapon.SelectRandomObject(), weaponsSpawn.position, Quaternion.identity);
             Instantiate(pickRandomItem.SelectRandomObject(), itemSpawn.position, Quaternion.identity);
             chestIsUsed = true;
-        }
-        else if (chestIsUsed && context.performed)
-        {
-            holdText.GetComponentInChildren<TMP_Text>().text = "Chest is empty";
-            holdText.GetComponentInChildren<TMP_Text>().color = Color.red;
-            //StartCoroutine(ReturnText());
         }
 
     }
@@ -60,20 +49,26 @@ public class Chest : MonoBehaviour
         if (Vector2.Distance(gameObject.transform.position, player.transform.position) < 3f)
         {
             holdText.SetActive(true);
+
             holdText.GetComponentInChildren<TMP_Text>().text = "Hold E";
+
             holdText.GetComponentInChildren<TMP_Text>().color = Color.white;
+
+            inRange = true;
+
+            if (chestIsUsed)
+            {
+                holdText.GetComponentInChildren<TMP_Text>().text = "Chest is empty";
+                holdText.GetComponentInChildren<TMP_Text>().color = Color.red;
+            }
         }
         else
         {
             holdText.SetActive(false);
-        }
-    }
 
-    IEnumerator ReturnText()
-    {
-        yield return new WaitForSeconds(1f);
-        holdText.GetComponentInChildren<TMP_Text>().text = "";
-        holdText.GetComponentInChildren<TMP_Text>().color = Color.white;
+            inRange = false;
+
+        }
     }
 
 }

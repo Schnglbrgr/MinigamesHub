@@ -61,6 +61,10 @@ public class AttackEnemyLight : MonoBehaviour
 
             currentBullet.transform.position = shootPoint.position;
 
+            currentBullet.transform.rotation = transform.rotation;
+
+            currentBullet.GetComponent<EnemyBullet>().prefab = enemyBullet;
+
             currentBullet.GetComponent<EnemyBullet>().damage = damage;
 
             timer = fireRate;

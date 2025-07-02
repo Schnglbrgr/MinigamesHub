@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class VoidWeapon : ElementalWeaponController, IPickable
 {
@@ -29,8 +30,6 @@ public class VoidWeapon : ElementalWeaponController, IPickable
 
     private void Update()
     {
-        Attack();
-
         if (fireRate > 0)
         {
             fireRate -= Time.deltaTime;
@@ -53,9 +52,9 @@ public class VoidWeapon : ElementalWeaponController, IPickable
 
     }
 
-    public override void Attack()
+    public override void Attack(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButton(0) && fireRate <= 0)
+        if (fireRate <= 0)
         {
             currentBullet = poolManager.PoolInstance(elementalBullet);
 

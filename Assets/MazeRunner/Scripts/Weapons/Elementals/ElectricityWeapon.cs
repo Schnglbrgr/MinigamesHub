@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ElectricityWeapon : ElementalWeaponController, IPickable
 {
@@ -29,7 +30,6 @@ public class ElectricityWeapon : ElementalWeaponController, IPickable
 
     private void Update()
     {
-        Attack();
 
         if (fireRate > 0)
         {
@@ -42,9 +42,9 @@ public class ElectricityWeapon : ElementalWeaponController, IPickable
         
     }
 
-    public override void Attack()
+    public override void Attack(InputAction.CallbackContext context)
     {
-        if (Input.GetMouseButton(0) && fireRate <= 0)
+        if (fireRate <= 0)
         {
             currentBullet = poolManager.PoolInstance(elementalBullet);
 

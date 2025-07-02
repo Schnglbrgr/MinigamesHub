@@ -267,15 +267,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 399d154c6926cb248bc23e6feea7558c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 0
-  damage: 0
-  speed: 0
-  manaReward: 0
-  fireRate: 0
-  spawnRate: 0
-  timer: 0
-  timerSpawn: 0
-  timerAttack: 0
   boss: {fileID: 11400000, guid: e7629c2f7192f9041be9550c4d13139b, type: 2}
   spawnPoint: {fileID: 1036193117900020081}
   shootPoint: {fileID: 7400209736191560148}
@@ -288,6 +279,15 @@ MonoBehaviour:
   healthBar: {fileID: 3426540324534996886}
   healthText: {fileID: 5268705407156314539}
   attackUI: {fileID: 0}
+  health: 0
+  damage: 0
+  speed: 0
+  manaReward: 0
+  fireRate: 0
+  spawnRate: 0
+  timer: 0
+  timerSpawn: 0
+  timerAttack: 0
 --- !u!60 &4713711545905306391
 PolygonCollider2D:
   m_ObjectHideFlags: 0

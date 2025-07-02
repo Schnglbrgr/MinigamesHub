@@ -4,16 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Wall
   - Floor
-  - Keys
-  - Door
   - Enemy
-  - Gun
   - Ammo
-  - Teleport
   - Ways
   - AudioController
+  - Wall
   layers:
   - Default
   - TransparentFX

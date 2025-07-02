@@ -8,6 +8,7 @@ public class CollectWeapon : MonoBehaviour
     [SerializeField] private Transform currentWeaponInvPosition;   
     [SerializeField] private Transform weaponsInMap;
     [SerializeField] private GameObject inventoryFull;
+    [SerializeField] private InputActionReference shoot;
 
     private float timer;
     private float coolDown = 0.5f;
@@ -46,10 +47,14 @@ public class CollectWeapon : MonoBehaviour
             if (currentWeapon.GetComponent<AttackSystem>() != null)
             {
                 currentWeapon.GetComponent<AttackSystem>().ControlEnable(true);
+
+                shoot.action.performed += currentWeapon.GetComponent<AttackSystem>().Shoot;
             }
             else if (currentWeapon.GetComponent<ElementalWeaponController>() != null)
             {
                 currentWeapon.GetComponent<ElementalWeaponController>().ControlEnable(true);
+
+                shoot.action.performed += currentWeapon.GetComponent<ElementalWeaponController>().Attack;
             }
 
             dropWeaponText.SetActive(true);
@@ -74,10 +79,16 @@ public class CollectWeapon : MonoBehaviour
             if (currentWeapon.GetComponent<AttackSystem>() != null)
             {
                 currentWeapon.GetComponent<AttackSystem>().ControlEnable(false);
+
+                shoot.action.performed -= currentWeapon.GetComponent<AttackSystem>().Shoot;
+
             }
             else if (currentWeapon.GetComponent<ElementalWeaponController>() != null)
             {
                 currentWeapon.GetComponent<ElementalWeaponController>().ControlEnable(false);
+
+                shoot.action.performed -= currentWeapon.GetComponent<ElementalWeaponController>().Attack;
+
             }
 
             currentWeapon = null;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public abstract class ElementalWeaponController : MonoBehaviour
@@ -23,7 +24,7 @@ public abstract class ElementalWeaponController : MonoBehaviour
 
     public abstract void SpecialAttack(Collision2D enemyy);
 
-    public abstract void Attack();
+    public abstract void Attack(InputAction.CallbackContext context);
 
     public virtual void Rotation()
     {
