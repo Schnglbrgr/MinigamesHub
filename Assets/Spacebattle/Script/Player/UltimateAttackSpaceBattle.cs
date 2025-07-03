@@ -11,6 +11,8 @@ public class UltimateAttackSpaceBattle : MonoBehaviour
 
     private AttackSpaceBattle attackSpaceBattle;
     private MovementSpacebattle movementSpacebattle;
+    private GameObject player;
+    private Color currentColor;
 
     public int ultimateCharge;
     public bool ultimateActive;
@@ -23,6 +25,10 @@ public class UltimateAttackSpaceBattle : MonoBehaviour
         attackSpaceBattle = GetComponent<AttackSpaceBattle>();
 
         movementSpacebattle = GetComponent<MovementSpacebattle>();
+
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        currentColor = player.GetComponent<SpriteRenderer>().color;
     }
 
     private void Update()
@@ -34,7 +40,7 @@ public class UltimateAttackSpaceBattle : MonoBehaviour
 
     public void UltimateAttack(InputAction.CallbackContext context)
     {
-        if (ultimateCharge == 100 && context.performed)
+        if (ultimateCharge >= 100 && context.performed)
         {
             ultimateActive = true;
 
@@ -45,6 +51,8 @@ public class UltimateAttackSpaceBattle : MonoBehaviour
             attackSpaceBattle.currentFireRate = bonusFireRate;
 
             movementSpacebattle.currentSpeed = bonusSpeed;
+
+            player.GetComponent<SpriteRenderer>().color = Color.blue;
 
             StartCoroutine(ReturnValues());
         }
@@ -61,6 +69,8 @@ public class UltimateAttackSpaceBattle : MonoBehaviour
         attackSpaceBattle.currentFireRate = attackSpaceBattle.fireRate;
 
         movementSpacebattle.currentSpeed = movementSpacebattle.speed;
+
+        player.GetComponent<SpriteRenderer>().color = currentColor;
 
     }
 }

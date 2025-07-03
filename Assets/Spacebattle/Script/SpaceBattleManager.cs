@@ -59,14 +59,14 @@ public class SpaceBattleManager : MonoBehaviour
 
     public void Keyboard()
     {
-        playerInput.defaultControlScheme = "Keyboard";
+        playerInput.SwitchCurrentControlScheme("Keyboard");
 
         StartGame();
     }
 
     public void Gamepad()
     {
-        playerInput.defaultControlScheme = "GamePad";
+        playerInput.SwitchCurrentControlScheme("GamePad");
 
         StartGame();
     }
@@ -206,5 +206,8 @@ public class SpaceBattleManager : MonoBehaviour
         Time.timeScale = 0f;
 
         restart_Paused.onClick.AddListener(Start);
+
+        EventSystem.current.SetSelectedGameObject(restart_Paused.gameObject);
+
     }
 }
