@@ -5244,7 +5244,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1229667633}
   - component: {fileID: 1229667632}
-  - component: {fileID: 1229667634}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -5304,12 +5303,10 @@ MonoBehaviour:
   - {fileID: 864544639}
   slowCam: {fileID: 741875661}
   slowCamText: {fileID: 1180957088}
-  holdPrefabSpawn: {fileID: 0}
-  holdPrefabText: {fileID: 0}
-  nextPrefab: {fileID: 0}
   score: 0
   invertoryBomb: 1
   powerUpActive: 0
+  nextPrefab: {fileID: 0}
   gridDimension: {x: 10, y: 20}
 --- !u!4 &1229667633
 Transform:
@@ -5326,68 +5323,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1229667634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1229667631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 99bae71dc8b4a6b45af839ba8a349552, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f16f50d4-ab25-4d11-b9c3-e3e72d85be7a
-    m_ActionName: Gameplay/Movement
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c94dbc4e-bdcc-4125-b53f-5d04d2b045d1
-    m_ActionName: 'Gameplay/Holdprefab[/Keyboard/q,/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/rightShoulder]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8e4f1079-d224-47b4-a63e-cd0912b88e90
-    m_ActionName: 'Gameplay/Useprefab[/Keyboard/e,/DualSenseGamepadHID/rightShoulder]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: f3eca904-5dc2-42be-9741-be5b5dabb9f3
-    m_ActionName: 'Gameplay/powerUp1[/Keyboard/1,/DualSenseGamepadHID/buttonNorth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: fa674348-ed8b-45f4-86ff-f10d6748f2fc
-    m_ActionName: 'Gameplay/powerUp2[/Keyboard/2,/DualSenseGamepadHID/buttonEast]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ce459b6a-f555-46cb-8064-65287e055ddd
-    m_ActionName: 'Gameplay/powerUp3[/Keyboard/3,/DualSenseGamepadHID/buttonSouth]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 86320889-7854-4141-a71a-eb9e0f2b9bd7
-    m_ActionName: 'Gameplay/powerUp4[/Keyboard/4,/DualSenseGamepadHID/buttonWest]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 67344444-32f1-4f60-8d15-b7c515fab2e8
-    m_ActionName: 'Gameplay/Pause[/Keyboard/escape,/DualSenseGamepadHID/start]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!1 &1242585391
 GameObject:
   m_ObjectHideFlags: 0
