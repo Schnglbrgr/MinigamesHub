@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class GameManagerMazeRunner : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class GameManagerMazeRunner : MonoBehaviour
     [SerializeField] private GameObject arrow;
     [SerializeField] private GameObject pauseHUD;
     [SerializeField] private GameObject resumeButton;
+    [SerializeField] private GameObject controlsHUD;
+    [SerializeField] private GameObject KeyboardButton;
 
     public GameObject[] teleports;
     public Transform bossSpawn;
@@ -32,6 +35,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     public PlayerController player;
     private Animation openDoor;
     private AudioControllerMazeRunner audioController;
+    private PlayerInput playerInput;
 
     [Header("----Variables----")]
     public int deathBoss;
@@ -49,12 +53,43 @@ public class GameManagerMazeRunner : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
 
         openDoor = GameObject.FindGameObjectWithTag("Wall").GetComponent<Animation>();
+
+        playerInput = player.GetComponent<PlayerInput>();
+
     }
 
     private void Start()
     {
+        controlsHUD.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(KeyboardButton);
+
+        Time.timeScale = 0f;
+    }
+
+    private void StartGame()
+    {
+        controlsHUD.SetActive(false);
+
         SpawnRandonEnemies();
+
         SpawnChest();
+
+        Time.timeScale = 1f;
+    }
+
+    public void Keyboard()
+    {
+        playerInput.SwitchCurrentControlScheme("Keyboard");
+
+        StartGame();
+    }
+
+    public void Gamepad()
+    {
+        playerInput.SwitchCurrentControlScheme("GamePad");
+
+        StartGame();
     }
 
     private void SpawnChest()
@@ -93,7 +128,7 @@ public class GameManagerMazeRunner : MonoBehaviour
 
     }
 
-    private void SpawnBoss()
+    public void SpawnBoss()
     {
         currentBoss = pickRandomBoss.SelectRandomObject();
 
@@ -116,6 +151,8 @@ public class GameManagerMazeRunner : MonoBehaviour
             restart.onClick.AddListener(Restart);
 
             EventSystem.current.SetSelectedGameObject(restart.gameObject);
+
+            playerInput.SwitchCurrentActionMap("Win");
 
             Time.timeScale = 0f;
         }

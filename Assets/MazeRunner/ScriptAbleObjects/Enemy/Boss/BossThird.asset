@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ba348efde9083b4cac4f04906eea2e3, type: 3}
   m_Name: BossThird
   m_EditorClassIdentifier: 
-  health: 300
+  health: 350
   damage: 55
   speed: 2.5
   manaReward: 70

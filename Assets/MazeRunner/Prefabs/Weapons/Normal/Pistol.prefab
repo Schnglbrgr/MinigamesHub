@@ -548,7 +548,7 @@ GameObject:
   - component: {fileID: -7857626243950247619}
   m_Layer: 6
   m_Name: Pistol
-  m_TagString: Gun
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -639,8 +639,11 @@ MonoBehaviour:
   warningAmmo: {fileID: 0}
   myWeapon: {fileID: 11400000, guid: 1041e0e20ac0ba440bda7fbab018a6b9, type: 2}
   currentBullet: {fileID: 0}
+  audioController: {fileID: 0}
   currentAmmo: 0
   timer: 0
+  maxAmmo: 0
+  shoot: {fileID: 0}
 --- !u!114 &-7857626243950247619
 MonoBehaviour:
   m_ObjectHideFlags: 0

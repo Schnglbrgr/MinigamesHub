@@ -145,7 +145,10 @@ public class BossSecond : BossController
 
             gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().Win();
 
+            gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().SpawnBoss();
+
             gameManagerMazeRunner.GetComponent<PoolManager>().Return(gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().currentBoss, gameObject);
+
         }
         else if (health == boss.health / 2)
         {

@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 
 public class Pistol : AttackSystem, IPickable
 {
-    public InputActionReference shoot;
 
     private void Awake()
     {

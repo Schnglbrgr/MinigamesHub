@@ -170,6 +170,8 @@ public class BossMain : BossController
 
             gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().Win();
 
+            gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().SpawnBoss();
+
             gameManagerMazeRunner.GetComponent<PoolManager>().Return(gameManagerMazeRunner.GetComponent<GameManagerMazeRunner>().currentBoss, gameObject);
 
         }
@@ -203,9 +205,12 @@ public class BossMain : BossController
 
             bullet.GetComponent<EnemyBullet>().speed = 5f;
 
+            bullet.GetComponent<EnemyBullet>().prefab = enemyBullet;
+
             bullet.transform.position = shootPoint.position;
 
             bullet.transform.rotation = gameObject.transform.rotation;
+
         }
        
         timer = fireRate;

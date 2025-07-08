@@ -99,10 +99,6 @@ public class EnemyLight : EnemyController
 
             dropAmmo.GetComponent<AmmoPickUp>().ammoReward = enemy.ammoReward;
 
-            enemy.PushItems(dropItem.GetComponent<Rigidbody2D>(), Vector2.down, 0.5f);
-
-            enemy.PushItems(dropAmmo.GetComponent<Rigidbody2D>(), Vector2.up, 0.5f);
-
             player.GetComponent<PlayerController>().killsInRow++;
 
             if (player.GetComponent<PlayerController>().killsInRow >= 5)
