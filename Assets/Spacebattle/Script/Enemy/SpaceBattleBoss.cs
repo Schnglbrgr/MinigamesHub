@@ -14,6 +14,7 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     public Transform spawnPointBullet;
     private SpaceBattleManager spaceBattleManager;
     private AudioControllerSpaceBattle audioController;
+    private UltimateAttackSpaceBattle ultimateAttack;
 
     private int currentHealth;
     private float speed = 2f;
@@ -22,6 +23,8 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
     private float fireRate;
     private float timerAttack;
     private bool isAttacking;
+    private int ultimateReward = 20;
+    private int hp = 15;
 
     private void Awake()
     {
@@ -29,24 +32,22 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
 
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
 
-        currentHealth = 15;
+        ultimateAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<UltimateAttackSpaceBattle>();
+
+        currentHealth = hp;
 
         transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
-
-        hpBar.value = currentHealth / 15;
 
         coolDown = 3f;
 
         isAttacking = false;
 
         fireRate = 0f;
-
-        hpText.text = $"{currentHealth} / 15";
     }
 
     private void OnEnable()
     {
-        currentHealth = 15;
+        currentHealth = hp;
 
         transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
 
@@ -64,6 +65,8 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
         audioController.musicSource.clip = audioController.bg;
 
         audioController.musicSource.Play();
+
+        hp += 5;
     }
 
     private void Start()
@@ -81,6 +84,11 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
 
             fireRate -= Time.deltaTime;
         }
+
+        hpBar.value = currentHealth / hp;
+
+        hpText.text = $"{currentHealth} / {hp}";
+
 
         Attack();
     }
@@ -118,9 +126,6 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
 
     void CheckHealth()
     {
-        hpBar.value = currentHealth / 15;
-        hpText.text = $"{currentHealth} / 15";
-
         if (currentHealth <= 0)
         {
             spaceBattleManager.bossActive = false;
@@ -132,6 +137,11 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
             coolDown = Mathf.Max(coolDown -= 0.5f, 0.5f);
 
             gameObject.SetActive(false);
+
+            if (ultimateAttack.ultimateCharge < 100)
+            {
+                ultimateAttack.ultimateCharge += ultimateReward;
+            }
         }
     }
 

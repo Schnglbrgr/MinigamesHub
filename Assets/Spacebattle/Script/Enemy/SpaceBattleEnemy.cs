@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 public class SpaceBattleEnemy : MonoBehaviour, IDamageable
@@ -8,12 +7,16 @@ public class SpaceBattleEnemy : MonoBehaviour, IDamageable
     private SpaceBattleManager spaceBattleManager;
     private GameObject prefab;
     private Animation animationEnemy;
+    private UltimateAttackSpaceBattle ultimatePlayer;
 
     private int currentHealth;
+    private int ultimateReward;
 
     private void Awake()
     {
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
+
+        ultimatePlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<UltimateAttackSpaceBattle>();
 
         currentHealth = enemy.health;
 
@@ -23,19 +26,23 @@ public class SpaceBattleEnemy : MonoBehaviour, IDamageable
 
         animationEnemy = GetComponent<Animation>();
 
+        ultimateReward = enemy.ultimateReward;
     }
 
 
     private void OnDisable()
     {
         transform.position = spaceBattleManager.poolManager.PickRandomSpawn();
+
         animationEnemy.Play();
+
         currentHealth = enemy.health;
     }
 
     private void FixedUpdate()
     {
         Movement();
+
         ReachedFloor();
     }
 
@@ -58,9 +65,17 @@ public class SpaceBattleEnemy : MonoBehaviour, IDamageable
         if (currentHealth <= 0)
         {
             spaceBattleManager.score += 10;
+
             spaceBattleManager.SpawnEnemies();
+
             spaceBattleManager.LevelUp(enemy.speed);
+
             spaceBattleManager.poolManager.Return(prefab,gameObject);
+
+            if (ultimatePlayer.ultimateCharge < 100)
+            {
+                ultimatePlayer.ultimateCharge += ultimateReward;
+            }
         }
     }
 
@@ -69,6 +84,7 @@ public class SpaceBattleEnemy : MonoBehaviour, IDamageable
         if (transform.position.y <= 0)
         {
             spaceBattleManager.poolManager.Return(prefab, gameObject);
+
             spaceBattleManager.EndGame();           
         }
     }
@@ -80,7 +96,9 @@ public class SpaceBattleEnemy : MonoBehaviour, IDamageable
         if (isDamageable != null)
         {
             isDamageable.TakeDamage(enemy.damage);
+
             spaceBattleManager.SpawnEnemies();
+
             spaceBattleManager.poolManager.Return(prefab, gameObject);
         }
     }

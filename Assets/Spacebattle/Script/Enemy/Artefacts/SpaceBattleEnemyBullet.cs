@@ -30,7 +30,7 @@ public class SpaceBattleEnemyBullet : MonoBehaviour
     {
         IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
 
-        if (isDamageable != null)
+        if (isDamageable != null && collision.gameObject.tag != "Enemy")
         {
             isDamageable.TakeDamage(damage);
             spaceBattleManager.poolManager.Return(boss.GetComponent<SpaceBattleBoss>().bulletEnemy, gameObject);

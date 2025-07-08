@@ -8,6 +8,7 @@ public class HealthSpaceBattle : MonoBehaviour, IDamageable
 
     private TMP_Text hpText;
     private AudioControllerSpaceBattle audioController;
+    private UltimateAttackSpaceBattle ultimate;
 
     private int health = 100;
     public int currentHealth;
@@ -19,6 +20,8 @@ public class HealthSpaceBattle : MonoBehaviour, IDamageable
         hpText = hpBar.GetComponentInChildren<TMP_Text>();
 
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
+
+        ultimate = GetComponent<UltimateAttackSpaceBattle>();
     }
 
     private void OnDisable()
@@ -50,5 +53,11 @@ public class HealthSpaceBattle : MonoBehaviour, IDamageable
         GetComponent<Animation>().Play();
 
         audioController.MakeSound(audioController.getHit);
+
+        if (ultimate.ultimateCharge > 0)
+        {
+            ultimate.ultimateCharge -= 10;
+        }
     }
+
 }

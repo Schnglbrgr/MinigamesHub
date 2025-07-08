@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +14,8 @@ public class SpaceBattleManager : MonoBehaviour
     [SerializeField] private Button restart_Paused;
     [SerializeField] private WeightedPickerSO pickRandomEnemy;
     [SerializeField] private WeightedPickerSO pickRandomPowerUp;
+    [SerializeField] private GameObject controlHUD;
+    [SerializeField] private GameObject keyboardButton;
 
     public PoolManagerSO poolManager;
     public GameObject bossEnemy;
@@ -25,6 +26,8 @@ public class SpaceBattleManager : MonoBehaviour
     private GameObject currentPrefabEnemy;
     private GameObject currentPowerUp;
     private AudioControllerSpaceBattle audioController;
+    private PlayerInput playerInput;
+    private UltimateAttackSpaceBattle ultimateAttack;
 
     [Header("----Variables----")]
     private Vector2Int map = new Vector2Int(10, 20);
@@ -39,17 +42,50 @@ public class SpaceBattleManager : MonoBehaviour
     private void Awake()
     {
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerSpaceBattle>();
+
+        playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
+
+        ultimateAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<UltimateAttackSpaceBattle>();
     }
 
     private void Start()
     {
+        controlHUD.SetActive(true);
+
+        EventSystem.current.SetSelectedGameObject(keyboardButton);
+
+        Time.timeScale = 0f;
+    }
+
+    public void Keyboard()
+    {
+        playerInput.SwitchCurrentControlScheme("Keyboard");
+
+        StartGame();
+    }
+
+    public void Gamepad()
+    {
+        playerInput.SwitchCurrentControlScheme("GamePad");
+
+        StartGame();
+    }
+
+    private void StartGame()
+    {
         Time.timeScale = 1f;
+
         lose_PausedHUD.SetActive(false);
+
         bossActive = false;
-        SpawnEnemies();
+
         score = 0;
+
         scoreText.text = $"Score: {score}";
+
         timerPowerUps = coolDownPowerUps;
+
+        controlHUD.SetActive(false);
     }
 
     private void Update()
@@ -88,7 +124,7 @@ public class SpaceBattleManager : MonoBehaviour
 
     private void SpawnPowerUps()
     {
-        if (timerPowerUps <= 0 && !bossActive)
+        if (timerPowerUps <= 0 && !bossActive && !ultimateAttack.ultimateActive)
         {
             currentPrefabPowerUp = pickRandomPowerUp.SelectRandomObject();
 
@@ -170,5 +206,8 @@ public class SpaceBattleManager : MonoBehaviour
         Time.timeScale = 0f;
 
         restart_Paused.onClick.AddListener(Start);
+
+        EventSystem.current.SetSelectedGameObject(restart_Paused.gameObject);
+
     }
 }

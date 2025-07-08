@@ -16,4 +16,4 @@ MonoBehaviour:
   speed: 2
   health: 3
   damage: 20
-  childNum: 2
+  ultimateReward: 20
