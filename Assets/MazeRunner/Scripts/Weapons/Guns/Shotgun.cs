@@ -12,8 +12,6 @@ public class Shotgun : AttackSystem, IPickable
     {
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
 
-        bullet.GetComponent<Bullet>().damage = myWeapon.damage;
-
         maxAmmo = myWeapon.maxAmmo;
 
         currentAmmo = maxAmmo;
@@ -82,6 +80,8 @@ public class Shotgun : AttackSystem, IPickable
             currentBullet.transform.position = shootPoint.position;
 
             currentBullet.transform.rotation = gameObject.transform.rotation;
+
+            currentBullet.GetComponent<Bullet>().damage = myWeapon.damage;
 
             Recoil();
         }

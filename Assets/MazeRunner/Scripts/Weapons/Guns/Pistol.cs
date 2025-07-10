@@ -11,8 +11,6 @@ public class Pistol : AttackSystem, IPickable
 
         //audioController.MakeSound(audioController.collectWeapon);
 
-        bullet.GetComponent<Bullet>().damage = myWeapon.damage;
-
         maxAmmo = myWeapon.maxAmmo;
 
         currentAmmo = maxAmmo;
@@ -77,6 +75,8 @@ public class Pistol : AttackSystem, IPickable
             currentBullet.transform.position = shootPoint.position;
 
             currentBullet.transform.rotation = gameObject.transform.rotation;
+
+            currentBullet.GetComponent<Bullet>().damage = myWeapon.damage;
         }     
     }
 
