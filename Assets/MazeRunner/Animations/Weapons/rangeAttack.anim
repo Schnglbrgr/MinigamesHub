@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: VoidAttack
+  m_Name: rangeAttack
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -30,7 +30,7 @@ AnimationClip:
         outWeight: {x: 0.33333334, y: 0.33333334, z: 0.33333334}
       - serializedVersion: 3
         time: 0.41666666
-        value: {x: 6, y: 6, z: 6}
+        value: {x: 5, y: 5, z: 5}
         inSlope: {x: 24.072792, y: 24.072792, z: 24.072792}
         outSlope: {x: 24.072792, y: 24.072792, z: 24.072792}
         tangentMode: 0
@@ -105,7 +105,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.41666666
-        value: 6
+        value: 5
         inSlope: 24.072792
         outSlope: 24.072792
         tangentMode: 136
@@ -144,7 +144,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.41666666
-        value: 6
+        value: 5
         inSlope: 24.072792
         outSlope: 24.072792
         tangentMode: 136
@@ -183,7 +183,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.41666666
-        value: 6
+        value: 5
         inSlope: 24.072792
         outSlope: 24.072792
         tangentMode: 136
