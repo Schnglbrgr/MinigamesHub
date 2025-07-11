@@ -15,5 +15,5 @@ MonoBehaviour:
   power: Fire
   healthWeapon: 20
   damage: 15
-  durationAttack: 2
+  durationAttack: 5
   fireRate: 3

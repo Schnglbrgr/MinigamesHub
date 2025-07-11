@@ -36,6 +36,9 @@ public class IceWeapon : ElementalWeaponController, IPickable
         {
             fireRate -= Time.deltaTime;
         }
+
+        Rotation();
+
     }
 
     public override void SpecialAttack(Collision2D enemy)
@@ -72,8 +75,6 @@ public class IceWeapon : ElementalWeaponController, IPickable
 
             HealthWeapon();
         }
-
-        Rotation();
     }
 
     public override void HealthWeapon()

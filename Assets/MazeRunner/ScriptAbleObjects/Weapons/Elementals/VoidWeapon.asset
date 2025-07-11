@@ -15,5 +15,5 @@ MonoBehaviour:
   power: Void
   healthWeapon: 15
   damage: 25
-  durationAttack: 4
+  durationAttack: 3
   fireRate: 5

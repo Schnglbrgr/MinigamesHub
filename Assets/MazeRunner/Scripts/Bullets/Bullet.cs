@@ -10,6 +10,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private PoolManager poolManager;
     private CollectWeapon collectWeapon;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -26,7 +27,6 @@ public class Bullet : MonoBehaviour
     {
         StopCoroutine(ReturnBullet());
     }
-
 
     void FixedUpdate()
     {

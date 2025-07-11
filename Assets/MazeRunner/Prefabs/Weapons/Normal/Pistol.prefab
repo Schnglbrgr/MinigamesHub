@@ -643,7 +643,6 @@ MonoBehaviour:
   currentAmmo: 0
   timer: 0
   maxAmmo: 0
-  shoot: {fileID: 0}
 --- !u!114 &-7857626243950247619
 MonoBehaviour:
   m_ObjectHideFlags: 0

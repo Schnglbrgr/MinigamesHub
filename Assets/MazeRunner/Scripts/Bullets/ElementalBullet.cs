@@ -8,7 +8,7 @@ public class ElementalBullet : MonoBehaviour
     private Rigidbody2D rb;
     public ElementalWeaponController elementalWeapon;
     public GameObject currentPrefab;
-    public GameObject attackVoid;
+    public GameObject rangeAttack;
 
     public int damage;
 
@@ -25,10 +25,6 @@ public class ElementalBullet : MonoBehaviour
         Movement();
     }
 
-    private void Update()
-    {
-        
-    }
     private void Movement()
     {
         rb.linearVelocity= transform.right * speed;

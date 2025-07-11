@@ -104,7 +104,7 @@ public class GameManagerMazeRunner : MonoBehaviour
 
     public void StartBoss()
     {
-        if (player.keyInventory == 10)
+        if (player.keyInventory >= 10)
         {
             openDoor.Play();
 

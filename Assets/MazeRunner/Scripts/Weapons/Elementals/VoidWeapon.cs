@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 
 public class VoidWeapon : ElementalWeaponController, IPickable
 {
+    private GameObject rangeAttack;
 
     private void Awake()
     {
@@ -34,21 +35,19 @@ public class VoidWeapon : ElementalWeaponController, IPickable
         {
             fireRate -= Time.deltaTime;
         }
+
+        Rotation();
     }
 
     public override void SpecialAttack(Collision2D enemy)
     {
-        currentBullet.GetComponent<ElementalBullet>().attackVoid.SetActive(true);
+        rangeAttack = Instantiate(currentBullet.GetComponent<ElementalBullet>().rangeAttack, enemy.gameObject.transform.position, Quaternion.identity);
 
-        currentBullet.GetComponent<ElementalBullet>().attackVoid.transform.SetParent(null);
+        rangeAttack.GetComponent<SpriteRenderer>().color = colorBullet;
 
-        currentBullet.GetComponent<ElementalBullet>().attackVoid.GetComponent<SpriteRenderer>().color = colorBullet;
+        rangeAttack.GetComponent<RangeAttack>().damage = damage;
 
-        currentBullet.GetComponent<ElementalBullet>().attackVoid.GetComponent<RangeAttack>().damage = damage;
-
-        currentBullet.GetComponent<ElementalBullet>().attackVoid.GetComponent<RangeAttack>().duratationAttack = durationAttack;
-
-        currentBullet.GetComponent<ElementalBullet>().attackVoid.GetComponent<RangeAttack>().animationController.SetBool("voidAttack", true);
+        rangeAttack.GetComponent<RangeAttack>().duratationAttack = durationAttack;
 
     }
 
@@ -74,8 +73,6 @@ public class VoidWeapon : ElementalWeaponController, IPickable
 
             HealthWeapon();
         }
-
-        Rotation();
     }
 
     public override void HealthWeapon()

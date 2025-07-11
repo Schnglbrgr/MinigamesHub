@@ -3,15 +3,16 @@ using System.Collections;
 
 public class RangeAttack : MonoBehaviour
 {
-    public Animator animationController;
-
     private bool insideRange;
     public int damage;
     public float duratationAttack;
 
     private void Awake()
     {
-        MakeAttack();
+
+        GetComponent<Animator>().SetBool("isHit", true);
+
+        Invoke("StopAttack", duratationAttack);
     }
 
     IEnumerator MakeDamage(IDamageable isDamageable)
@@ -19,15 +20,13 @@ public class RangeAttack : MonoBehaviour
         while (insideRange)
         {
             isDamageable.TakeDamage(damage);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
-    IEnumerator MakeAttack()
+    private void StopAttack()
     {
-        yield return new WaitForSeconds(3f);
-
-        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
