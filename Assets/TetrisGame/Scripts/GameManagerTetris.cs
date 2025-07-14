@@ -30,6 +30,7 @@ public class GameManagerTetris : MonoBehaviour
     private GameObject holdPrefab;
     private GameObject currentPrefab;
     public Transform[,] grid;
+    private AudioControllerTetris audioController;
 
 
     [Header("----Variables----")]
@@ -71,6 +72,8 @@ public class GameManagerTetris : MonoBehaviour
         holdPrefabText.text = "Hold Block: Q";
 
         Time.timeScale = 1f;
+
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerTetris>();
     }
 
     private void Update()
@@ -278,11 +281,16 @@ public class GameManagerTetris : MonoBehaviour
         }
 
         Destroy(hearts[heartsCount]);
+
         Destroy(currentPrefab);
+
         score = Mathf.Max(score - 50, 0);
+
         level = Mathf.Max(level--, 1);
 
         SpawnNewBlock();
+
+        audioController.MakeSound(audioController.loseHeart);
     }
 
     void NextLevel()
@@ -290,12 +298,18 @@ public class GameManagerTetris : MonoBehaviour
         if (score % 100 == 0)
         {
             level += 1;
+
             fallTime = Mathf.Max(fallTime -= 0.05f, 0);
 
             invertoryBomb = Mathf.Max(invertoryBomb++, 3);
+
             invertoryChangePiece = Mathf.Max(invertoryBomb++, 3);
+
             invertorySelectPiece = Mathf.Max(invertoryBomb++, 3);
+
             invertorySlowMotion = Mathf.Max(invertoryBomb++, 3);
+
+            audioController.MakeSound(audioController.levelUp);
         }
 
     }
@@ -303,8 +317,11 @@ public class GameManagerTetris : MonoBehaviour
     void PowerUps()
     {       
         powerUps[0].onClick.AddListener(() => ChangePiece(5));
+
         powerUps[1].onClick.AddListener(() => SelectPiece(10));
+
         powerUps[2].onClick.AddListener(() => Bomb());
+
         powerUps[3].onClick.AddListener(() => SlowCam(7));
 
     }
@@ -315,11 +332,17 @@ public class GameManagerTetris : MonoBehaviour
         if (!powerUpActive && invertoryChangePiece >= 1)
         {
             ChangeColorButton(0, Color.red);
+
             Destroy(currentPrefab);
+
             Destroy(nextPrefab);
+
             SpawnNewBlock();
+
             NextPrefab();
+
             powerUpActive = true;
+
             invertoryChangePiece--;
         }
 
@@ -331,11 +354,15 @@ public class GameManagerTetris : MonoBehaviour
         if (!powerUpActive && invertorySlowMotion >= 1)
         {
             ChangeColorButton(3, Color.red);
+
             slowCam.SetActive(true);
+
             slowCamText.text = "SlowMotion Active";
 
             currentPrefab.GetComponent<PlayerTetris>().fallTime = 1f;
+
             powerUpActive = true;
+
             invertorySlowMotion--;
 
             StartCoroutine(ReturnSpeed(coolDown));
@@ -348,9 +375,13 @@ public class GameManagerTetris : MonoBehaviour
         if (!powerUpActive && invertoryBomb >= 1)
         {
             ChangeColorButton(2, Color.red);
+
             powerUpActive = true;
+
             Destroy(currentPrefab);
+
             invertoryBomb--;
+
             Instantiate(bomb, spawnPoint.position, Quaternion.identity);
         }                 
     }
@@ -466,6 +497,8 @@ public class GameManagerTetris : MonoBehaviour
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
 
         restart_Paused.onClick.AddListener(Start);
+
+        audioController.MakeSound(audioController.gameOver);
 
     }
 
