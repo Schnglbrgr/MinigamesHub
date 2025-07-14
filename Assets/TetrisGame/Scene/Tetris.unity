@@ -5303,8 +5303,6 @@ MonoBehaviour:
   - {fileID: 864544639}
   slowCam: {fileID: 741875661}
   slowCamText: {fileID: 1180957088}
-  holdPrefabSpawn: {fileID: 0}
-  holdPrefabText: {fileID: 0}
   score: 0
   invertoryBomb: 1
   powerUpActive: 0
