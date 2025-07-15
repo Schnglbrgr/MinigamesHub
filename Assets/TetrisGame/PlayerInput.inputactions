@@ -42,15 +42,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "powerUp4",
-                    "type": "Button",
-                    "id": "0d4d2bb1-edf6-43cd-b4c1-a508e1245fcf",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "HoldPrefab",
                     "type": "Button",
                     "id": "e1fb0d5f-fe15-41f6-bba8-66da6e226958",
@@ -173,28 +164,6 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "powerUp3",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "12d63496-1ab1-4469-86fc-5eb97a1ee9cb",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard",
-                    "action": "powerUp4",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cad2eaba-0345-4627-a79f-169e3654d1c2",
-                    "path": "<DualShockGamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "powerUp4",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
