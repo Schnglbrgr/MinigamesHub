@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class SpaceBattleManager : MonoBehaviour
 {
@@ -185,6 +186,11 @@ public class SpaceBattleManager : MonoBehaviour
     public void Restart()
     {
         Start();
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void EndGame()
