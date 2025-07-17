@@ -2694,6 +2694,7 @@ MonoBehaviour:
   gameOver: {fileID: 8300000, guid: 12cead7c1a561014caef27fd5cf97835, type: 3}
   selectPiece: {fileID: 8300000, guid: 1bd2968abee08f14ab8dadebf5f0af76, type: 3}
   loseHeart: {fileID: 8300000, guid: d713c8507b3a2f146bed9cb00e72fd0f, type: 3}
+  destroyRow: {fileID: 0}
 --- !u!4 &1031512351
 Transform:
   m_ObjectHideFlags: 0
@@ -3003,22 +3004,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1229667632}
         m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
-        m_MethodName: SlowCam
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0d4d2bb1-edf6-43cd-b4c1-a508e1245fcf
-    m_ActionName: 'Gameplay/powerUp4[/Keyboard/4,/DualSenseGamepadHID/buttonWest]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1229667632}
-        m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
         m_MethodName: HoldPrefab
         m_Mode: 0
         m_Arguments:
@@ -3079,6 +3064,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 83f88bef-adba-46c8-9085-207cb1629055
     m_ActionName: 'Pause/Exit[/Keyboard/escape,/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID/start]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 5180245c-ffba-4f87-978e-0bea61173c9d
+    m_ActionName: 'Gameplay/Movement[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow,/DualSenseGamepadHID/dpad/left,/DualSenseGamepadHID/dpad/right]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -3981,7 +3970,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1809092505}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1229667632}
+        m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1809092505
 MonoBehaviour:
   m_ObjectHideFlags: 0

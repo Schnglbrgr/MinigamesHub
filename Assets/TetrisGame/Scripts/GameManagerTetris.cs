@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManagerTetris : MonoBehaviour
@@ -396,6 +397,11 @@ public class GameManagerTetris : MonoBehaviour
         currentPrefab.GetComponent<PlayerTetris>().enabled = true;
 
         playerInput.SwitchCurrentActionMap("Gameplay");
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void EndGame()
