@@ -134,6 +134,8 @@ public class GameManagerTetris : MonoBehaviour
                 score += 20;
 
                 NextLevel();
+
+                audioController.MakeSound(audioController.destroyRow);
             }
         }
     }
