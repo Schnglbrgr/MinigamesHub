@@ -67,8 +67,6 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
         audioController.musicSource.Play();
 
         hp += 5;
-
-        coolDown -= 0.1f;
     }
 
     private void Start()
