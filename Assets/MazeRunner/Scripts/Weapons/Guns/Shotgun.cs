@@ -35,12 +35,14 @@ public class Shotgun : AttackSystem, IPickable
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
 
+        crossHair.SetActive(true);
     }
 
     private void OnDisable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
 
+        crossHair.SetActive(false);
     }
 
     private void Update()
@@ -67,7 +69,7 @@ public class Shotgun : AttackSystem, IPickable
 
     public override void Shoot(InputAction.CallbackContext obj)
     {
-        if (Input.GetMouseButton(0) && timer <= 0 && currentAmmo > 0)
+        if (timer <= 0 && currentAmmo > 0)
         {
             audioController.MakeSound(audioController.shootPlayer);
 

@@ -16,6 +16,7 @@ public abstract class AttackSystem : MonoBehaviour
     public WeaponsSO myWeapon;
     public GameObject currentBullet;
     public AudioControllerMazeRunner audioController;
+    public GameObject crossHair;
 
     [Header("----Variables----")]
     public int currentAmmo;

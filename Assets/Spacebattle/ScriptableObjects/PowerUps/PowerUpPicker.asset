@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PowerUpPicker
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 11400000, guid: d182a37ac5a187a4ebc07c60588a80e3, type: 2}
-  - {fileID: 11400000, guid: ec2110e99f5d0e54187b7026484e773f, type: 2}
-  - {fileID: 11400000, guid: 4f15de432bc80b14db08691a6f5b3f77, type: 2}
-  - {fileID: 11400000, guid: dd5cdde625a2e4e4cb7646b044251a39, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

@@ -15,6 +15,8 @@ public abstract class ElementalWeaponController : MonoBehaviour
     public Color colorBullet;
     public Slider hpBar;
     public Transform shootPoint;
+    public GameObject crossHair;
+    public AudioControllerMazeRunner audioController;
 
     [Header("----Variables----")]
     public float healthWeapon;
