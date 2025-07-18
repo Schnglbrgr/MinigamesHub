@@ -19,15 +19,24 @@ public class IceWeapon : ElementalWeaponController, IPickable
 
         colorBullet = headWeapon.GetComponent<SpriteRenderer>().color;
 
-        hpBar.gameObject.SetActive(true);
-
         hpBar.value = healthWeapon / elementalWeapon.healthWeapon;
 
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerMazeRunner>();
+
+    }
+
+    private void OnEnable()
+    {
+        hpBar.gameObject.SetActive(true);
+
+        crossHair.SetActive(true);
     }
 
     private void OnDisable()
     {
         hpBar.gameObject.SetActive(false);
+
+        crossHair.SetActive(false);
     }
 
     private void Update()
@@ -74,6 +83,8 @@ public class IceWeapon : ElementalWeaponController, IPickable
             fireRate = elementalWeapon.fireRate;
 
             HealthWeapon();
+
+            audioController.MakeSound(audioController.shootPlayer);
         }
     }
 

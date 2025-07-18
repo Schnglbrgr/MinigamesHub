@@ -31,11 +31,14 @@ public class Pistol : AttackSystem, IPickable
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
 
+        crossHair.SetActive(true);
     }
 
     private void OnDisable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
+
+        crossHair.SetActive(false);
     }
 
     private void Update()
@@ -84,6 +87,7 @@ public class Pistol : AttackSystem, IPickable
     {
         collectWeapon.TakeWeapon(gameObject);
     }
+
     public override void ControlEnable(bool turnOff_On)
     {
         this.enabled = turnOff_On;

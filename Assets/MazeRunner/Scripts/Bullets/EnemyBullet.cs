@@ -39,9 +39,6 @@ public class EnemyBullet : MonoBehaviour
             poolManager.Return(prefab, gameObject);
         }
 
-        if (collision.gameObject.layer == 7)
-        {
-            poolManager.Return(prefab, gameObject);
-        }       
+        poolManager.Return(prefab, gameObject);
     }
 }
