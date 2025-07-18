@@ -1,7 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerTetris : MonoBehaviour
 {
+    [SerializeField] private InputActionReference movement;
+    [SerializeField] private InputActionReference rotation;
+
     private GameManagerTetris gameManagerTetris;
 
     private float previousTime;
@@ -15,6 +19,16 @@ public class PlayerTetris : MonoBehaviour
         gameManagerTetris = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerTetris>();
     }
 
+    private void OnEnable()
+    {
+        rotation.action.performed += Rotation;
+    }
+
+    private void OnDisable()
+    {
+        rotation.action.performed -= Rotation;
+    }
+
     private void Update()
     {
         if (timer < 0.3f)
@@ -22,35 +36,21 @@ public class PlayerTetris : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        Movement();
+        if (timer >= moveSpeed)
+        {
+            Move(movement.action.ReadValue<Vector2>());
+        }
+
         Fall();
     }
 
-
-    void Movement()
+    private void Rotation(InputAction.CallbackContext context)
     {
-        if (Input.GetKey(KeyCode.A) && timer >= moveSpeed )
-        {
-            Move(Vector3.left);
-        }
-        else if (Input.GetKey(KeyCode.D) && timer >= moveSpeed)
-        {
-            Move(Vector3.right);
-        }
-        else if (Input.GetKey(KeyCode.W) && timer >= moveSpeed )
-        {
-            timer -= moveSpeed;
-            transform.Rotate(0f,0f,90f);
+        transform.Rotate(0f, 0f, 90f);
 
-            if (!gameManagerTetris.IsValidMove(transform))
-            {
-                transform.Rotate(0f, 0f, -90f);
-            }
-
-        }
-        else if (Input.GetKey(KeyCode.S))
+        if (!gameManagerTetris.IsValidMove(transform))
         {
-            //
+            transform.Rotate(0f, 0f, -90f);
         }
     }
 

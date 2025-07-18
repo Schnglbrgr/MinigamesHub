@@ -222,6 +222,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce89896fc5938fd408fc11f5bec210f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movement: {fileID: -5591627784566116522, guid: a9797264d5a723741a4151eb26bccfe3, type: 3}
+  rotation: {fileID: 2546721738562632077, guid: a9797264d5a723741a4151eb26bccfe3, type: 3}
+  fallTime: 0.5
 --- !u!1 &7550244001378290266
 GameObject:
   m_ObjectHideFlags: 0
