@@ -17,10 +17,6 @@ public class Pistol : AttackSystem, IPickable
 
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<PoolManager>();
 
-        ammoText = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
-
-        warningAmmo = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
-
         collectWeapon = GameObject.FindGameObjectWithTag("Player").GetComponent<CollectWeapon>();
 
         timer = 0f;
@@ -31,11 +27,18 @@ public class Pistol : AttackSystem, IPickable
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(true);
 
+        warningAmmo = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject;
+
+        ammoText = ammoHUD.transform.GetChild(0).gameObject.transform.GetChild(0).GetComponent<TMP_Text>();
+
+        crossHair.SetActive(true);
     }
 
     private void OnDisable()
     {
         ammoHUD.transform.GetChild(0).gameObject.SetActive(false);
+
+        crossHair.SetActive(false);
     }
 
     private void Update()
