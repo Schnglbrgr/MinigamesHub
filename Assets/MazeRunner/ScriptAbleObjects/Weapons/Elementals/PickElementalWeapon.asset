@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d677f95f78f6a10458c0657dcabf4085, type: 3}
+  m_Name: PickElementalWeapon
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 11400000, guid: 4d256e5b240caff418811a4800d25a33, type: 2}
+  - {fileID: 11400000, guid: 47f01d7a071edf145a96d1be41f6a6c3, type: 2}
+  - {fileID: 11400000, guid: 327d506c6fc99f949a54b7bf51f9f7bd, type: 2}
+  - {fileID: 11400000, guid: 0c9f28f7ff4ef1e4f93951cb914fc497, type: 2}
