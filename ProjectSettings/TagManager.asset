@@ -4,7 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Floor
+  - Enemy
+  - Ammo
+  - Ways
   - AudioController
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -12,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Weapon
+  - Bg
+  - ShowMiniMap
   - 
   - 
   - 
@@ -39,6 +44,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 1682554021
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

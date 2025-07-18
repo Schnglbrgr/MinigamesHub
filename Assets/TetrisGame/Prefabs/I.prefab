@@ -222,10 +222,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce89896fc5938fd408fc11f5bec210f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementX: {fileID: 2281362581357066866, guid: fb8bc6d12e21a2543b73051ce6b8ed7b, type: 3}
-  rotation: {fileID: -1369820218996338617, guid: fb8bc6d12e21a2543b73051ce6b8ed7b, type: 3}
-  drop: {fileID: -4403675939545177384, guid: fb8bc6d12e21a2543b73051ce6b8ed7b, type: 3}
-  fallTime: 0.5
 --- !u!1 &7550244001378290266
 GameObject:
   m_ObjectHideFlags: 0
