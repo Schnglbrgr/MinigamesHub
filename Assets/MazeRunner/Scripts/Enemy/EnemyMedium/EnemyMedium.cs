@@ -91,7 +91,7 @@ public class EnemyMedium : EnemyController
 
     private bool CheckPositionPlayer()
     {
-        if (Vector3.Distance(player.transform.position, transform.position) < 5.5f)
+        if (Vector3.Distance(player.transform.position, transform.position) < 10f)
         {
             return true;
         }
