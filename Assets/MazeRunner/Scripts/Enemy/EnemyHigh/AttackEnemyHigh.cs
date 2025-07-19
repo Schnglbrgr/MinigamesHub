@@ -48,7 +48,6 @@ public class AttackEnemyHigh : MonoBehaviour
     {
         if (CheckPositionPlayer() && timer <= 0)
         {
-
             if (timerShoot <= 0)
             {
                 rotationBullet = 0f;
@@ -61,7 +60,9 @@ public class AttackEnemyHigh : MonoBehaviour
 
                     currentBullet.GetComponent<EnemyBullet>().damage = damage;
 
-                    rotationBullet += 90f;
+                    rotationBullet -= 90f;
+
+                    currentBullet.transform.rotation = Quaternion.Euler(0f, 0f, rotationBullet);
                 }
 
                 timerShoot = fireRate;
