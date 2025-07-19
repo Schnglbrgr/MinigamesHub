@@ -10,9 +10,8 @@ public class PlayerTetris : MonoBehaviour
 
     private float previousTime;
     public float fallTime;
-    private float moveSpeed = 0.2f;
+    private float moveSpeed = 0.1f;
     private float timer = 0f;
-
 
     private void Awake()
     {
@@ -36,6 +35,10 @@ public class PlayerTetris : MonoBehaviour
             timer += Time.deltaTime;
         }
 
+    }
+
+    private void FixedUpdate()
+    {
         if (timer >= moveSpeed)
         {
             Move(movement.action.ReadValue<Vector2>());
@@ -78,10 +81,15 @@ public class PlayerTetris : MonoBehaviour
             if (!gameManagerTetris.IsValidMove(transform))
             {
                 transform.position += Vector3.up;
+
                 gameManagerTetris.AddToGrid(transform);
+
                 gameManagerTetris.SpawnNewBlock();
+
                 this.enabled = false;
+
                 Destroy(gameManagerTetris.nextPrefab);
+
                 gameManagerTetris.NextPrefab();
             }
             previousTime = 0f;
