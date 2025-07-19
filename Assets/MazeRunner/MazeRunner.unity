@@ -50589,7 +50589,7 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: 7376af9cdeb7c0b4ba3a80577fe42273, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_UpdateMode: 0
   m_CullingType: 0
