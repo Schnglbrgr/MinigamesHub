@@ -7,7 +7,7 @@ public class AttackSpaceBattle : MonoBehaviour
     [Header ("----Components----")]
     public Transform spawnPosition;
     public GameObject bullet;
-    public PoolManagerSO bulletPool;
+    public PoolManagerSpaceBattleSO bulletPool;
     public InputActionReference shoot;
 
     private AudioControllerSpaceBattle audioController;

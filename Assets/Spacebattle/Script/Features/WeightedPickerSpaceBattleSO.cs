@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "WeightedPickerSO", menuName = "Scriptable Objects/WeightedPickerSO")]
 
-public class WeightedPickerSO : ScriptableObject
+public class WeightedPickerSpaceBattleSO : ScriptableObject
 {
-    public List<WeightedEntrySO> enemies;
+    public List<WeightedEntrySpaceBattleSO> enemies;
 
     private int totalWeight;
     private int randomNum;

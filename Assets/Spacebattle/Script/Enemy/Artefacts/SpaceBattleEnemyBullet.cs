@@ -6,11 +6,12 @@ public class SpaceBattleEnemyBullet : MonoBehaviour
     private SpaceBattleManager spaceBattleManager;
 
     private float speed = 15f;
-    private int damage = 50;
+    public int damage = 50;
 
     private void Awake()
     {
         boss = GameObject.FindGameObjectWithTag("Boss");
+
         spaceBattleManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpaceBattleManager>();
 
         transform.position = boss.GetComponent<SpaceBattleBoss>().spawnPointBullet.position;
@@ -28,7 +29,7 @@ public class SpaceBattleEnemyBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
+        IDamageableSpaceBattle isDamageable = collision.gameObject.GetComponent<IDamageableSpaceBattle>();
 
         if (isDamageable != null && collision.gameObject.tag != "Enemy")
         {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "PoolManagerSO", menuName = "Scriptable Objects/PoolManagerSO")]
 
-public class PoolManagerSO : ScriptableObject
+public class PoolManagerSpaceBattleSO : ScriptableObject
 {
     private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
 

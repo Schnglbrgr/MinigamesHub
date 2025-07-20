@@ -5,7 +5,7 @@ public class Bomb : MonoBehaviour
     [SerializeField] private float speed = 4f;
 
     private SpaceBattleManager spaceBattleManager;
-    public WeightedEntrySO bombEntry;
+    public WeightedEntrySpaceBattleSO bombEntry;
     private GameObject prefab;
 
     private void Awake()

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class SpaceBattleManager : MonoBehaviour
 {
@@ -12,12 +13,10 @@ public class SpaceBattleManager : MonoBehaviour
     [SerializeField] private GameObject lose_PausedHUD;
     [SerializeField] private TMP_Text lose_PausedText;
     [SerializeField] private Button restart_Paused;
-    [SerializeField] private WeightedPickerSO pickRandomEnemy;
-    [SerializeField] private WeightedPickerSO pickRandomPowerUp;
-    [SerializeField] private GameObject controlHUD;
-    [SerializeField] private GameObject keyboardButton;
+    [SerializeField] private WeightedPickerSpaceBattleSO pickRandomEnemy;
+    [SerializeField] private WeightedPickerSpaceBattleSO pickRandomPowerUp;
 
-    public PoolManagerSO poolManager;
+    public PoolManagerSpaceBattleSO poolManager;
     public GameObject bossEnemy;
     public GameObject currentPrefabPowerUp;
     public GameObject[] powerUps;
@@ -50,29 +49,6 @@ public class SpaceBattleManager : MonoBehaviour
 
     private void Start()
     {
-        controlHUD.SetActive(true);
-
-        EventSystem.current.SetSelectedGameObject(keyboardButton);
-
-        Time.timeScale = 0f;
-    }
-
-    public void Keyboard()
-    {
-        playerInput.SwitchCurrentControlScheme("Keyboard");
-
-        StartGame();
-    }
-
-    public void Gamepad()
-    {
-        playerInput.SwitchCurrentControlScheme("GamePad");
-
-        StartGame();
-    }
-
-    private void StartGame()
-    {
         Time.timeScale = 1f;
 
         lose_PausedHUD.SetActive(false);
@@ -84,8 +60,6 @@ public class SpaceBattleManager : MonoBehaviour
         scoreText.text = $"Score: {score}";
 
         timerPowerUps = coolDownPowerUps;
-
-        controlHUD.SetActive(false);
     }
 
     private void Update()
@@ -185,6 +159,11 @@ public class SpaceBattleManager : MonoBehaviour
     public void Restart()
     {
         Start();
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     public void EndGame()
