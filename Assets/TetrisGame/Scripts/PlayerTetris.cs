@@ -1,18 +1,31 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerTetris : MonoBehaviour
 {
+    [SerializeField] private InputActionReference movement;
+    [SerializeField] private InputActionReference rotation;
+
     private GameManagerTetris gameManagerTetris;
 
     private float previousTime;
     public float fallTime;
-    private float moveSpeed = 0.2f;
+    private float moveSpeed = 0.1f;
     private float timer = 0f;
-
 
     private void Awake()
     {
         gameManagerTetris = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerTetris>();
+    }
+
+    private void OnEnable()
+    {
+        rotation.action.performed += Rotation;
+    }
+
+    private void OnDisable()
+    {
+        rotation.action.performed -= Rotation;
     }
 
     private void Update()
@@ -22,35 +35,25 @@ public class PlayerTetris : MonoBehaviour
             timer += Time.deltaTime;
         }
 
-        Movement();
+    }
+
+    private void FixedUpdate()
+    {
+        if (timer >= moveSpeed)
+        {
+            Move(movement.action.ReadValue<Vector2>());
+        }
+
         Fall();
     }
 
-
-    void Movement()
+    private void Rotation(InputAction.CallbackContext context)
     {
-        if (Input.GetKey(KeyCode.A) && timer >= moveSpeed )
-        {
-            Move(Vector3.left);
-        }
-        else if (Input.GetKey(KeyCode.D) && timer >= moveSpeed)
-        {
-            Move(Vector3.right);
-        }
-        else if (Input.GetKey(KeyCode.W) && timer >= moveSpeed )
-        {
-            timer -= moveSpeed;
-            transform.Rotate(0f,0f,90f);
+        transform.Rotate(0f, 0f, 90f);
 
-            if (!gameManagerTetris.IsValidMove(transform))
-            {
-                transform.Rotate(0f, 0f, -90f);
-            }
-
-        }
-        else if (Input.GetKey(KeyCode.S))
+        if (!gameManagerTetris.IsValidMove(transform))
         {
-            //
+            transform.Rotate(0f, 0f, -90f);
         }
     }
 
@@ -78,10 +81,15 @@ public class PlayerTetris : MonoBehaviour
             if (!gameManagerTetris.IsValidMove(transform))
             {
                 transform.position += Vector3.up;
+
                 gameManagerTetris.AddToGrid(transform);
+
                 gameManagerTetris.SpawnNewBlock();
+
                 this.enabled = false;
+
                 Destroy(gameManagerTetris.nextPrefab);
+
                 gameManagerTetris.NextPrefab();
             }
             previousTime = 0f;

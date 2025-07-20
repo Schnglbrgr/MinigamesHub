@@ -2641,7 +2641,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -1196241393, guid: 069a00c4a21d8654bbe27600f3ba7103, type: 3}
+  m_Sprite: {fileID: -1196241393, guid: f7cb49cfbee2ec546bf6b6611df6af3d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2694,7 +2694,7 @@ MonoBehaviour:
   gameOver: {fileID: 8300000, guid: 12cead7c1a561014caef27fd5cf97835, type: 3}
   selectPiece: {fileID: 8300000, guid: 1bd2968abee08f14ab8dadebf5f0af76, type: 3}
   loseHeart: {fileID: 8300000, guid: d713c8507b3a2f146bed9cb00e72fd0f, type: 3}
-  destroyRow: {fileID: 0}
+  destroyRow: {fileID: 8300000, guid: 0015cf1d2e537704eb4b5bb90845552c, type: 3}
 --- !u!4 &1031512351
 Transform:
   m_ObjectHideFlags: 0
@@ -2935,7 +2935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: fb8bc6d12e21a2543b73051ce6b8ed7b, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: a9797264d5a723741a4151eb26bccfe3, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -2950,8 +2950,12 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls: []
-    m_ActionId: 06d0968e-a2a6-4ddd-abfe-7b2867ce4bcb
-    m_ActionName: 'Gameplay/Rotate[/Keyboard/w,/DualSenseGamepadHID/dpad/up]'
+    m_ActionId: 9265e0a6-fc51-4d24-b608-6ccf0ef9934c
+    m_ActionName: 'GamePlay/Movement[/Keyboard/leftArrow,/Keyboard/rightArrow,/Keyboard/a,/Keyboard/d,/DualSenseGamepadHID/dpad/left,/DualSenseGamepadHID/dpad/right]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 638d6c9a-4d4d-4fde-b6fe-819adf8ef8e2
+    m_ActionName: 'GamePlay/Rotation[/Keyboard/w,/Keyboard/upArrow,/DualSenseGamepadHID/dpad/up]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1229667632}
@@ -2966,24 +2970,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 4856da87-a630-4c7a-be6e-3ac6655045ae
-    m_ActionName: 'Gameplay/powerUp1[/Keyboard/1,/DualSenseGamepadHID/buttonNorth]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1229667632}
-        m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
-        m_MethodName: SelectPiece
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 6c1c53d7-cff6-4022-839c-484b12f5f3f6
-    m_ActionName: 'Gameplay/powerUp2[/Keyboard/2,/DualSenseGamepadHID/buttonEast]'
+    m_ActionId: b3f4d8d7-2cbc-4a8e-8afc-f28f71a5da3d
+    m_ActionName: 'GamePlay/PowerUp1[/Keyboard/1,/DualSenseGamepadHID/buttonNorth]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1229667632}
@@ -2998,13 +2986,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 7de2020d-241e-4205-a803-df8c80314ed9
-    m_ActionName: 'Gameplay/powerUp3[/Keyboard/3,/DualSenseGamepadHID/buttonSouth]'
+    m_ActionId: 1d8488d0-ea15-4440-bf18-4e7cc2db66e8
+    m_ActionName: 'GamePlay/PowerUp2[/Keyboard/2,/DualSenseGamepadHID/buttonEast]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1229667632}
         m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
-        m_MethodName: HoldPrefab
+        m_MethodName: SlowCam
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3014,24 +3002,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: e1fb0d5f-fe15-41f6-bba8-66da6e226958
-    m_ActionName: 'Gameplay/HoldPrefab[/Keyboard/q,/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/rightShoulder]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1229667632}
-        m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
-        m_MethodName: UsePrefab
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: d0c0485f-8dff-4020-bda2-7e237b522837
-    m_ActionName: 'Gameplay/UsePrefab[/Keyboard/e,/DualSenseGamepadHID/rightShoulder]'
+    m_ActionId: fba314a8-5320-4a21-b233-51a62e7c7850
+    m_ActionName: 'GamePlay/PowerUp3[/Keyboard/3,/DualSenseGamepadHID/buttonSouth]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1229667632}
@@ -3046,8 +3018,40 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 27c06ab4-7e4c-4764-9525-1a6defe8d089
-    m_ActionName: 'Gameplay/Pause[/Keyboard/escape,/DualSenseGamepadHID/start]'
+    m_ActionId: 11de448e-7290-4dc9-a602-5ebb2250e4a3
+    m_ActionName: 'GamePlay/pause[/Keyboard/escape,/DualSenseGamepadHID/start]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1229667632}
+        m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
+        m_MethodName: HoldPrefab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3fd48803-fc81-4f00-aa7b-1b33219005ef
+    m_ActionName: 'GamePlay/holdprefab[/Keyboard/q,/DualSenseGamepadHID/leftShoulder,/DualSenseGamepadHID/rightShoulder]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1229667632}
+        m_TargetAssemblyTypeName: GameManagerTetris, Assembly-CSharp
+        m_MethodName: UsePrefab
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3bcb45f9-7a3b-41b8-9fb6-afaafe8c52a1
+    m_ActionName: 'GamePlay/useprefab[/Keyboard/e,/DualSenseGamepadHID/leftTrigger]'
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1229667632}
@@ -3062,15 +3066,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 83f88bef-adba-46c8-9085-207cb1629055
-    m_ActionName: 'Pause/Exit[/Keyboard/escape,/DualSenseGamepadHID/buttonEast,/DualSenseGamepadHID/start]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 5180245c-ffba-4f87-978e-0bea61173c9d
-    m_ActionName: 'Gameplay/Movement[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow,/DualSenseGamepadHID/dpad/left,/DualSenseGamepadHID/dpad/right]'
+    m_ActionId: d4890e40-0a59-4ee3-bd49-94b45bae5db3
+    m_ActionName: 'Pause/Exit[/Keyboard/escape,/DualSenseGamepadHID/start,/DualSenseGamepadHID/buttonEast]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Gameplay
+  m_DefaultActionMap: GamePlay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &1274890899
@@ -3659,7 +3659,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -151394201, guid: 069a00c4a21d8654bbe27600f3ba7103, type: 3}
+  m_Sprite: {fileID: -151394201, guid: f7cb49cfbee2ec546bf6b6611df6af3d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3870,7 +3870,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 13857534, guid: 069a00c4a21d8654bbe27600f3ba7103, type: 3}
+  m_Sprite: {fileID: 13857534, guid: f7cb49cfbee2ec546bf6b6611df6af3d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
