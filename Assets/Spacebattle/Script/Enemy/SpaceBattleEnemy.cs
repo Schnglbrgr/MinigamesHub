@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class SpaceBattleEnemy : MonoBehaviour, IDamageable
+public class SpaceBattleEnemy : MonoBehaviour, IDamageableSpaceBattle
 {
     public SpaceBattleEnemySO enemy;
-    public WeightedEntrySO enemyEntry;
+    public WeightedEntrySpaceBattleSO enemyEntry;
     private SpaceBattleManager spaceBattleManager;
     private GameObject prefab;
     private Animation animationEnemy;
@@ -91,7 +91,7 @@ public class SpaceBattleEnemy : MonoBehaviour, IDamageable
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        IDamageable isDamageable = collision.gameObject.GetComponent<IDamageable>();
+        IDamageableSpaceBattle isDamageable = collision.gameObject.GetComponent<IDamageableSpaceBattle>();
 
         if (isDamageable != null)
         {

@@ -1,9 +1,8 @@
-using System.Collections;
 using UnityEngine;
 
 public class MovementPowerUps : MonoBehaviour
 {
-    public WeightedEntrySO powerUpEntry;
+    public WeightedEntrySpaceBattleSO powerUpEntry;
     public float speed = 3f;
     private GameObject player;
     public GameObject prefab;

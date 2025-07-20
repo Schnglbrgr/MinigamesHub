@@ -1,9 +1,10 @@
 using System.Collections;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SpaceBattleBoss : MonoBehaviour, IDamageable
+public class SpaceBattleBoss : MonoBehaviour, IDamageableSpaceBattle
 {
     [SerializeField] private Transform[] ways;
     [SerializeField] private Slider hpBar;
@@ -172,5 +173,15 @@ public class SpaceBattleBoss : MonoBehaviour, IDamageable
         isAttacking = false;
 
         fireRate = 1f;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        IDamageableSpaceBattle isDamageable = collision.gameObject.GetComponent<IDamageableSpaceBattle>();
+
+        if (isDamageable != null)
+        {
+            isDamageable.TakeDamage(bulletEnemy.GetComponent<SpaceBattleEnemyBullet>().damage);
+        }
     }
 }

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthSpaceBattle : MonoBehaviour, IDamageable
+public class HealthSpaceBattle : MonoBehaviour, IDamageableSpaceBattle
 {
     [SerializeField] private Slider hpBar;
 
