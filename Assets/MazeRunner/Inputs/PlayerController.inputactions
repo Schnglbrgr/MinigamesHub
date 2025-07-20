@@ -54,7 +54,7 @@
                     "name": "RotateWeapon",
                     "type": "Value",
                     "id": "e9ec2698-89b2-46fd-9fa2-6272f37348a7",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -194,7 +194,7 @@
                 {
                     "name": "",
                     "id": "39a1dd93-7cbb-4fb2-b36c-0b981fc81218",
-                    "path": "<DualShockGamepad>/buttonSouth",
+                    "path": "<DualShockGamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": ";GamePad",
@@ -291,9 +291,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "gamepad",
-                    "id": "8dcc16b3-a277-4633-8a17-77f20039bd08",
-                    "path": "2DVector",
+                    "name": "3D Vector",
+                    "id": "b51dea7d-00fd-4d21-b41c-26b8bc93935c",
+                    "path": "3DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -303,7 +303,7 @@
                 },
                 {
                     "name": "up",
-                    "id": "8acc7ae4-d825-4ede-99d7-b08884213bdc",
+                    "id": "27edaec8-b950-4e73-a4c5-2e3168487083",
                     "path": "<DualShockGamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
@@ -314,7 +314,7 @@
                 },
                 {
                     "name": "down",
-                    "id": "33910902-5ccb-4ef8-b1ae-9b34343ddf55",
+                    "id": "71c431c9-fd5c-41f1-a566-19253aba9cf0",
                     "path": "<DualShockGamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
@@ -325,7 +325,7 @@
                 },
                 {
                     "name": "left",
-                    "id": "5f189289-bbe2-4eac-9e51-aed31e1a4750",
+                    "id": "af16e687-f80b-4e91-be3e-0dfcae616c43",
                     "path": "<DualShockGamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
@@ -336,63 +336,8 @@
                 },
                 {
                     "name": "right",
-                    "id": "cf43348c-557f-4ef4-a677-4047b59bbe70",
+                    "id": "07fbe371-3b40-4d99-a4e2-9f6ace9d56f6",
                     "path": "<DualShockGamepad>/rightStick/right",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "keyboard",
-                    "id": "99f397f6-daed-49ca-b15a-7816fb33e686",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateWeapon",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "60c98fb8-8704-4dd1-9a4f-c9010c4f4a50",
-                    "path": "<Mouse>/delta/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "75cc6985-9c11-41bb-b4f2-5b2fb1e9d6a0",
-                    "path": "<Mouse>/delta/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "802af94e-a008-43c0-99d8-31575e90a8cf",
-                    "path": "<Mouse>/delta/left",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "RotateWeapon",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "ab3ac62f-306c-4167-9a7f-6b061862fef7",
-                    "path": "<Mouse>/delta/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

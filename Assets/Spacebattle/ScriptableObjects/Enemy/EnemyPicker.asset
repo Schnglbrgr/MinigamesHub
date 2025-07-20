@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyPicker
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 11400000, guid: 7d418168e851fdd4093a84bbfe57cabf, type: 2}
-  - {fileID: 11400000, guid: 5a0b59c871c77ed419f0a1230f0b98f2, type: 2}
-  - {fileID: 11400000, guid: a67c9a92ad90b0a4799c6354ade387d4, type: 2}
-  - {fileID: 11400000, guid: 7f931b25fa8f737409b037fa5b22122e, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
