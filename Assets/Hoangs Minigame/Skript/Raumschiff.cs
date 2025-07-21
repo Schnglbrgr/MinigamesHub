@@ -45,6 +45,6 @@ public class Raumschiff : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManager.instance.gameOver = true;
+        GameManagerSpaceShooter.instance.gameOver = true;
     }
 }

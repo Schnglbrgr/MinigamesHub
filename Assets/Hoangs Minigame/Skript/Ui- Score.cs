@@ -13,6 +13,6 @@ public class Ui : MonoBehaviour
 
     void Update()
     {
-        textMeshProUGUI.text = GameManager.instance.score.ToString();
+        textMeshProUGUI.text = GameManagerSpaceShooter.instance.score.ToString();
     }
 }

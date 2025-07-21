@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager1 : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     public GameObject ballPrefab;
     [SerializeField] GameObject gameOverText;

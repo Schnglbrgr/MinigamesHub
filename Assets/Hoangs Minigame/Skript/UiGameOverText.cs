@@ -13,7 +13,7 @@ public class UiGameOverText : MonoBehaviour
 
     void Update()
     {
-        if (GameManager.instance.gameOver == true && textMesh.enabled == false)
+        if (GameManagerSpaceShooter.instance.gameOver == true && textMesh.enabled == false)
         { 
             textMesh.enabled = true;
         }

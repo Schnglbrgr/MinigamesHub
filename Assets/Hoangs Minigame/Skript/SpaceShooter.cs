@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManagerSpaceShooter : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManagerSpaceShooter instance;
 
     public int score;
     public bool gameOver = false;
