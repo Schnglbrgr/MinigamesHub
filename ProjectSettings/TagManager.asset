@@ -4,14 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Wall
-  - Floor
-  - Keys
-  - Door
-  - Enemy
   - Gun
-  - Ammo
-  - Teleport
+  - Enemy
+  - Laser
   layers:
   - Default
   - TransparentFX
@@ -19,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Weapon
+  - 
   - 
   - 
   - 
@@ -46,9 +41,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: BG
-    uniqueID: 1682554021
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

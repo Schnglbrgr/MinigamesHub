@@ -1,8 +1,9 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager1 : MonoBehaviour
 {
     public GameObject ballPrefab;
     [SerializeField] GameObject gameOverText;
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     private int score;
     private bool isPaused = false;
+    internal static readonly object instance;
 
     private void Awake()
     {

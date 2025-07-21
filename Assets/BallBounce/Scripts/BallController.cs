@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    GameManager gameManager;
+    GameManager1 gameManager;
     Rigidbody2D rb;
     [SerializeField] float ballSpeed = 1f;
     [SerializeField] float directionY = 11f;
@@ -11,7 +11,7 @@ public class BallController : MonoBehaviour
 
     void Awake()
     {
-        gameManager = FindAnyObjectByType<GameManager>();
+        gameManager = FindAnyObjectByType<GameManager1>();
         rb = GetComponent<Rigidbody2D>();        
     }
 
