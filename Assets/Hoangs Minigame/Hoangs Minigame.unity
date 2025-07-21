@@ -160,9 +160,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6682260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0bcac5aeeac822419643d76d575c1c0, type: 3}
+  m_Script: {fileID: 11500000, guid: aa58cc72c7e2c4f449c5e300ee1aa903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Asteorid: {fileID: 3734041888451564558, guid: fa19445f24f6829448ca4cd12e6f681a, type: 3}
 --- !u!1 &57259367
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 280db35ad199e404aac1f3308700da9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 15
+  moveSpeed: 10
   laserObject: {fileID: 352111026086966942, guid: d1f1acb3b30f60a40b21a64483884bd7, type: 3}
   cannonLeft: {fileID: 926458263}
   cannonRight: {fileID: 785261563}
@@ -283,7 +284,7 @@ Transform:
   m_GameObject: {fileID: 57259367}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -4.4976, z: 0.0036795}
+  m_LocalPosition: {x: 0.08, y: -4.13, z: 0.0036795}
   m_LocalScale: {x: 0.13609335, y: 0.456825, z: 0.10669233}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1462,7 +1463,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989772027}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
