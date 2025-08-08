@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PoolManagerTowerGameSO", menuName = "Scriptable Objects/PoolManagerTowerGameSO")]
-public class PoolManagerTowerGameSO : ScriptableObject
+public class PoolManagerTowerGame : MonoBehaviour
 {
     private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
 

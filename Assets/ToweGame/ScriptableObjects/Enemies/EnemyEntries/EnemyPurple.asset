@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e633c6d814e5742a50012d1da426e2, type: 3}
   m_Name: EnemyPurple
   m_EditorClassIdentifier: 
-  weight: 2
-  prefab: {fileID: 0}
+  weight: 5
+  prefab: {fileID: 3855306840544365107, guid: ddff9572d99d71a4c9069d82a408b52b, type: 3}

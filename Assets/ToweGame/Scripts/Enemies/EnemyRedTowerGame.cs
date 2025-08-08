@@ -26,11 +26,23 @@ public class EnemyRedTowerGame : EnemyControllerTowerGame
 
     public override void TakeDamage(int damage)
     {
+        currentHealth -= damage;
 
+        CheckHealth();
     }
 
     public override void CheckHealth()
     {
+        switch (currentHealth)
+        {
+            case <= 0:
+                poolManager.Return(enemyController.prefab, gameObject);
+            break;
 
+            case < 40:
+                damage *= 2;
+                speed *= 2;
+            break;
+        }
     }
 }

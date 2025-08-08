@@ -3,11 +3,12 @@ using UnityEngine;
 public abstract class EnemyControllerTowerGame : MonoBehaviour, IDamageableTowerGame
 {
     public EnemyControllerSOTowerGame enemyController;
-    public PoolManagerTowerGameSO poolManager;
+    public PoolManagerTowerGame poolManager;
 
     public int health;
     public int damage;
     public float speed;
+    public int currentHealth;
 
     public abstract void Movement();
 

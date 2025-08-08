@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41e633c6d814e5742a50012d1da426e2, type: 3}
   m_Name: EnemyBlue
   m_EditorClassIdentifier: 
-  weight: 3
-  prefab: {fileID: 0}
+  weight: 10
+  prefab: {fileID: 1659376653919237619, guid: 84ec47eb7fbdeb54ea45f81e6234277b, type: 3}

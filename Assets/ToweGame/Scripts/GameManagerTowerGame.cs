@@ -4,19 +4,32 @@ public class GameManagerTowerGame : MonoBehaviour
 {
     [SerializeField] private Transform[] enemySpawns;
 
-    public PoolManagerTowerGameSO poolManager;
     public WeightedPickerTowerGameSO enemyPicker;
+    public PoolManagerTowerGame poolManager;
 
-    private GameObject currentEnemy;
+    public GameObject currentEnemy;
 
     private int randomSpawn;
 
+    private void Awake()
+    {
+        poolManager = GetComponent<PoolManagerTowerGame>();
+    }
+
+    private void Update()
+    {
+        SpawnEnemy();
+    }
+
     private void SpawnEnemy()
     {
-        randomSpawn = Random.Range(0, enemySpawns.Length);
+        if (Input.GetKeyDown(KeyCode.Space) && currentEnemy == null)
+        {
+            randomSpawn = Random.Range(0, enemySpawns.Length);
 
-        currentEnemy = poolManager.CreateObject(enemyPicker.SelectRandomObject());
+            currentEnemy = poolManager.CreateObject(enemyPicker.SelectRandomObject());
 
-        currentEnemy.transform.position = enemySpawns[randomSpawn].position;
+            currentEnemy.transform.position = enemySpawns[randomSpawn].position;
+        }       
     }
 }
