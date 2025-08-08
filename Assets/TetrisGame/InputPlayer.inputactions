@@ -6,7 +6,7 @@
             "id": "6da3bbfc-17f8-4a16-aeef-214245fd4025",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "MovementTetris",
                     "type": "Value",
                     "id": "9265e0a6-fc51-4d24-b608-6ccf0ef9934c",
                     "expectedControlType": "Vector2",
@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Rotation",
+                    "name": "RotationTetris",
                     "type": "Button",
                     "id": "638d6c9a-4d4d-4fde-b6fe-819adf8ef8e2",
                     "expectedControlType": "",
@@ -86,7 +86,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -97,7 +97,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -108,7 +108,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -119,7 +119,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -130,7 +130,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -141,7 +141,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -152,7 +152,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -163,7 +163,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -174,7 +174,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "MovementTetris",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -185,7 +185,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotation",
+                    "action": "RotationTetris",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -196,7 +196,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotation",
+                    "action": "RotationTetris",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -207,7 +207,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Rotation",
+                    "action": "RotationTetris",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -31,6 +31,7 @@ public class GameManagerTetris : MonoBehaviour
     public Transform[,] grid;
     private AudioControllerTetris audioController;
     private PlayerInput playerInput;
+    private Scene currentScene;
 
 
     [Header("----Variables----")]
@@ -50,6 +51,8 @@ public class GameManagerTetris : MonoBehaviour
         audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerTetris>();
 
         playerInput = GetComponent<PlayerInput>();
+
+        currentScene = SceneManager.GetActiveScene();
     }
 
     private void Start()
@@ -414,7 +417,7 @@ public class GameManagerTetris : MonoBehaviour
 
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
 
-        restart_Paused.onClick.AddListener(Start);
+        restart_Paused.onClick.AddListener(() => SceneManager.LoadScene(currentScene.name));
 
         audioController.MakeSound(audioController.gameOver);
 
