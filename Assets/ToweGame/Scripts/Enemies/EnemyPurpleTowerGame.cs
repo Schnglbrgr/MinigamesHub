@@ -10,6 +10,8 @@ public class EnemyPurpleTowerGame : EnemyControllerTowerGame
 
         speed = enemyController.speed;
 
+        transform.position = RandomPosition();
+
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerTowerGame>().poolManager;
 
     }
@@ -37,7 +39,7 @@ public class EnemyPurpleTowerGame : EnemyControllerTowerGame
         {
             case <= 0:
                 poolManager.Return(enemyController.prefab, gameObject);
-            break;
+            break;  
 
             case < 40:
                 damage *= 2;
