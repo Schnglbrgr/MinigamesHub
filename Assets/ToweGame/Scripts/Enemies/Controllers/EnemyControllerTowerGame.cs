@@ -25,8 +25,8 @@ public abstract class EnemyControllerTowerGame : MonoBehaviour, IDamageableTower
 
     public Vector3 RandomPosition()
     {
-        xValue = Random.Range(-500, 400);
-        zValue = Random.Range(-700, -150);
+        xValue = Random.Range(-500, 420);
+        zValue = Random.Range(-700, -650);
 
         randomPosition = new Vector3(xValue, 12f, zValue);
 
