@@ -1,9 +1,9 @@
-using System.Collections;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    private GameManagerBallBounce gameManager;
+    private BallBounceGameManager gameManager;
+    private BallBounceUiManager uiManager;
     private Rigidbody2D rb;
 
     [Header("Ball Settings")]
@@ -14,12 +14,12 @@ public class BallController : MonoBehaviour
     [SerializeField] private ParticleSystem gameOverParticle;
     private float speedIncrement = 0.25f;
     private float rangeX = 3f;
-    private float directionY = 11.5f;    
-
+    private float directionY = 11.5f;
 
     void Awake()
     {        
-        gameManager = FindAnyObjectByType<GameManagerBallBounce>();
+        gameManager = FindAnyObjectByType<BallBounceGameManager>();
+        uiManager = FindAnyObjectByType<BallBounceUiManager>();    
         rb = GetComponent<Rigidbody2D>();        
     }
 
@@ -33,7 +33,7 @@ public class BallController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
-            BallBounce();            
+            BallBounce();
             gameManager.IncreaseScore();            
             
             startSpeed += speedIncrement;
@@ -50,11 +50,10 @@ public class BallController : MonoBehaviour
         {
             BallBounce();
             gameManager.lives--;
-            gameManager.UpdateScoreText();
+            uiManager.UpdateScoreText();
             if(gameManager.lives <= 0)
             {
                 collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-                collision.gameObject.GetComponent<BoxCollider2D>().sharedMaterial = null;
             }
         }
     }
