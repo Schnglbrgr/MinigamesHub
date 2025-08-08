@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c52db6162ad5fd543a4b02f9cae0efb9, type: 3}
+  m_Name: EnemyPicker
+  m_EditorClassIdentifier: 
+  gameObject:
+  - {fileID: 11400000, guid: 74c62fc3a41e48a4da9bda79b1717f28, type: 2}
+  - {fileID: 11400000, guid: e24b35468438aac41b1bd81b67757bcc, type: 2}
+  - {fileID: 11400000, guid: 352ea5066d261e24f9ce6200d25034bc, type: 2}
