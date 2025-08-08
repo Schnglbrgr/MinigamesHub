@@ -11,13 +11,4 @@ public class GridManager : MonoBehaviour
     {
         grid = new Grid(gridWidth, 0, gridLength);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            int tileValue = grid.GetTileValue(10, 67);
-            Debug.Log(tileValue);
-        }
-    }
 }
