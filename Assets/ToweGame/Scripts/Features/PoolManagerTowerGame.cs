@@ -22,9 +22,9 @@ public class PoolManagerTowerGame : MonoBehaviour
         }
         else
         {
-            Instantiate(prefab);
+            GameObject newObj = Instantiate(prefab);
+            return newObj;
         }
-        return null;
     }
 
     public void Return(GameObject prefab, GameObject currentObject)

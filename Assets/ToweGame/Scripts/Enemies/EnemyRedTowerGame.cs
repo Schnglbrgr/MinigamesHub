@@ -10,6 +10,8 @@ public class EnemyRedTowerGame : EnemyControllerTowerGame
 
         speed = enemyController.speed;
 
+        transform.position = RandomPosition();
+
         poolManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManagerTowerGame>().poolManager;
 
     }

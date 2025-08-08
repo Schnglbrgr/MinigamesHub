@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 4318638243009267587}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 312, y: 155, z: -751.38}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -47,9 +47,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyController: {fileID: 11400000, guid: 359393aae771d0f4f9d98dbc682563f2, type: 2}
   poolManager: {fileID: 0}
+  randomPosition: {x: 0, y: 0, z: 0}
   health: 0
   damage: 0
   speed: 0
+  currentHealth: 0
+  xValue: 0
+  zValue: 0
 --- !u!1 &7900342201574601047
 GameObject:
   m_ObjectHideFlags: 0

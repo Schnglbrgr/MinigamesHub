@@ -4,11 +4,14 @@ public abstract class EnemyControllerTowerGame : MonoBehaviour, IDamageableTower
 {
     public EnemyControllerSOTowerGame enemyController;
     public PoolManagerTowerGame poolManager;
+    public Vector3 randomPosition;
 
     public int health;
     public int damage;
     public float speed;
     public int currentHealth;
+    public int xValue;
+    public int zValue;
 
     public abstract void Movement();
 
@@ -18,5 +21,15 @@ public abstract class EnemyControllerTowerGame : MonoBehaviour, IDamageableTower
 
     public virtual void TakeDamage(int damage)
     {
+    }
+
+    public Vector3 RandomPosition()
+    {
+        xValue = Random.Range(-500, 400);
+        zValue = Random.Range(-700, -150);
+
+        randomPosition = new Vector3(xValue, 12f, zValue);
+
+        return randomPosition;
     }
 }
