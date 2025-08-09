@@ -27,6 +27,7 @@ public class SpaceBattleManager : MonoBehaviour
     private AudioControllerSpaceBattle audioController;
     private PlayerInput playerInput;
     private UltimateAttackSpaceBattle ultimateAttack;
+    private Scene currentScene;
 
     [Header("----Variables----")]
     private Vector2Int map = new Vector2Int(10, 20);
@@ -45,6 +46,8 @@ public class SpaceBattleManager : MonoBehaviour
         playerInput = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInput>();
 
         ultimateAttack = GameObject.FindGameObjectWithTag("Player").GetComponent<UltimateAttackSpaceBattle>();
+
+        currentScene = SceneManager.GetActiveScene();
     }
 
     private void Start()
@@ -184,7 +187,7 @@ public class SpaceBattleManager : MonoBehaviour
 
         Time.timeScale = 0f;
 
-        restart_Paused.onClick.AddListener(Start);
+        restart_Paused.onClick.AddListener(() => SceneManager.LoadScene(currentScene.name));
 
         EventSystem.current.SetSelectedGameObject(restart_Paused.gameObject);
 
