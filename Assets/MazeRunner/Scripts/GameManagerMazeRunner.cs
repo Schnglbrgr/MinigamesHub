@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManagerMazeRunner : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class GameManagerMazeRunner : MonoBehaviour
     private Animation openDoor;
     private AudioControllerMazeRunner audioController;
     private PlayerInput playerInput;
+    private Scene currentScene;
 
     [Header("----Variables----")]
     public int deathBoss;
@@ -53,6 +55,8 @@ public class GameManagerMazeRunner : MonoBehaviour
         openDoor = GameObject.FindGameObjectWithTag("Wall").GetComponent<Animation>();
 
         playerInput = player.GetComponent<PlayerInput>();
+
+        currentScene = SceneManager.GetActiveScene();
 
     }
 
@@ -121,8 +125,6 @@ public class GameManagerMazeRunner : MonoBehaviour
 
             audioController.MakeSound(audioController.win);
 
-            restart.onClick.AddListener(Restart);
-
             EventSystem.current.SetSelectedGameObject(restart.gameObject);
 
             playerInput.SwitchCurrentActionMap("Win");
@@ -131,9 +133,14 @@ public class GameManagerMazeRunner : MonoBehaviour
         }
     }
 
-    private void Restart()
+    public void ExitGame()
     {
-        //
+        SceneManager.LoadScene(0);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void Lose()
