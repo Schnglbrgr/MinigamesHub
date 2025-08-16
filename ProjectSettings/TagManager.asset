@@ -10,6 +10,10 @@ TagManager:
   - Ways
   - AudioController
   - Wall
+  - Gun
+  - Boss
+  - Undefined
+  - Laser
   layers:
   - Default
   - TransparentFX
