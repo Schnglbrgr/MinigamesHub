@@ -38,13 +38,8 @@ public class Raumschiff : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            Destroy(gameObject);
+            GameManagerSpaceShooter.instance.LoseLife();
+            other.gameObject.SetActive(false);
         }
-
-    }
-
-    private void OnDestroy()
-    {
-        GameManagerSpaceShooter.instance.gameOver = true;
     }
 }

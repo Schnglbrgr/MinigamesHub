@@ -20,6 +20,6 @@ public class Asteorid : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameManagerSpaceShooter.instance.score += 1;
+        GameManagerSpaceShooter.instance.score ++;
     }
 }

@@ -2,21 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class UiGameOverText : MonoBehaviour
 {
-    private TextMeshProUGUI textMesh;
-    void Start()
+    public GameObject GameoverScene;
+    private void Start()
     {
-        textMesh = GetComponent<TextMeshProUGUI>();
+        GameoverScene.SetActive(false);
     }
 
-
-    void Update()
+    public void Loadscene(int scenenindex)
     {
-        if (GameManagerSpaceShooter.instance.gameOver == true && textMesh.enabled == false)
-        { 
-            textMesh.enabled = true;
-        }
-
-    }           
+        SceneManager.LoadScene(scenenindex);
+    }
 }

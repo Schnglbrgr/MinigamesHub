@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.UI;
 public class Ui : MonoBehaviour
 {
     private TextMeshProUGUI textMeshProUGUI;
@@ -15,4 +15,5 @@ public class Ui : MonoBehaviour
     {
         textMeshProUGUI.text = GameManagerSpaceShooter.instance.score.ToString();
     }
+
 }
