@@ -32057,71 +32057,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1365887705
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 19.51
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -12.809376
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 769856602901233278, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4426470133606627319, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4426470133606627319, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5245605685648393930, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
-      propertyPath: m_Name
-      value: EnemyMedium
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2c731c94192b3354e870d65123ed24b1, type: 3}
 --- !u!1 &1375460892
 GameObject:
   m_ObjectHideFlags: 0
@@ -51550,6 +51485,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4108374741814737165, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5863581803494020454, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -51561,7 +51500,19 @@ PrefabInstance:
     - target: {fileID: 6321160245058308253, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1007278701}
+      objectReference: {fileID: 1007278702}
+    - target: {fileID: 6321160245058308253, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321160245058308253, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManagerMazeRunner, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6321160245058308253, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_Colors.m_PressedColor.b
       value: 0.40183505
@@ -51585,6 +51536,34 @@ PrefabInstance:
     - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1007278702}
+    - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManagerMazeRunner, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6645347926305230504, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7007622895281669736, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: exit
@@ -51629,6 +51608,34 @@ PrefabInstance:
     - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
       propertyPath: m_Colors.m_SelectedColor.r
       value: 0.6745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1007278702}
+    - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Restart
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: GameManagerMazeRunner, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7929918444478327892, guid: a5282d01985c2c944957c931644b11a0, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
@@ -51764,4 +51771,3 @@ SceneRoots:
   - {fileID: 1417338663}
   - {fileID: 1234287702}
   - {fileID: 712344428}
-  - {fileID: 1365887705}
