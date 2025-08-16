@@ -3,6 +3,10 @@ using UnityEngine;
 public class Asteorid : MonoBehaviour
 {
     public float speed;
+    private void OnEnable()
+    {
+        Destroy(gameObject, 4f);
+    }
     void Update()
     {
         transform.Rotate(new Vector3(180, 180, 0) * Time.deltaTime);
