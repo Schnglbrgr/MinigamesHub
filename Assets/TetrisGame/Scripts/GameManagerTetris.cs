@@ -1,13 +1,14 @@
 using System.Collections;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
-using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManagerTetris : MonoBehaviour
 {
+    [Header ("----Components----")]
     [SerializeField] private Transform spawnPoint;
     [SerializeField] private GameObject[] prefabs;
     [SerializeField] private TMP_Text lose_PausedText;
@@ -15,36 +16,44 @@ public class GameManagerTetris : MonoBehaviour
     [SerializeField] private Button exit;
     [SerializeField] private GameObject lose_PausedHUD;
     [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text timerText;
     [SerializeField] private TMP_Text levelText;
     [SerializeField] private GameObject[] hearts;
     [SerializeField] private Transform nextPrefabSpawn;
-    [SerializeField] private Button[] powerUps;
     [SerializeField] private GameObject bomb;
-    [SerializeField] private GameObject selectPrefab;
-    [SerializeField] private Button[] selectPlayer;
     [SerializeField] private GameObject slowCam;
     [SerializeField] private TMP_Text slowCamText;
     [SerializeField] private Transform holdPrefabSpawn;
     [SerializeField] private TMP_Text holdPrefabText;
 
+    public GameObject nextPrefab;
+    private GameObject holdPrefab;
+    private GameObject currentPrefab;
+    public Transform[,] grid;
+    private AudioControllerTetris audioController;
+    private PlayerInput playerInput;
+    private Scene currentScene;
+
+
+    [Header("----Variables----")]
     public int score;
     private int level;
     private float fallTime;
     private int heartsCount;
     private int prefabNum;
-    private float invertoryChangePiece = 1f;
-    private float invertorySelectPiece = 1f;
-    public float invertoryBomb = 1f;
-    private float invertorySlowMotion = 1f;
     public bool powerUpActive;
     private bool isHolding;
-
-    public GameObject nextPrefab;
-    private GameObject holdPrefab;
-    private GameObject currentPrefab;
-    public Transform[,] grid;
     public Vector2Int gridDimension = new Vector2Int(10, 20);
+    private float timer = 0f;
+    private float cooldown = 3f;
+
+    private void Awake()
+    {
+        audioController = GameObject.FindGameObjectWithTag("AudioController").GetComponent<AudioControllerTetris>();
+
+        playerInput = GetComponent<PlayerInput>();
+
+        currentScene = SceneManager.GetActiveScene();
+    }
 
     private void Start()
     {
@@ -64,39 +73,27 @@ public class GameManagerTetris : MonoBehaviour
 
         lose_PausedHUD.SetActive(false);
 
-        PowerUps();
-
         isHolding = false;
 
+        holdPrefabText.text = "Hold Block: Q";
+
         Time.timeScale = 1f;
+
     }
 
     private void Update()
     {
 
         scoreText.text = $"Score: {score}";
+
         levelText.text = $"Level: {level}";
-        PausedGame();
 
-        if (powerUpActive)
+        if (timer > 0)
         {
-            for (int x = 0; x < powerUps.Length; x++)
-            {
-                ChangeColorButton(x, Color.red);
-            }
-        }
-        else
-        {
-            for (int x = 0; x < powerUps.Length; x++)
-            {
-                ChangeColorButton(x, Color.green);
-            }
+            timer -= Time.deltaTime;
         }
 
-
-
-        HoldPrefab();
-
+        CheckAndClearLines();
     }
 
     public void SpawnNewBlock()
@@ -127,16 +124,22 @@ public class GameManagerTetris : MonoBehaviour
        
     }
 
-    public void CheckAndClearLines()
+    //===============================================================
+    private void CheckAndClearLines()
     {
         for (int y = 0; y < gridDimension.y; y++)
         {
             if (RowIsFull(y))
             {
                 ClearRow(y);
+
                 MoveRowDown(y);
+
                 score += 20;
+
                 NextLevel();
+
+                audioController.MakeSound(audioController.destroyRow);
             }
         }
     }
@@ -192,8 +195,6 @@ public class GameManagerTetris : MonoBehaviour
                 grid[position.x, position.y] = block;
             }
         }
-
-        CheckAndClearLines();
     }
 
     public bool IsValidMove(Transform player)
@@ -220,41 +221,7 @@ public class GameManagerTetris : MonoBehaviour
         return false;
     }
 
-    void PausedGame()
-    {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            currentPrefab.GetComponent<PlayerTetris>().enabled = false;
-
-            lose_PausedHUD.SetActive(true);
-
-            lose_PausedText.text = "Game Paused";
-
-            restart_Paused.GetComponentInChildren<TMP_Text>().text = "Resume";
-
-            restart_Paused.onClick.AddListener(() => StartCoroutine(ResumeGame()));
-
-        }
-    }
-
-    IEnumerator ResumeGame()
-    {
-        lose_PausedHUD.SetActive(false);
-
-        timerText.text = "3";
-
-        yield return new WaitForSeconds(1f);
-        timerText.text = "2";
-
-        yield return new WaitForSeconds(1f);
-        timerText.text = "1";
-
-        yield return new WaitForSeconds(1f);
-        timerText.text = "";
-        currentPrefab.GetComponent<PlayerTetris>().enabled = true;
-
-
-    }
+    //===============================================================
 
     void LoseHearts()
     {
@@ -278,11 +245,16 @@ public class GameManagerTetris : MonoBehaviour
         }
 
         Destroy(hearts[heartsCount]);
+
         Destroy(currentPrefab);
+
         score = Mathf.Max(score - 50, 0);
+
         level = Mathf.Max(level--, 1);
 
         SpawnNewBlock();
+
+        audioController.MakeSound(audioController.loseHeart);
     }
 
     void NextLevel()
@@ -290,135 +262,17 @@ public class GameManagerTetris : MonoBehaviour
         if (score % 100 == 0)
         {
             level += 1;
+
             fallTime = Mathf.Max(fallTime -= 0.05f, 0);
 
-            invertoryBomb = Mathf.Max(invertoryBomb++, 3);
-            invertoryChangePiece = Mathf.Max(invertoryBomb++, 3);
-            invertorySelectPiece = Mathf.Max(invertoryBomb++, 3);
-            invertorySlowMotion = Mathf.Max(invertoryBomb++, 3);
+            audioController.MakeSound(audioController.levelUp);
         }
 
     }
 
-    void PowerUps()
-    {       
-        powerUps[0].onClick.AddListener(() => ChangePiece(5));
-        powerUps[1].onClick.AddListener(() => SelectPiece(10));
-        powerUps[2].onClick.AddListener(() => Bomb());
-        powerUps[3].onClick.AddListener(() => SlowCam(7));
-
-    }
-
-    void ChangePiece(int coolDown)
+    public void HoldPrefab(InputAction.CallbackContext context)
     {
-
-        if (!powerUpActive && invertoryChangePiece >= 1)
-        {
-            ChangeColorButton(0, Color.red);
-            Destroy(currentPrefab);
-            Destroy(nextPrefab);
-            SpawnNewBlock();
-            NextPrefab();
-            powerUpActive = true;
-            invertoryChangePiece--;
-        }
-
-    }
-
-    void SlowCam(int coolDown)
-    {
-
-        if (!powerUpActive && invertorySlowMotion >= 1)
-        {
-            ChangeColorButton(3, Color.red);
-            slowCam.SetActive(true);
-            slowCamText.text = "SlowMotion Active";
-
-            currentPrefab.GetComponent<PlayerTetris>().fallTime = 1f;
-            powerUpActive = true;
-            invertorySlowMotion--;
-
-            StartCoroutine(ReturnSpeed(coolDown));
-        }
-       
-    }
-
-    void Bomb()
-    {
-        if (!powerUpActive && invertoryBomb >= 1)
-        {
-            ChangeColorButton(2, Color.red);
-            powerUpActive = true;
-            Destroy(currentPrefab);
-            invertoryBomb--;
-            Instantiate(bomb, spawnPoint.position, Quaternion.identity);
-        }                 
-    }
-
-    void SelectPiece(int coolDown)
-    {
-
-        if (invertorySelectPiece >= 1 && !powerUpActive)
-        {
-            ChangeColorButton(1, Color.red);
-
-            Destroy(currentPrefab);
-
-            selectPrefab.SetActive(true);
-
-            invertorySelectPiece--;
-
-            for (int x = 0; x < selectPlayer.Length; x++)
-            {
-                selectPlayer[x].gameObject.SetActive(true);
-
-            }
-
-            selectPlayer[0].onClick.AddListener(() => SelectPieceSpawn(0));
-            selectPlayer[1].onClick.AddListener(() => SelectPieceSpawn(1));
-            selectPlayer[2].onClick.AddListener(() => SelectPieceSpawn(2));
-            selectPlayer[3].onClick.AddListener(() => SelectPieceSpawn(3));
-            selectPlayer[4].onClick.AddListener(() => SelectPieceSpawn(4));
-            selectPlayer[5].onClick.AddListener(() => SelectPieceSpawn(5));
-            selectPlayer[6].onClick.AddListener(() => SelectPieceSpawn(6));
-            selectPlayer[7].onClick.AddListener(() => SelectPieceSpawn(7));
-        }
-    }
-
-    void SelectPieceSpawn(int prefabNum)
-    {
-        ChangeColorButton(1, Color.green);
-
-
-        Instantiate(prefabs[prefabNum], spawnPoint.position, Quaternion.identity);
-
-        selectPrefab.SetActive(false);
-
-        for (int x = 0; x < selectPlayer.Length; x++)
-        {
-            selectPlayer[x].gameObject.SetActive(false);
-        }
-
-        powerUpActive = false;
-    }
-
-    private void ChangeColorButton(int num, Color color)
-    {
-        powerUps[num].GetComponent<Image>().color = color;
-    }
-
-    IEnumerator ReturnSpeed(int coolDown)
-    {
-        yield return new WaitForSeconds(4f);
-        currentPrefab.GetComponent<PlayerTetris>().fallTime = fallTime;
-        slowCam.SetActive(false);
-        slowCamText.text = "";
-        powerUpActive = false;
-    }
-
-    void HoldPrefab()
-    {
-        if (!isHolding && Input.GetKey(KeyCode.Q))
+        if (!isHolding && context.performed && timer <= 0)
         {
             isHolding = true;
 
@@ -437,8 +291,11 @@ public class GameManagerTetris : MonoBehaviour
             holdPrefabText.text = "Use Block: E";
 
         }
+    }
 
-        if (isHolding && Input.GetKey(KeyCode.E))
+    public void UsePrefab(InputAction.CallbackContext context)
+    {
+        if (isHolding && context.performed)
         {
             isHolding = false;
 
@@ -446,13 +303,108 @@ public class GameManagerTetris : MonoBehaviour
 
             Destroy(holdPrefab);
 
-            currentPrefab = Instantiate(holdPrefab,spawnPoint.position,Quaternion.identity);
+            currentPrefab = Instantiate(holdPrefab, spawnPoint.position, Quaternion.identity);
 
             currentPrefab.GetComponent<PlayerTetris>().enabled = true;
 
             holdPrefabText.text = "Hold Block: Q";
 
+            timer = cooldown;
         }
+    }
+
+    //===============================================================
+    public void ChangePiece(InputAction.CallbackContext context)
+    {
+
+        if (!powerUpActive && context.performed)
+        {
+            Destroy(currentPrefab);
+
+            Destroy(nextPrefab);
+
+            SpawnNewBlock();
+
+            NextPrefab();
+
+            powerUpActive = true;
+
+        }
+    }
+
+    public void SlowCam(InputAction.CallbackContext context)
+    {
+
+        if (!powerUpActive && context.performed)
+        {
+            slowCam.SetActive(true);
+
+            slowCamText.text = "SlowMotion Active";
+
+            currentPrefab.GetComponent<PlayerTetris>().fallTime = 1f;
+
+            powerUpActive = true;
+
+            StartCoroutine(ReturnSpeed());
+        }   
+    }
+
+    public void Bomb(InputAction.CallbackContext context)
+    {
+        if (!powerUpActive && context.performed)
+        {
+            powerUpActive = true;
+
+            Destroy(currentPrefab);
+
+            Instantiate(bomb, spawnPoint.position, Quaternion.identity);
+        }                 
+    }
+
+    IEnumerator ReturnSpeed()
+    {
+        yield return new WaitForSeconds(4f);
+
+        currentPrefab.GetComponent<PlayerTetris>().fallTime = fallTime;
+
+        slowCam.SetActive(false);
+
+        slowCamText.text = "";
+
+        powerUpActive = false;
+    }
+
+    //===============================================================
+    public void PausedGame(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            currentPrefab.GetComponent<PlayerTetris>().enabled = false;
+
+            lose_PausedHUD.SetActive(true);
+
+            lose_PausedText.text = "Game Paused";
+
+            restart_Paused.GetComponentInChildren<TMP_Text>().text = "Resume";
+
+            playerInput.SwitchCurrentActionMap("Pause");
+
+            EventSystem.current.SetSelectedGameObject(restart_Paused.gameObject);
+        }
+    }
+
+    public void ResumeGame()
+    {
+        lose_PausedHUD.SetActive(false);
+
+        currentPrefab.GetComponent<PlayerTetris>().enabled = true;
+
+        playerInput.SwitchCurrentActionMap("Gameplay");
+    }
+
+    public void ExitGame()
+    {
+        SceneManager.LoadScene(0);
     }
 
     void EndGame()
@@ -465,8 +417,11 @@ public class GameManagerTetris : MonoBehaviour
 
         restart_Paused.GetComponentInChildren<TMP_Text>().text = "Restart";
 
-        restart_Paused.onClick.AddListener(Start);
+        restart_Paused.onClick.AddListener(() => SceneManager.LoadScene(currentScene.name));
 
+        audioController.MakeSound(audioController.gameOver);
+
+        EventSystem.current.SetSelectedGameObject(restart_Paused.gameObject);
     }
 
 }

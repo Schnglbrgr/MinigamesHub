@@ -17,6 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Plantgame/Scenes/Plantgame.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Spacebattle/SpaceBattle.unity
+    guid: a66f0160b22bfb244a4b71ce1c36a21a
+  - enabled: 1
+    path: Assets/Hoangs Minigame/Hoangs Minigame.unity
+    guid: 17e5795b82603dd44ab558bae1d758cc
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 3590b91b4603b465dbb4216d601bff33, type: 3}
   m_UseUCBPForAssetBundles: 0
