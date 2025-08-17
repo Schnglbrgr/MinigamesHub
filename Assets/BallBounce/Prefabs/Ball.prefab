@@ -167,3 +167,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startSpeed: 0.25
   maxSpeed: 8
+  gameOverParticle: {fileID: 5427146292080182507, guid: 226d234d6cf07a346bbd3464ddfbfa34, type: 3}
+  gameEvent: {fileID: 11400000, guid: a1588acc5aff1ac4f9ec983f3080823e, type: 2}

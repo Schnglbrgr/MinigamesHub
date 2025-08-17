@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,9 +23,6 @@ public class BallBouncePoolManager : MonoBehaviour
         }
         else
         {
-            float spawnX = 7.5f;
-            float randomX = Random.Range(-spawnX, spawnX);
-
             return Instantiate(prefab, SpawnPosition(prefab), Quaternion.identity);
         }
     }
@@ -43,9 +39,9 @@ public class BallBouncePoolManager : MonoBehaviour
 
     private Vector2 SpawnPosition(GameObject obj)
     {
-        float spawnX = 7.5f;
-        float randomX = Random.Range(-spawnX, spawnX);
+            float spawnX = 7.5f;
+            float randomX = Random.Range(-spawnX, spawnX);
 
-        return obj.transform.position = new Vector2(randomX, spawnHeight);
+            return obj.transform.position = new Vector2(randomX, spawnHeight);
     }
 }

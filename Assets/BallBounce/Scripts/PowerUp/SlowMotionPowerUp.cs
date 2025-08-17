@@ -15,7 +15,7 @@ public class SlowMotionPowerUp : PowerUpEffect
             
     private IEnumerator SlowMotion()
     {        
-        GameManagerBallBounce gameManagerBallBounce = FindAnyObjectByType<GameManagerBallBounce>();
+        BallBounceGameManager gameManager = FindAnyObjectByType<BallBounceGameManager>();
         Image slowMoIcon = GameObject.Find("UI")?.transform.Find("SlowMoIcon")?.GetComponent<Image>();        
 
         slowMoIcon.gameObject.SetActive(true);
@@ -31,12 +31,12 @@ public class SlowMotionPowerUp : PowerUpEffect
 
         while (true)
         {
-            if (gameManagerBallBounce.isPaused)
+            if (gameManager.isPaused)
             {
 
                 pauseStartTime = Time.realtimeSinceStartup;
 
-                while (gameManagerBallBounce.isPaused)
+                while (gameManager.isPaused)
                 {
                     yield return null;
                 }
@@ -49,7 +49,10 @@ public class SlowMotionPowerUp : PowerUpEffect
             float adjustedElapsed = currentTime - startTime - totalPausedTime;
 
             float remaining = powerUpDuration - adjustedElapsed;
-            slowMoIcon.fillAmount = remaining / powerUpDuration;
+            if(slowMoIcon != null)
+            {
+                slowMoIcon.fillAmount = remaining / powerUpDuration;
+            }
 
             if (adjustedElapsed >= powerUpDuration)
             {

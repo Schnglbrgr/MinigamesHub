@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8347147800949016104}
   - component: {fileID: 4735342523658916586}
-  - component: {fileID: 9175160963099213580}
+  - component: {fileID: 51991981833798020}
   - component: {fileID: 5891889851853455562}
   m_Layer: 0
   m_Name: Speed-_PowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3001782543815513366}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.432911, y: 6, z: 0}
+  m_LocalPosition: {x: -0.5576341, y: 6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 0.8867924, g: 0.26352793, b: 0.26352793, a: 1}
+  m_Sprite: {fileID: 21300000, guid: eaa3d35c81e114044a9e63deb4d9c0ba, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -89,8 +89,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &9175160963099213580
-BoxCollider2D:
+--- !u!58 &51991981833798020
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,18 +123,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.21133333}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.48
 --- !u!114 &5891889851853455562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,5 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786190f53ea8ba744bdc85f27e52fb02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpEffect: {fileID: 11400000, guid: 76d15e3fd81ff0c40a2f5cb98ea7b518, type: 2}
   fallingSpeed: 1.2
+  powerUpEffect: {fileID: 11400000, guid: 76d15e3fd81ff0c40a2f5cb98ea7b518, type: 2}
+  particleForPlatform: {fileID: 2300933889158828213, guid: 09a1a9d44030b01488a25ba6e68034d0, type: 3}
+  particleForGround: {fileID: 2300933889158828213, guid: 09a1a9d44030b01488a25ba6e68034d0, type: 3}

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1d2bc2f3a83c6c84c917a9754fc5f31f
+guid: eaa3d35c81e114044a9e63deb4d9c0ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8190887587523798024
-    second: heartContainer_0
+      213: -1233409899451356983
+    second: Speed-Icon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,10 +48,10 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: heartContainer_0
+      name: Speed-Icon_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 43
-        width: 512
-        height: 426
+        x: 8
+        y: 3
+        width: 241
+        height: 249
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8fbdc76e22f145e80800000000000000
-      internalID: -8190887587523798024
+      spriteID: 9c860c83b3c02eee0800000000000000
+      internalID: -1233409899451356983
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      heartContainer_0: -8190887587523798024
+      Speed-Icon_0: -1233409899451356983
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

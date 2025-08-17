@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4084526259036466899}
   m_Layer: 0
   m_Name: Scale-_PowerUp
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 1768540566308687542}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.453674, y: 6, z: 0}
-  m_LocalScale: {x: 1, y: 0.3, z: 1}
+  m_LocalPosition: {x: 1.2935193, y: 6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,8 +78,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.8773585, g: 0.11173906, b: 0.11173906, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 323fdf893fbdf8248b295d351a666c58, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -133,7 +133,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &4084526259036466899
 MonoBehaviour:
@@ -147,5 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786190f53ea8ba744bdc85f27e52fb02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUpEffect: {fileID: 11400000, guid: 5d0ef4ea1d9d55141821bcff3d994273, type: 2}
   fallingSpeed: 1.2
+  powerUpEffect: {fileID: 11400000, guid: 5d0ef4ea1d9d55141821bcff3d994273, type: 2}
+  particleForPlatform: {fileID: 2300933889158828213, guid: 09a1a9d44030b01488a25ba6e68034d0, type: 3}
+  particleForGround: {fileID: 2300933889158828213, guid: 09a1a9d44030b01488a25ba6e68034d0, type: 3}

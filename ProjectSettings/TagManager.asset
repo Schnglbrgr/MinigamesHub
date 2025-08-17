@@ -4,6 +4,11 @@
 TagManager:
   serializedVersion: 3
   tags:
+
+  - Platform
+  - Ground
+  - PowerUp
+  - Wall
   - Floor
   - Enemy
   - Ammo
@@ -14,6 +19,7 @@ TagManager:
   - Boss
   - Undefined
   - Laser
+
   layers:
   - Default
   - TransparentFX
