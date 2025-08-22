@@ -117,7 +117,7 @@ public class BallBounceGameManager : MonoBehaviour
             }
             else
             {
-                yield return null;
+                yield return new WaitForSeconds(0.1f);
             }
         }
     }

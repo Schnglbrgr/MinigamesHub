@@ -7,7 +7,7 @@ public class PlatformController : MonoBehaviour
     private float clampRange = 8.5f;
 
     [SerializeField] private float minSpeed = 4f;
-    [SerializeField] private float maxSpeed = 16f;
+    [SerializeField] private float maxSpeed = 14f;
 
     private float minScaleX = 1.5f;
     private float maxScaleX = 5.5f;
@@ -45,8 +45,12 @@ public class PlatformController : MonoBehaviour
     public void SetScaleX(float newX)
     {
         Vector3 currentScale = transform.localScale;
+
         float newScaleX = currentScale.x + newX;
         newScaleX = Mathf.Clamp(newScaleX, minScaleX, maxScaleX);
         transform.localScale = new Vector3(newScaleX, currentScale.y, currentScale.z);
+
+        scaleStat += newX;
+        scaleStat = Mathf.Clamp(scaleStat, -2f, 2f);
     }
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 public class BallBouncePoolManager : MonoBehaviour
 {
     private Dictionary<GameObject, Queue<GameObject>> pools = new Dictionary<GameObject, Queue<GameObject>>();
-    //private float spawnHeight = 6f;
 
     public GameObject Get(GameObject prefab, Vector2 position)
     {
@@ -17,7 +16,7 @@ public class BallBouncePoolManager : MonoBehaviour
         if (pool.Count > 0)
         {
             GameObject obj = pool.Dequeue();
-            //SpawnPosition(obj);
+            obj.transform.position = position;
             obj.SetActive(true);
             return obj;
         }
@@ -36,12 +35,4 @@ public class BallBouncePoolManager : MonoBehaviour
         }
         pools[prefab].Enqueue(instance);
     }
-
-    //private Vector2 SpawnPosition(GameObject obj)
-    //{
-    //        float spawnX = 7.5f;
-    //        float randomX = Random.Range(-spawnX, spawnX);
-
-    //        return obj.transform.position = new Vector2(randomX, spawnHeight);
-    //}
 }

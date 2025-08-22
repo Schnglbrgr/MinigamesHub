@@ -64,6 +64,4 @@ public class BallController : MonoBehaviour
         float bounceDirection = Random.Range(-rangeX, rangeX);
         rb.linearVelocity = new Vector2(bounceDirection * startSpeed, directionY);
     }
-
-            
 }
