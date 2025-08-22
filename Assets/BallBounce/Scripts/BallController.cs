@@ -7,7 +7,7 @@ public class BallController : MonoBehaviour
     private Rigidbody2D rb;
 
     [Header("Ball Settings")]
-    [SerializeField] private float startSpeed = 0.25f;
+    [SerializeField] private float currentSpeed = 0.25f;
     [SerializeField] private float maxSpeed = 8f;
     [Space(5)]
 
@@ -36,8 +36,8 @@ public class BallController : MonoBehaviour
             BallBounce();
             gameManager.IncreaseScore();            
             
-            startSpeed += speedIncrement;
-            startSpeed = Mathf.Clamp(startSpeed, 0f, maxSpeed);
+            currentSpeed += speedIncrement;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0f, maxSpeed);
         }
 
         if (collision.gameObject.CompareTag("Ground") && gameManager.lives <= 0)
@@ -51,6 +51,7 @@ public class BallController : MonoBehaviour
             BallBounce();
             gameManager.lives--;
             uiManager.UpdateScoreText();
+
             if(gameManager.lives <= 0)
             {
                 collision.gameObject.GetComponent<SpriteRenderer>().color = Color.red;
@@ -62,8 +63,6 @@ public class BallController : MonoBehaviour
     void BallBounce()
     {
         float bounceDirection = Random.Range(-rangeX, rangeX);
-        rb.linearVelocity = new Vector2(bounceDirection * startSpeed, directionY);
+        rb.linearVelocity = new Vector2(bounceDirection * currentSpeed, directionY);
     }
-
-            
 }

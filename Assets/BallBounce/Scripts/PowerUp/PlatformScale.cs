@@ -11,6 +11,5 @@ public class PlatformScale : PowerUpEffect
     public override void Apply(GameObject target)
     {        
         target.GetComponent<PlatformController>().SetScaleX(xScale);
-        target.GetComponent<PlatformController>().scaleStat += xScale;
     }          
 }
