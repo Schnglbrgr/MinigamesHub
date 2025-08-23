@@ -11,7 +11,8 @@ public class MenuManager : MonoBehaviour
     private void Start()
     {
         startMenu?.SetActive(true);
-        levelSelectMenu?.SetActive(false);    
+        levelSelectMenu?.SetActive(false); 
+        Time.timeScale = 1.0f;
     }
 
 
@@ -22,7 +23,6 @@ public class MenuManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Debug.Log("Quit");
-        //Application.Quit();
+        Application.Quit();
     }
 }
