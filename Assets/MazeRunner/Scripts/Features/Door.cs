@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Door : MonoBehaviour, IInteractive
+public class Gate : MonoBehaviour, IInteractive
 {
     private GameManagerMazeRunner gameManagerMazeRunner;
 
